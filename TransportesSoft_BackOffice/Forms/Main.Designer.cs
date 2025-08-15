@@ -28,20 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.DGV_Unidades = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Unidades)).BeginInit();
             this.SuspendLayout();
+            // 
+            // DGV_Unidades
+            // 
+            this.DGV_Unidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Unidades.Location = new System.Drawing.Point(141, 89);
+            this.DGV_Unidades.Name = "DGV_Unidades";
+            this.DGV_Unidades.Size = new System.Drawing.Size(657, 245);
+            this.DGV_Unidades.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(961, 446);
+            this.Controls.Add(this.DGV_Unidades);
             this.Name = "Main";
-            this.Text = "Form1";
+            this.ShowIcon = false;
+            this.Text = "Transportes BackOffice";
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Unidades)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView DGV_Unidades;
     }
 }
 
