@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TransportesSoft_BackOffice.Clases;
+using TransportesSoft_BackOffice.Forms;
 using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice
@@ -32,6 +33,13 @@ namespace TransportesSoft_BackOffice
             lContUnidades = lServiceContUnidades.ObtenerUnidades();
             DGV_Unidades.DataSource = lContUnidades;
             
+        }
+
+        private void BtnReporte_Click(object sender, EventArgs e)
+        {
+            FormReporte_Load lreport = new FormReporte_Load();
+            lreport.ShowDialog();
+
         }
     }
 }

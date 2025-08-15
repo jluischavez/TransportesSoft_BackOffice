@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.DGV_Unidades = new System.Windows.Forms.DataGridView();
+            this.BtnReporte = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Unidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,11 +41,22 @@
             this.DGV_Unidades.Size = new System.Drawing.Size(657, 245);
             this.DGV_Unidades.TabIndex = 0;
             // 
+            // BtnReporte
+            // 
+            this.BtnReporte.Location = new System.Drawing.Point(861, 127);
+            this.BtnReporte.Name = "BtnReporte";
+            this.BtnReporte.Size = new System.Drawing.Size(75, 23);
+            this.BtnReporte.TabIndex = 1;
+            this.BtnReporte.Text = "Imprimir";
+            this.BtnReporte.UseVisualStyleBackColor = true;
+            this.BtnReporte.Click += new System.EventHandler(this.BtnReporte_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(961, 446);
+            this.Controls.Add(this.BtnReporte);
             this.Controls.Add(this.DGV_Unidades);
             this.Name = "Main";
             this.ShowIcon = false;
@@ -57,6 +69,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DGV_Unidades;
+        private System.Windows.Forms.Button BtnReporte;
     }
 }
 
