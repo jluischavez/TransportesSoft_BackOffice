@@ -27,8 +27,6 @@ namespace TransportesSoft_BackOffice.Repositories
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                //var SqlInsert = "UPDATE contUnidades set MARCA = @MARCA WHERE id_Unidad = @id_Unidad";
-                //var resultEdit = db.Execute(SqlInsert, new { MARCA = "VOLVO", id_Unidad = 5 });
 
                 var sql = "SELECT * FROM ContUnidades";
 
@@ -38,6 +36,24 @@ namespace TransportesSoft_BackOffice.Repositories
             }
 
 
+        }
+
+        public void GuadarUnidad(ContUnidades unidad)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlInsert = "Insert into ContUnidades(Marca, Serie, Kilometraje, FechaActualizacion, id_Operador, ProximoMantenimiento) " +
+                    "Values(@Marca, @Serie, @Kilometraje, @FechaActualizacion, @id_Operador, @ProximoMantenimiento)";
+                var result = db.Execute(sqlInsert, new
+                {
+                    Marca = unidad.Marca,
+                    Serie = unidad.Serie,
+                    Kilometraje = unidad.Kilometraje,
+                    FechaActualizacion = DateTime.Now,
+                    id_Operador = unidad.id_Operador,
+                    ProximoMantenimiento = unidad.ProximoMantenimiento
+                });
+            }
         }
 
 
