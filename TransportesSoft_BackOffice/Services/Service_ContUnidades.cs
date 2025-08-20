@@ -27,5 +27,9 @@ namespace TransportesSoft_BackOffice.Services
 
             return lContUnidades;
         }
+        public void GuardarUnidad(ContUnidades unidad)
+        {
+            lRepo.GuadarUnidad(unidad);
+        }
     }
 }

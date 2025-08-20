@@ -15,7 +15,8 @@ namespace TransportesSoft_BackOffice.Clases
         public string Serie { get; set; }
         public int Kilometraje { get; set; }
         public DateTime FechaActualizacion { get; set; }
-        public int id_Transportista { get; set; }
+        public int id_Operador { get; set; }
+        public int ProximoMantenimiento { get; set; }
 
 
     }
