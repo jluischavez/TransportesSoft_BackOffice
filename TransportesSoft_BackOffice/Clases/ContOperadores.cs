@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.Services.Description;
 
 namespace TransportesSoft_BackOffice.Clases
 {
@@ -15,5 +17,7 @@ namespace TransportesSoft_BackOffice.Clases
         public string Estatus { get; set; }
         public int id_Unidad { get; set; }
         public int id_Remolque { get; set; }
+
+        public string Descripcion => $"{id_Operador} - {Nombre})";
     }
 }

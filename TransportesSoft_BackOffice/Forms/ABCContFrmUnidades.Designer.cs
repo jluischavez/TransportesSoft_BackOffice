@@ -36,12 +36,12 @@
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.txtSerie = new System.Windows.Forms.TextBox();
             this.txtKilometraje = new System.Windows.Forms.TextBox();
-            this.txtOperador = new System.Windows.Forms.TextBox();
             this.txtProxMantenimiento = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.LblID = new System.Windows.Forms.Label();
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.CBOperadores = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,13 +113,7 @@
             this.txtKilometraje.Name = "txtKilometraje";
             this.txtKilometraje.Size = new System.Drawing.Size(195, 20);
             this.txtKilometraje.TabIndex = 8;
-            // 
-            // txtOperador
-            // 
-            this.txtOperador.Location = new System.Drawing.Point(140, 112);
-            this.txtOperador.Name = "txtOperador";
-            this.txtOperador.Size = new System.Drawing.Size(195, 20);
-            this.txtOperador.TabIndex = 10;
+            this.txtKilometraje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtKilometraje_KeyPress);
             // 
             // txtProxMantenimiento
             // 
@@ -159,13 +153,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.CBOperadores);
             this.groupBox1.Controls.Add(this.LblMarca);
             this.groupBox1.Controls.Add(this.LblSerie);
             this.groupBox1.Controls.Add(this.LblKilometraje);
             this.groupBox1.Controls.Add(this.LblOperador);
             this.groupBox1.Controls.Add(this.txtProxMantenimiento);
             this.groupBox1.Controls.Add(this.LblProxMantenimiento);
-            this.groupBox1.Controls.Add(this.txtOperador);
             this.groupBox1.Controls.Add(this.txtMarca);
             this.groupBox1.Controls.Add(this.txtKilometraje);
             this.groupBox1.Controls.Add(this.txtSerie);
@@ -174,6 +168,14 @@
             this.groupBox1.Size = new System.Drawing.Size(356, 185);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
+            // 
+            // CBOperadores
+            // 
+            this.CBOperadores.FormattingEnabled = true;
+            this.CBOperadores.Location = new System.Drawing.Point(140, 112);
+            this.CBOperadores.Name = "CBOperadores";
+            this.CBOperadores.Size = new System.Drawing.Size(195, 21);
+            this.CBOperadores.TabIndex = 12;
             // 
             // ABCContFrmUnidades
             // 
@@ -184,9 +186,13 @@
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.LblID);
             this.Controls.Add(this.txtID);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ABCContFrmUnidades";
             this.ShowIcon = false;
             this.Text = "Control de Unidades";
+            this.Load += new System.EventHandler(this.ABCContFrmUnidades_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ABCContFrmUnidades_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -205,11 +211,11 @@
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.TextBox txtSerie;
         private System.Windows.Forms.TextBox txtKilometraje;
-        private System.Windows.Forms.TextBox txtOperador;
         private System.Windows.Forms.TextBox txtProxMantenimiento;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label LblID;
         private System.Windows.Forms.Button BtnGuardar;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox CBOperadores;
     }
 }

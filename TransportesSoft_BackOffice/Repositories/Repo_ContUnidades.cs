@@ -27,15 +27,11 @@ namespace TransportesSoft_BackOffice.Repositories
 
             using (var db = new SqlConnection(ConnectionString))
             {
-
                 var sql = "SELECT * FROM ContUnidades";
-
                 lContUnidades = db.Query<ContUnidades>(sql).ToList();
 
                 return lContUnidades;
             }
-
-
         }
 
         public void GuadarUnidad(ContUnidades unidad)
@@ -53,6 +49,25 @@ namespace TransportesSoft_BackOffice.Repositories
                     id_Operador = unidad.id_Operador,
                     ProximoMantenimiento = unidad.ProximoMantenimiento
                 });
+            }
+        }
+
+        public void ActualizarUnidad(ContUnidades unidad)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContUnidades set Marca=@Marca, Serie=@Serie, Kilometraje=@Kilometraje, FechaActualizacion=@FechaActualizacion, " +
+                    "ProximoMantenimiento=@ProximoMantenimiento, id_Operador = @id_Operador WHERE id_Unidad=@id_Unidad";
+                var result = db.Execute(sqlEdit, new
+                {
+                    Marca = unidad.Marca,
+                    Serie = unidad.Serie,
+                    Kilometraje = unidad.Kilometraje,
+                    FechaActualizacion = DateTime.Now,
+                    id_Operador = unidad.id_Operador,
+                    ProximoMantenimiento = unidad.ProximoMantenimiento,
+                    id_Unidad = unidad.id_Unidad
+                });;
             }
         }
 

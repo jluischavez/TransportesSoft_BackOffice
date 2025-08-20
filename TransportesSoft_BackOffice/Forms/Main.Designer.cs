@@ -32,8 +32,9 @@
             this.contabilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remolquesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.remolquesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consumoDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,10 +66,18 @@
             // unidadesToolStripMenuItem
             // 
             this.unidadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aBCDeUnidadesToolStripMenuItem});
+            this.aBCDeUnidadesToolStripMenuItem,
+            this.consumoDeUnidadesToolStripMenuItem});
             this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
             this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.unidadesToolStripMenuItem.Text = "Unidades";
+            // 
+            // aBCDeUnidadesToolStripMenuItem
+            // 
+            this.aBCDeUnidadesToolStripMenuItem.Name = "aBCDeUnidadesToolStripMenuItem";
+            this.aBCDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.aBCDeUnidadesToolStripMenuItem.Text = "ABC de Unidades";
+            this.aBCDeUnidadesToolStripMenuItem.Click += new System.EventHandler(this.aBCDeUnidadesToolStripMenuItem_Click);
             // 
             // remolquesToolStripMenuItem
             // 
@@ -76,12 +85,12 @@
             this.remolquesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
             this.remolquesToolStripMenuItem.Text = "Remolques";
             // 
-            // aBCDeUnidadesToolStripMenuItem
+            // consumoDeUnidadesToolStripMenuItem
             // 
-            this.aBCDeUnidadesToolStripMenuItem.Name = "aBCDeUnidadesToolStripMenuItem";
-            this.aBCDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.aBCDeUnidadesToolStripMenuItem.Text = "ABC de Unidades";
-            this.aBCDeUnidadesToolStripMenuItem.Click += new System.EventHandler(this.aBCDeUnidadesToolStripMenuItem_Click);
+            this.consumoDeUnidadesToolStripMenuItem.Name = "consumoDeUnidadesToolStripMenuItem";
+            this.consumoDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.consumoDeUnidadesToolStripMenuItem.Text = "Consumo de Unidades";
+            this.consumoDeUnidadesToolStripMenuItem.Click += new System.EventHandler(this.consumoDeUnidadesToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -107,6 +116,7 @@
         private System.Windows.Forms.ToolStripMenuItem unidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem remolquesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBCDeUnidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consumoDeUnidadesToolStripMenuItem;
     }
 }
 
