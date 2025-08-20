@@ -17,36 +17,56 @@ namespace TransportesSoft_BackOffice.Forms
     {
         Service_ContUnidades lServiceContUnidades;
         Boolean esConsulta = false;
-
+        Service_ContOperadores lServContOperadores;
+        List<ContOperadores> lContOperadores;
         public ABCContFrmUnidades()
         {
             InitializeComponent();
             lServiceContUnidades = new Service_ContUnidades();
             this.KeyPreview = true;
+            this.StartPosition = FormStartPosition.Manual;
+            ObtenerDatos();
         }
-
+        private void ObtenerDatos()
+        {
+            /* Traemos Operadores y llenamos el ComboBox */
+            lServContOperadores = new Service_ContOperadores();
+            lContOperadores = lServContOperadores.ObtenerOperadores();
+            CBOperadores.DataSource = lContOperadores;
+            CBOperadores.DisplayMember = "Descripcion";
+            CBOperadores.ValueMember = "id_Operador";
+        }
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
-                ContUnidades unidad = new ContUnidades();
-                unidad.Marca = txtMarca.Text;
-                unidad.Kilometraje = Convert.ToInt32(txtKilometraje.Text);
-                unidad.Serie = txtSerie.Text;
-                unidad.ProximoMantenimiento = Convert.ToInt32(txtProxMantenimiento.Text);
-                unidad.id_Operador = 1;
 
-                if (esConsulta == false)
+                if (!ValidarKilometraje(Convert.ToInt32(txtKilometraje.Text), Convert.ToInt32(txtProxMantenimiento.Text)))
                 {
-                    lServiceContUnidades.GuardarUnidad(unidad);
+                    ContUnidades unidad = new ContUnidades();
+                    unidad.Marca = txtMarca.Text.ToUpper();
+                    unidad.Kilometraje = Convert.ToInt32(txtKilometraje.Text);
+                    unidad.Serie = txtSerie.Text.ToUpper();
+                    unidad.ProximoMantenimiento = Convert.ToInt32(txtProxMantenimiento.Text);
+                    unidad.id_Operador = Convert.ToInt32(CBOperadores.SelectedValue);
+                    unidad.id_Unidad = Convert.ToInt32(txtID.Text);
+
+                    if (esConsulta == false)
+                    {
+                        lServiceContUnidades.GuardarUnidad(unidad);
+                    }
+                    else
+                    {
+                        lServiceContUnidades.ActualizarUnidad(unidad);
+                    }
+                    MessageBox.Show("Se guardó la unidad correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Limpiar();
                 }
                 else
                 {
-
+                    MessageBox.Show($"Kilometraje actual: {txtKilometraje.Text}\nPróximo mantenimiento: {txtProxMantenimiento.Text}\n\nVerifica los valores ingresados.");
                 }
-                
-                MessageBox.Show("Se guardó la unidad correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Limpiar();
             }
             catch(Exception ex)
             {
@@ -60,10 +80,11 @@ namespace TransportesSoft_BackOffice.Forms
             txtID.Text = String.Empty;
             txtKilometraje.Text = String.Empty;
             txtMarca.Text = String.Empty;
-            txtOperador.Text = String.Empty;
             txtProxMantenimiento.Text = String.Empty;
             txtSerie.Text = String.Empty;
             esConsulta = false;
+            CBOperadores.DataSource = null;
+            ObtenerDatos();
         }
 
         private void txtID_KeyDown(object sender, KeyEventArgs e)
@@ -85,7 +106,7 @@ namespace TransportesSoft_BackOffice.Forms
             txtID.Text = unidad.id_Unidad.ToString();
             txtKilometraje.Text = unidad.Kilometraje.ToString();
             txtMarca.Text = unidad.Marca;
-            txtOperador.Text = unidad.id_Operador.ToString();
+            CBOperadores.SelectedValue = unidad.id_Operador;
             txtProxMantenimiento.Text = unidad.ProximoMantenimiento.ToString();
             txtSerie.Text = unidad.Serie;
             esConsulta = true;
@@ -98,6 +119,30 @@ namespace TransportesSoft_BackOffice.Forms
                 Limpiar(); 
                 e.SuppressKeyPress = true; 
             }
+        }
+
+        private void txtKilometraje_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo dígitos y teclas de control (como Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void ABCContFrmUnidades_Load(object sender, EventArgs e)
+        {
+            CBOperadores.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+
+        private bool ValidarKilometraje(int kilometraje, int proximomantenimiento)
+        {
+            // Si ProximoMantenimiento es 0, se permite cualquier kilometraje
+            if (proximomantenimiento == 0)
+                return true;
+
+            // Si no, el kilometraje debe ser mayor o igual
+            return kilometraje >= proximomantenimiento;
         }
     }
 }

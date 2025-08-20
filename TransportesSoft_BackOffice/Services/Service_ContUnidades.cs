@@ -31,5 +31,9 @@ namespace TransportesSoft_BackOffice.Services
         {
             lRepo.GuadarUnidad(unidad);
         }
+        public void ActualizarUnidad(ContUnidades unidad)
+        {
+            lRepo.ActualizarUnidad(unidad);
+        }
     }
 }

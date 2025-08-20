@@ -82,12 +82,37 @@ namespace TransportesSoft_BackOffice
         {
             ABCContFrmUnidades lContUnidades = new ABCContFrmUnidades();
             lContUnidades.MdiParent = this;
-            lContUnidades.FormBorderStyle = FormBorderStyle.Sizable;
+            lContUnidades.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            lContUnidades.StartPosition = FormStartPosition.Manual;
+            // Centrar respecto al MDI client
+            int x = (this.ClientSize.Width - lContUnidades.Width) / 2;
+            int y = (this.ClientSize.Height - lContUnidades.Height) / 2;
+            lContUnidades.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+
+
             lContUnidades.Show();
             lContUnidades.BringToFront();
+            
         }
+
         #endregion
 
+        private void consumoDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ContFrmConsumosUnidades lFrmConsumoUnidades = new ContFrmConsumosUnidades();
+            lFrmConsumoUnidades.MdiParent = this;
+            lFrmConsumoUnidades.FormBorderStyle = FormBorderStyle.FixedDialog;
 
+            lFrmConsumoUnidades.StartPosition = FormStartPosition.Manual;
+            // Centrar respecto al MDI client
+            int x = (this.ClientSize.Width - lFrmConsumoUnidades.Width) / 2;
+            int y = (this.ClientSize.Height - lFrmConsumoUnidades.Height) / 2;
+            lFrmConsumoUnidades.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+
+
+            lFrmConsumoUnidades.Show();
+            lFrmConsumoUnidades.BringToFront();
+        }
     }
 }

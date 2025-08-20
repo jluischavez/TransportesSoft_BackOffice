@@ -18,8 +18,9 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class ContFrmBuscar : Form
     {
-        List<ContUnidades> lContUnidades;
-        Service_ContUnidades lServiceContUnidades;
+        private List<ContUnidades> lContUnidades;
+        private Service_ContUnidades lServiceContUnidades;
+        private BindingSource bindingSourceUnidades = new BindingSource();
 
         public ContUnidades UnidadSeleccionada { get; private set; }
 
@@ -42,7 +43,9 @@ namespace TransportesSoft_BackOffice.Forms
             try
             {
                 lContUnidades = lServiceContUnidades.ObtenerUnidades();
-                DGV_Unidades.DataSource = lContUnidades;
+                bindingSourceUnidades.DataSource = lContUnidades;
+                DGV_Unidades.DataSource = bindingSourceUnidades;
+                //DGV_Unidades.DataSource = lContUnidades;
                 ConfigurarGrid();
             }
             catch(Exception ex)
@@ -101,6 +104,28 @@ namespace TransportesSoft_BackOffice.Forms
             }
 
             doc.Close();
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            string filtro = txtBuscar.Text.Trim().ToLower();
+
+            if (string.IsNullOrEmpty(filtro))
+            {
+                bindingSourceUnidades.DataSource = lContUnidades;
+            }
+            else
+            {
+                var filtradas = lContUnidades
+                    .Where(u => u.Marca.ToLower().Contains(filtro) ||
+                                u.Serie.ToLower().Contains(filtro) ||
+                                u.id_Unidad.ToString().Contains(filtro))
+                    .ToList();
+
+                bindingSourceUnidades.DataSource = filtradas;
+            }
+
+            DGV_Unidades.Refresh();
         }
     }
 }

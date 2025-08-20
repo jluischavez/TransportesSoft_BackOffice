@@ -18,6 +18,6 @@ namespace TransportesSoft_BackOffice.Clases
         public int id_Operador { get; set; }
         public int ProximoMantenimiento { get; set; }
 
-
+        public string Descripcion => $"{id_Unidad} - {Marca} ({Serie})";
     }
 }
