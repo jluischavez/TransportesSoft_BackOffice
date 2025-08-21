@@ -32,6 +32,38 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
+        public List<ContConsumoUnidades> ObtenerContConsumoUnidadesPorFecha(DateTime FechaInicial, DateTime FechaFinal)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContConsumoUnidades WHERE Fecha Between @FechaInicial AND @FechaFinal";
+                var parametros = new
+                {
+                    FechaInicial = FechaInicial,
+                    FechaFinal = FechaFinal
+                };
+                lContConsumoUnidades = db.Query<ContConsumoUnidades>(sql, parametros).ToList();
+
+                return lContConsumoUnidades;
+            }
+        }
+        public List<ContConsumoUnidades> ObtenerContConsumoUnidadPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContConsumoUnidades WHERE id_Unidad=@id_Unidad AND Fecha Between @FechaInicial AND @FechaFinal";
+                var parametros = new
+                {
+                    FechaInicial = FechaInicial,
+                    FechaFinal = FechaFinal,
+                    id_Unidad = idUnidad
+                };
+                lContConsumoUnidades = db.Query<ContConsumoUnidades>(sql, parametros).ToList();
+
+                return lContConsumoUnidades;
+            }
+        }
+
         public void GuardarConsumoUnidades(ContConsumoUnidades consumounidad)
         {
             using (var db = new SqlConnection(ConnectionString))

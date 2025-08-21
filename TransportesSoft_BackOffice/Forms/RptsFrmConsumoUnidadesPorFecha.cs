@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TransportesSoft_BackOffice.Clases;
+using TransportesSoft_BackOffice.Services;
+
+namespace TransportesSoft_BackOffice.Forms
+{
+    public partial class RptsFrmConsumoUnidadesPorFecha : Form
+    {
+        private List<ContUnidades> lContUnidades;
+        private Service_ContUnidades lServContUnidades;
+        public RptsFrmConsumoUnidadesPorFecha()
+        {
+            InitializeComponent();
+            ObtenerUnidades();
+            CboUnidades.Enabled = false;
+        }
+
+        private void BtnImprimir_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicial = DTFechaInicial.Value.Date;
+            DateTime fechaFinal = DTFechaFinal.Value.Date;
+
+            if (ValidarFechas(fechaInicial, fechaFinal))
+            {
+                int idUnidad = 0;
+                if (CBUnidadSeleccionada.Checked)
+                {
+                    idUnidad = Convert.ToInt32(CboUnidades.SelectedValue);
+                }
+                // Ejecutar lógica del reporte
+                FormReporte lreport = new FormReporte(FormReporte.TipoReporte.ContabilidadConsumoUnidades,fechaInicial, fechaFinal, idUnidad);
+                lreport.MdiParent = this.MdiParent;
+                lreport.FormBorderStyle = FormBorderStyle.Sizable;
+                lreport.Show();
+                lreport.BringToFront();
+            }
+        }
+        private bool ValidarFechas(DateTime fechaInicial, DateTime fechaFinal)
+        {
+            DateTime hoy = DateTime.Today;
+
+            // Validación básica
+            if (fechaFinal < fechaInicial)
+            {
+                MessageBox.Show("La fecha final no puede ser menor que la fecha inicial.", "Validación de fechas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (fechaFinal > hoy)
+            {
+                MessageBox.Show("La fecha final no puede ser mayor que la fecha actual.", "Validación de fechas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (fechaInicial > hoy)
+            {
+                MessageBox.Show("La fecha inicial no puede ser mayor que la fecha actual.", "Validación de fechas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ObtenerUnidades()
+        {
+            try
+            {
+                lServContUnidades = new Service_ContUnidades();
+                lContUnidades = lServContUnidades.ObtenerUnidades();
+                CboUnidades.DataSource = lContUnidades;
+                CboUnidades.DisplayMember = "Descripcion";
+                CboUnidades.ValueMember = "id_Unidad";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al consultar: ", "Error" + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void CBTodasUnidades_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CBUnidadSeleccionada.Checked)
+            {
+                CboUnidades.Enabled = true;
+            }
+            else
+            {
+                CboUnidades.Enabled = false;
+            }
+        }
+    }
+}

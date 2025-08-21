@@ -1,6 +1,6 @@
 ﻿namespace TransportesSoft_BackOffice.Forms
 {
-    partial class FormReporte_Load
+    partial class FormReporte
     {
         /// <summary>
         /// Required designer variable.
@@ -33,20 +33,23 @@
             // 
             // reportViewer1
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(42, 12);
+            this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(691, 426);
+            this.reportViewer1.Size = new System.Drawing.Size(580, 577);
             this.reportViewer1.TabIndex = 0;
             // 
-            // FormReporte_Load
+            // FormReporte
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(580, 577);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "FormReporte_Load";
-            this.Text = "FormReporte_Load";
+            this.Name = "FormReporte";
+            this.ShowIcon = false;
+            this.Text = "FormReporte";
+            this.Load += new System.EventHandler(this.FormReporte_Load);
             this.ResumeLayout(false);
 
         }
