@@ -70,6 +70,7 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.Columns["FechaActualizacion"].Visible = false;
             DGV_Unidades.Columns["id_Operador"].Visible = false;
             DGV_Unidades.Columns["ProximoMantenimiento"].Visible = false;
+            DGV_Unidades.Columns["Descripcion"].Visible = false;
         }
 
         private void DGV_Unidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

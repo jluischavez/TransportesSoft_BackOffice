@@ -28,10 +28,25 @@ namespace TransportesSoft_BackOffice.Services
             return lContConsumoUnidades;
         }
 
+        public List<ContConsumoUnidades> ObtenerContConsumoUnidadesPorFecha(DateTime FechaInicial, DateTime FechaFinal)
+        {
+            lContConsumoUnidades = lRepoContConsumoUnidades.ObtenerContConsumoUnidadesPorFecha(FechaInicial,FechaFinal);
+
+            return lContConsumoUnidades;
+        }
+
+        public List<ContConsumoUnidades> ObtenerContConsumoUnidadPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
+        {
+            lContConsumoUnidades = lRepoContConsumoUnidades.ObtenerContConsumoUnidadPorFecha(FechaInicial, FechaFinal, idUnidad);
+
+            return lContConsumoUnidades;
+        }
+
         public void GuardarConsumoUnidad(ContConsumoUnidades consumoUnidad)
         {
             lRepoContConsumoUnidades.GuardarConsumoUnidades(consumoUnidad);
         }
+
 
 
     }
