@@ -52,24 +52,24 @@ namespace TransportesSoft_BackOffice.Forms
             InitializeComponent();
             if (tipoReporte == TipoReporte.ContabilidadConsumoUnidades)
             {
-                if (idunidad == 0)
-                {
-                    RptContConsumoUnidadesPorFecha(FechaInicial, FechaFinal);
-                }
-                else
-                {
-                    RptContConsumoUnidadPorFecha(FechaInicial, FechaFinal, idunidad);
-                }
-                
+                    RptContConsumoUnidadesPorFecha(FechaInicial, FechaFinal, idunidad);
             }
         }
         #endregion
-        private void RptContConsumoUnidadesPorFecha(DateTime FechaInicial, DateTime FechaFinal)
+        private void RptContConsumoUnidadesPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
         {
             try
             {
                 lServiceConsumoUnidades = new Service_ContConsumoUnidades();
-                lContConsumoUnidades = lServiceConsumoUnidades.ObtenerContConsumoUnidadesPorFecha(FechaInicial, FechaFinal);
+                if (idUnidad == 0)
+                {
+                    lContConsumoUnidades = lServiceConsumoUnidades.ObtenerContConsumoUnidadesPorFecha(FechaInicial, FechaFinal);
+                }
+                else
+                {
+                    lContConsumoUnidades = lServiceConsumoUnidades.ObtenerContConsumoUnidadPorFecha(FechaInicial, FechaFinal, idUnidad);
+                }
+                
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
 
@@ -91,36 +91,6 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 MessageBox.Show("Error", "Error al generar reporte. " + ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-        }
-
-        private void RptContConsumoUnidadPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
-        {
-            try
-            {
-                lServiceConsumoUnidades = new Service_ContConsumoUnidades();
-                lContConsumoUnidades = lServiceConsumoUnidades.ObtenerContConsumoUnidadPorFecha(FechaInicial, FechaFinal, idUnidad);
-                lServcontSucLocal = new Service_ConfSucursalLocal();
-                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
-
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptConsumoUnidadPorFecha.rdlc");
-
-                ReportDataSource rds = new ReportDataSource("ContConsumoUnidades", lContConsumoUnidades);
-                reportViewer1.LocalReport.DataSources.Clear();
-                reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
-
-                /*Agrega la sucursal*/
-                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
-                reportViewer1.LocalReport.SetParameters(paramSucursal);
-
-                reportViewer1.RefreshReport();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error", "Error al generar reporte. " + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
         }
 
         private void FormReporte_Load(object sender, EventArgs e)
