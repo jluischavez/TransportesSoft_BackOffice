@@ -70,6 +70,12 @@ namespace TransportesSoft_BackOffice.Forms
                     lContConsumoUnidades = lServiceConsumoUnidades.ObtenerContConsumoUnidadPorFecha(FechaInicial, FechaFinal, idUnidad);
                 }
                 
+                if (lContConsumoUnidades.Count == 0)
+                {
+                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
 
@@ -89,13 +95,15 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Error", "Error al generar reporte. " + ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
         private void FormReporte_Load(object sender, EventArgs e)
         {
-            
+            reportViewer1.Dock = DockStyle.Fill;
+            reportViewer1.ZoomMode = ZoomMode.PageWidth;
+            reportViewer1.RefreshReport();
         }
     }
 }

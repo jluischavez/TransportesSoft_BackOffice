@@ -91,7 +91,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             if (e.KeyCode == Keys.F3)
             {
-                ContFrmBuscar frmBuscar = new ContFrmBuscar("Unidades");
+                ContFrmBuscar frmBuscar = new ContFrmBuscar("Unidades", ContFrmBuscar.TipoBusqueda.ContUnidades);
                 frmBuscar.MdiParent = this.MdiParent;
                 frmBuscar.FormBorderStyle = FormBorderStyle.Sizable;
 

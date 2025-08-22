@@ -96,12 +96,12 @@
             this.txtMarca.MaxLength = 15;
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(195, 20);
-            this.txtMarca.TabIndex = 6;
+            this.txtMarca.TabIndex = 1;
             // 
             // txtSerie
             // 
             this.txtSerie.Location = new System.Drawing.Point(140, 60);
-            this.txtSerie.MaxLength = 20;
+            this.txtSerie.MaxLength = 2;
             this.txtSerie.Name = "txtSerie";
             this.txtSerie.Size = new System.Drawing.Size(195, 20);
             this.txtSerie.TabIndex = 7;
@@ -109,7 +109,7 @@
             // txtKilometraje
             // 
             this.txtKilometraje.Location = new System.Drawing.Point(140, 86);
-            this.txtKilometraje.MaxLength = 6;
+            this.txtKilometraje.MaxLength = 3;
             this.txtKilometraje.Name = "txtKilometraje";
             this.txtKilometraje.Size = new System.Drawing.Size(195, 20);
             this.txtKilometraje.TabIndex = 8;
@@ -121,7 +121,7 @@
             this.txtProxMantenimiento.MaxLength = 6;
             this.txtProxMantenimiento.Name = "txtProxMantenimiento";
             this.txtProxMantenimiento.Size = new System.Drawing.Size(195, 20);
-            this.txtProxMantenimiento.TabIndex = 11;
+            this.txtProxMantenimiento.TabIndex = 5;
             // 
             // txtID
             // 
@@ -129,7 +129,7 @@
             this.txtID.Location = new System.Drawing.Point(54, 16);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(49, 20);
-            this.txtID.TabIndex = 12;
+            this.txtID.TabIndex = 1;
             this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
             // 
             // LblID
@@ -146,7 +146,7 @@
             this.BtnGuardar.Location = new System.Drawing.Point(272, 233);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.BtnGuardar.TabIndex = 14;
+            this.BtnGuardar.TabIndex = 6;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = true;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
@@ -166,7 +166,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(356, 185);
-            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // CBOperadores
@@ -175,7 +175,7 @@
             this.CBOperadores.Location = new System.Drawing.Point(140, 112);
             this.CBOperadores.Name = "CBOperadores";
             this.CBOperadores.Size = new System.Drawing.Size(195, 21);
-            this.CBOperadores.TabIndex = 12;
+            this.CBOperadores.TabIndex = 4;
             // 
             // ABCContFrmUnidades
             // 

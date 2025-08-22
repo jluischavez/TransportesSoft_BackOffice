@@ -65,7 +65,7 @@
                   <Width>2.79104cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>5.91312cm</Width>
+                  <Width>7.23604cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -414,10 +414,15 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ContConsumoUnidades</DataSetName>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!Fecha.Value</Value>
+              </SortExpression>
+            </SortExpressions>
             <Top>0.60537cm</Top>
             <Left>0.34203cm</Left>
             <Height>1.2cm</Height>
-            <Width>16.44228cm</Width>
+            <Width>17.7652cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -428,7 +433,7 @@
             <Top>1.98176cm</Top>
             <Left>0.34203cm</Left>
             <Height>0cm</Height>
-            <Width>16.44228cm</Width>
+            <Width>17.7652cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>

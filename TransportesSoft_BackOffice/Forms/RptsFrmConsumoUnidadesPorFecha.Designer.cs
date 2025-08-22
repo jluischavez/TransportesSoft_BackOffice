@@ -130,6 +130,7 @@
             this.Name = "RptsFrmConsumoUnidadesPorFecha";
             this.ShowIcon = false;
             this.Text = "Consumo de unidades por fecha";
+            this.Load += new System.EventHandler(this.RptsFrmConsumoUnidadesPorFecha_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
