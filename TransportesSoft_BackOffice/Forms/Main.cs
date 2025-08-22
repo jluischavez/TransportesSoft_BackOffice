@@ -142,5 +142,21 @@ namespace TransportesSoft_BackOffice
             lRptConsumoUnidadesPorFecha.Show();
             lRptConsumoUnidadesPorFecha.BringToFront();
         }
+
+        private void aBCDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ABCContFrmClientes lFrmContClientes = new ABCContFrmClientes();
+            lFrmContClientes.MdiParent = this;
+            lFrmContClientes.FormBorderStyle = FormBorderStyle.FixedDialog; // o None si quieres sin bordes
+
+            lFrmContClientes.StartPosition = FormStartPosition.Manual;
+            // Centrar respecto al MDI client
+            int x = (this.ClientSize.Width - lFrmContClientes.Width) / 2;
+            int y = (this.ClientSize.Height - lFrmContClientes.Height) / 2;
+            lFrmContClientes.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+
+            lFrmContClientes.Show();
+            lFrmContClientes.BringToFront();
+        }
     }
 }

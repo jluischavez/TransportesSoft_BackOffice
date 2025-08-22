@@ -64,10 +64,11 @@
             // 
             // DTFecha
             // 
+            this.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DTFecha.Location = new System.Drawing.Point(140, 61);
             this.DTFecha.Name = "DTFecha";
             this.DTFecha.Size = new System.Drawing.Size(195, 20);
-            this.DTFecha.TabIndex = 18;
+            this.DTFecha.TabIndex = 2;
             // 
             // CBUnidades
             // 
@@ -75,16 +76,16 @@
             this.CBUnidades.Location = new System.Drawing.Point(140, 34);
             this.CBUnidades.Name = "CBUnidades";
             this.CBUnidades.Size = new System.Drawing.Size(195, 21);
-            this.CBUnidades.TabIndex = 17;
+            this.CBUnidades.TabIndex = 1;
             // 
             // LblUnidad
             // 
             this.LblUnidad.AutoSize = true;
             this.LblUnidad.Location = new System.Drawing.Point(15, 37);
             this.LblUnidad.Name = "LblUnidad";
-            this.LblUnidad.Size = new System.Drawing.Size(41, 13);
+            this.LblUnidad.Size = new System.Drawing.Size(44, 13);
             this.LblUnidad.TabIndex = 0;
-            this.LblUnidad.Text = "Unidad";
+            this.LblUnidad.Text = "Unidad:";
             // 
             // LblFecha
             // 
@@ -116,7 +117,7 @@
             // txtConsumoEnPesos
             // 
             this.txtConsumoEnPesos.Location = new System.Drawing.Point(140, 112);
-            this.txtConsumoEnPesos.MaxLength = 6;
+            this.txtConsumoEnPesos.MaxLength = 4;
             this.txtConsumoEnPesos.Name = "txtConsumoEnPesos";
             this.txtConsumoEnPesos.Size = new System.Drawing.Size(195, 20);
             this.txtConsumoEnPesos.TabIndex = 11;
@@ -134,7 +135,7 @@
             // txtComentarios
             // 
             this.txtComentarios.Location = new System.Drawing.Point(140, 142);
-            this.txtComentarios.MaxLength = 50;
+            this.txtComentarios.MaxLength = 5;
             this.txtComentarios.Multiline = true;
             this.txtComentarios.Name = "txtComentarios";
             this.txtComentarios.Size = new System.Drawing.Size(195, 63);
@@ -143,7 +144,7 @@
             // txtConsumoLitros
             // 
             this.txtConsumoLitros.Location = new System.Drawing.Point(140, 86);
-            this.txtConsumoLitros.MaxLength = 6;
+            this.txtConsumoLitros.MaxLength = 3;
             this.txtConsumoLitros.Name = "txtConsumoLitros";
             this.txtConsumoLitros.Size = new System.Drawing.Size(195, 20);
             this.txtConsumoLitros.TabIndex = 8;
@@ -154,7 +155,7 @@
             this.BTGuardar.Location = new System.Drawing.Point(272, 229);
             this.BTGuardar.Name = "BTGuardar";
             this.BTGuardar.Size = new System.Drawing.Size(75, 23);
-            this.BTGuardar.TabIndex = 17;
+            this.BTGuardar.TabIndex = 6;
             this.BTGuardar.Text = "Guardar";
             this.BTGuardar.UseVisualStyleBackColor = true;
             this.BTGuardar.Click += new System.EventHandler(this.BTGuardar_Click);

@@ -81,7 +81,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al consultar: ", "Error" + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error.", "Error al consultar: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -96,6 +96,11 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 CboUnidades.Enabled = false;
             }
+        }
+
+        private void RptsFrmConsumoUnidadesPorFecha_Load(object sender, EventArgs e)
+        {
+            CboUnidades.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }

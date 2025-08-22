@@ -10,25 +10,23 @@ using TransportesSoft_BackOffice.Clases;
 
 namespace TransportesSoft_BackOffice.Repositories
 {
-    public class Repo_ConfSucursalLocal
+    public class Repo_ContClientes
     {
         private string ConnectionString;
-        ConfSucursalLocal lConfSucursalLocal;
-
-        public Repo_ConfSucursalLocal()
+        List<ContClientes> lContClientes;
+        public Repo_ContClientes()
         {
-            lConfSucursalLocal = new ConfSucursalLocal();
+            lContClientes = new List<ContClientes>();
             ConnectionString = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
         }
 
-
-        public ConfSucursalLocal ObtenerConfiguracionSucursalLocal()
+        public List<ContClientes> ObtenerClientes()
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ConfSucursalLocal";
-                lConfSucursalLocal = db.QueryFirst<ConfSucursalLocal>(sql);
-                return lConfSucursalLocal;
+                var sql = "SELECT * FROM ContClientes";
+                lContClientes = db.Query<ContClientes>(sql).ToList();
+                return lContClientes;
             }
         }
     }

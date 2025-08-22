@@ -53,9 +53,11 @@
             this.BtnAceptar.TabIndex = 2;
             this.BtnAceptar.Text = "Aceptar";
             this.BtnAceptar.UseVisualStyleBackColor = true;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
             // BntReporte
             // 
+            this.BntReporte.Enabled = false;
             this.BntReporte.Location = new System.Drawing.Point(12, 369);
             this.BntReporte.Name = "BntReporte";
             this.BntReporte.Size = new System.Drawing.Size(75, 23);
@@ -69,7 +71,7 @@
             this.txtBuscar.Location = new System.Drawing.Point(61, 12);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(290, 20);
-            this.txtBuscar.TabIndex = 4;
+            this.txtBuscar.TabIndex = 1;
             this.txtBuscar.TextChanged += new System.EventHandler(this.txtBuscar_TextChanged);
             // 
             // label1
