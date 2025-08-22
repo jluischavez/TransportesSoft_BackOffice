@@ -1,0 +1,1 @@
+Hola, este proyecto se está creando para una empresa la cual requiere un sistema para administrar y controlar las unidades de transporte que tiene. Consumos en litros de diesel, en pesos, fechas, control de operadores, de unidades, de clientes, etc. Se espera en un futuro el proyecto crezca más, de momento aún se está trabajando en él.
