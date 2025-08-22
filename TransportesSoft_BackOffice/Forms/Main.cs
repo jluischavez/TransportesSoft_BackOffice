@@ -75,16 +75,6 @@ namespace TransportesSoft_BackOffice
 
             toolStripStatusConexion.Text = $"BD: {baseDatos} | Instancia: {instancia}";
         }
-
-        //private void BtnReporte_Click(object sender, EventArgs e)
-        //{
-        //    FormReporte_Load lreport = new FormReporte_Load();
-        //    lreport.MdiParent = this;
-        //    lreport.FormBorderStyle = FormBorderStyle.Sizable; // o None si quieres sin bordes
-        //    lreport.Show();
-        //    lreport.BringToFront();
-
-        //}
         private void Main_Resize(object sender, EventArgs e)
         {
 
@@ -92,71 +82,42 @@ namespace TransportesSoft_BackOffice
 
         private void aBCDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ABCContFrmUnidades lContUnidades = new ABCContFrmUnidades();
-            lContUnidades.MdiParent = this;
-            lContUnidades.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            lContUnidades.StartPosition = FormStartPosition.Manual;
-            // Centrar respecto al MDI client
-            int x = (this.ClientSize.Width - lContUnidades.Width) / 2;
-            int y = (this.ClientSize.Height - lContUnidades.Height) / 2;
-            lContUnidades.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
-
-
-            lContUnidades.Show();
-            lContUnidades.BringToFront();
-            
+            FormFactory.AbrirFormulario<ABCContFrmUnidades>(this);
         }
 
         #endregion
 
         private void consumoDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ContFrmConsumosUnidades lFrmConsumoUnidades = new ContFrmConsumosUnidades();
-            lFrmConsumoUnidades.MdiParent = this;
-            lFrmConsumoUnidades.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            lFrmConsumoUnidades.StartPosition = FormStartPosition.Manual;
-            // Centrar respecto al MDI client
-            int x = (this.ClientSize.Width - lFrmConsumoUnidades.Width) / 2;
-            int y = (this.ClientSize.Height - lFrmConsumoUnidades.Height) / 2;
-            lFrmConsumoUnidades.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
-
-
-            lFrmConsumoUnidades.Show();
-            lFrmConsumoUnidades.BringToFront();
+            FormFactory.AbrirFormulario<ContFrmConsumosUnidades>(this);
         }
 
         private void consumoDeUnidadesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            RptsFrmConsumoUnidadesPorFecha lRptConsumoUnidadesPorFecha = new RptsFrmConsumoUnidadesPorFecha();
-            lRptConsumoUnidadesPorFecha.MdiParent = this;
-            lRptConsumoUnidadesPorFecha.FormBorderStyle = FormBorderStyle.FixedDialog; // o None si quieres sin bordes
-
-            lRptConsumoUnidadesPorFecha.StartPosition = FormStartPosition.Manual;
-            // Centrar respecto al MDI client
-            int x = (this.ClientSize.Width - lRptConsumoUnidadesPorFecha.Width) / 2;
-            int y = (this.ClientSize.Height - lRptConsumoUnidadesPorFecha.Height) / 2;
-            lRptConsumoUnidadesPorFecha.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
-
-            lRptConsumoUnidadesPorFecha.Show();
-            lRptConsumoUnidadesPorFecha.BringToFront();
+            FormFactory.AbrirFormulario<RptsFrmConsumoUnidadesPorFecha>(this);
         }
 
         private void aBCDeClientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ABCContFrmClientes lFrmContClientes = new ABCContFrmClientes();
-            lFrmContClientes.MdiParent = this;
-            lFrmContClientes.FormBorderStyle = FormBorderStyle.FixedDialog; // o None si quieres sin bordes
+            FormFactory.AbrirFormulario<ABCContFrmClientes>(this);
+        }
+    }
 
-            lFrmContClientes.StartPosition = FormStartPosition.Manual;
-            // Centrar respecto al MDI client
-            int x = (this.ClientSize.Width - lFrmContClientes.Width) / 2;
-            int y = (this.ClientSize.Height - lFrmContClientes.Height) / 2;
-            lFrmContClientes.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+    public static class FormFactory
+    {
+        public static void AbrirFormulario<T>(Form mdiParent) where T : Form, new()
+        {
+            var formulario = new T();
+            formulario.MdiParent = mdiParent;
+            formulario.FormBorderStyle = FormBorderStyle.FixedDialog;
+            formulario.StartPosition = FormStartPosition.Manual;
 
-            lFrmContClientes.Show();
-            lFrmContClientes.BringToFront();
+            int x = (mdiParent.ClientSize.Width - formulario.Width) / 2;
+            int y = (mdiParent.ClientSize.Height - formulario.Height) / 2;
+            formulario.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+
+            formulario.Show();
+            formulario.BringToFront();
         }
     }
 }
