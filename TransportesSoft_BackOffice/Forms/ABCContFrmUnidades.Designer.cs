@@ -42,6 +42,7 @@
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.CBOperadores = new System.Windows.Forms.ComboBox();
+            this.BtnEliminar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,24 +102,24 @@
             // txtSerie
             // 
             this.txtSerie.Location = new System.Drawing.Point(140, 60);
-            this.txtSerie.MaxLength = 2;
+            this.txtSerie.MaxLength = 20;
             this.txtSerie.Name = "txtSerie";
             this.txtSerie.Size = new System.Drawing.Size(195, 20);
-            this.txtSerie.TabIndex = 7;
+            this.txtSerie.TabIndex = 2;
             // 
             // txtKilometraje
             // 
             this.txtKilometraje.Location = new System.Drawing.Point(140, 86);
-            this.txtKilometraje.MaxLength = 3;
+            this.txtKilometraje.MaxLength = 999999;
             this.txtKilometraje.Name = "txtKilometraje";
             this.txtKilometraje.Size = new System.Drawing.Size(195, 20);
-            this.txtKilometraje.TabIndex = 8;
+            this.txtKilometraje.TabIndex = 3;
             this.txtKilometraje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtKilometraje_KeyPress);
             // 
             // txtProxMantenimiento
             // 
             this.txtProxMantenimiento.Location = new System.Drawing.Point(140, 138);
-            this.txtProxMantenimiento.MaxLength = 6;
+            this.txtProxMantenimiento.MaxLength = 999999;
             this.txtProxMantenimiento.Name = "txtProxMantenimiento";
             this.txtProxMantenimiento.Size = new System.Drawing.Size(195, 20);
             this.txtProxMantenimiento.TabIndex = 5;
@@ -177,11 +178,26 @@
             this.CBOperadores.Size = new System.Drawing.Size(195, 21);
             this.CBOperadores.TabIndex = 4;
             // 
+            // BtnEliminar
+            // 
+            this.BtnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.BtnEliminar.FlatAppearance.BorderSize = 2;
+            this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEliminar.ForeColor = System.Drawing.Color.Red;
+            this.BtnEliminar.Location = new System.Drawing.Point(30, 233);
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.BtnEliminar.TabIndex = 14;
+            this.BtnEliminar.Text = "Eliminar";
+            this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
+            // 
             // ABCContFrmUnidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(380, 284);
+            this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.LblID);
@@ -217,5 +233,6 @@
         private System.Windows.Forms.Button BtnGuardar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox CBOperadores;
+        private System.Windows.Forms.Button BtnEliminar;
     }
 }

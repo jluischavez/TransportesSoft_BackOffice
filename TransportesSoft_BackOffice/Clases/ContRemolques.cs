@@ -10,8 +10,6 @@ namespace TransportesSoft_BackOffice.Clases
     {
 
         public int id_Remolque { get; set; }
-        public int id_Operador { get; set; }
-        public int id_Client { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
         public string Serie { get; set; }

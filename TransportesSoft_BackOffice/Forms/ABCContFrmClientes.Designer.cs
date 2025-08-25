@@ -38,6 +38,7 @@
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.LblID = new System.Windows.Forms.Label();
             this.txtID = new System.Windows.Forms.TextBox();
+            this.BtnEliminar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(356, 125);
-            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // LblNombre
@@ -85,7 +86,7 @@
             // txtNombre
             // 
             this.txtNombre.Location = new System.Drawing.Point(140, 34);
-            this.txtNombre.MaxLength = 15;
+            this.txtNombre.MaxLength = 50;
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(195, 20);
             this.txtNombre.TabIndex = 1;
@@ -93,28 +94,29 @@
             // txtTelefono
             // 
             this.txtTelefono.Location = new System.Drawing.Point(140, 86);
-            this.txtTelefono.MaxLength = 3;
+            this.txtTelefono.MaxLength = 10;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(195, 20);
-            this.txtTelefono.TabIndex = 8;
+            this.txtTelefono.TabIndex = 3;
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtKilometraje_KeyPress);
             // 
             // txtDireccion
             // 
             this.txtDireccion.Location = new System.Drawing.Point(140, 60);
-            this.txtDireccion.MaxLength = 2;
+            this.txtDireccion.MaxLength = 255;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(195, 20);
-            this.txtDireccion.TabIndex = 7;
+            this.txtDireccion.TabIndex = 2;
             // 
             // BtnGuardar
             // 
             this.BtnGuardar.Location = new System.Drawing.Point(272, 169);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.BtnGuardar.TabIndex = 16;
+            this.BtnGuardar.TabIndex = 3;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = true;
+            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // LblID
             // 
@@ -131,21 +133,36 @@
             this.txtID.Location = new System.Drawing.Point(54, 12);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(49, 20);
-            this.txtID.TabIndex = 14;
+            this.txtID.TabIndex = 1;
             this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
+            // 
+            // BtnEliminar
+            // 
+            this.BtnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.BtnEliminar.FlatAppearance.BorderSize = 2;
+            this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnEliminar.ForeColor = System.Drawing.Color.Red;
+            this.BtnEliminar.Location = new System.Drawing.Point(30, 168);
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.BtnEliminar.TabIndex = 18;
+            this.BtnEliminar.Text = "Eliminar";
+            this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // ABCContFrmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 203);
+            this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.LblID);
             this.Controls.Add(this.txtID);
             this.Name = "ABCContFrmClientes";
             this.ShowIcon = false;
-            this.Text = "ABCContFrmClientes";
+            this.Text = "Control de Clientes";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -165,5 +182,6 @@
         private System.Windows.Forms.Button BtnGuardar;
         private System.Windows.Forms.Label LblID;
         private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.Button BtnEliminar;
     }
 }

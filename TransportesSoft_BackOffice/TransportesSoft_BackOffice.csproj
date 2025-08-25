@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -106,6 +108,12 @@
     <Compile Include="Forms\ABCContFrmClientes.Designer.cs">
       <DependentUpon>ABCContFrmClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ABCContFrmRemolques.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ABCContFrmRemolques.Designer.cs">
+      <DependentUpon>ABCContFrmRemolques.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ABCContFrmUnidades.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +131,12 @@
     </Compile>
     <Compile Include="Forms\ContFrmConsumosUnidades.Designer.cs">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ContFrmViajes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmViajes.Designer.cs">
+      <DependentUpon>ContFrmViajes.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormReporte.cs">
       <SubType>Form</SubType>
@@ -148,15 +162,20 @@
     <Compile Include="Repositories\Repo_ContClientes.cs" />
     <Compile Include="Repositories\Repo_ContConsumoUnidades.cs" />
     <Compile Include="Repositories\Repo_ContOperadores.cs" />
+    <Compile Include="Repositories\Repo_ContRemolques.cs" />
     <Compile Include="Repositories\Repo_ContUnidades.cs" />
     <Compile Include="Services\Service_ConfSucursalLocal.cs" />
     <Compile Include="Services\Service_ContClientes.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
     <Compile Include="Services\Service_ContOperadores.cs" />
+    <Compile Include="Services\Service_ContRemolques.cs" />
     <Compile Include="Services\Service_ContUnidades.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Forms\ABCContFrmClientes.resx">
       <DependentUpon>ABCContFrmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ABCContFrmRemolques.resx">
+      <DependentUpon>ABCContFrmRemolques.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ABCContFrmUnidades.resx">
       <DependentUpon>ABCContFrmUnidades.cs</DependentUpon>
@@ -166,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmConsumosUnidades.resx">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmViajes.resx">
+      <DependentUpon>ContFrmViajes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormReporte.resx">
       <DependentUpon>FormReporte.cs</DependentUpon>

@@ -29,5 +29,36 @@ namespace TransportesSoft_BackOffice.Repositories
                 return lContClientes;
             }
         }
+
+        public void GuardarCliente(ContClientes lCliente)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlInsert = "Insert into ContClientes(Nombre, Direccion, Telefono) " +
+                    "Values(@Nombre, @Direccion, @Telefono)";
+                var result = db.Execute(sqlInsert, new
+                {
+                    Nombre = lCliente.Nombre,
+                    Direccion = lCliente.Direccion,
+                    Telefono = lCliente.Telefono
+                });
+            }
+        }
+
+        public void ActualizarCliente(ContClientes lCliente)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContClientes set Nombre=@Nombre, Direccion=@Direccion, Telefono=@Telefono " +
+                    "WHERE id_Client=@id_Client";
+                var result = db.Execute(sqlEdit, new
+                {
+                    Nombre = lCliente.Nombre,
+                    Direccion = lCliente.Direccion,
+                    Telefono = lCliente.Telefono,
+                    id_Client = lCliente.id_Client
+                }); ;
+            }
+        }
     }
 }

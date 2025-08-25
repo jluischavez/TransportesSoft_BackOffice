@@ -15,25 +15,36 @@ namespace TransportesSoft_BackOffice.Repositories
         private string ConnectionString;
         List<ContUnidades> lContUnidades;
 
+        /// <summary>
+        /// Repositorio de ContUnidades
+        /// </summary>
         public Repo_ContUnidades()
         {
             lContUnidades = new List<ContUnidades>();
             ConnectionString = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
         }
         
-
+        /// <summary>
+        /// Regresa todas las unidades con Estatus 'A'
+        /// </summary>
+        /// <returns></returns>
         public List<ContUnidades> ObtenerUnidades()
         {
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContUnidades";
+                var sql = "SELECT * FROM ContUnidades WHERE Estatus='A'";
                 lContUnidades = db.Query<ContUnidades>(sql).ToList();
 
                 return lContUnidades;
             }
         }
 
+
+        /// <summary>
+        /// Genera un registro nuevo de unidad.
+        /// </summary>
+        /// <param name="unidad"></param>
         public void GuadarUnidad(ContUnidades unidad)
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -52,6 +63,10 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
+        /// <summary>
+        /// Actualiza los campos de una Unidad en base de datos.
+        /// </summary>
+        /// <param name="unidad"></param>
         public void ActualizarUnidad(ContUnidades unidad)
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -68,6 +83,23 @@ namespace TransportesSoft_BackOffice.Repositories
                     ProximoMantenimiento = unidad.ProximoMantenimiento,
                     id_Unidad = unidad.id_Unidad
                 });;
+            }
+        }
+
+
+        /// <summary>
+        /// EliminarUnidad no Elimina, solo actualiza status en base de datos.
+        /// </summary>
+        /// <param name="id_Unidad"></param>
+        public void EliminarUnidad(int id_Unidad)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContUnidades set Estatus=@Estatus " +
+                   "WHERE id_Unidad=@id_Unidad";
+                var result = db.Execute(sqlEdit, new { id_Unidad = id_Unidad, Estatus='C' });
+                //var sqlDelete = "DELETE FROM ContUnidades WHERE id_Unidad=@id_Unidad";
+                //db.Execute(sqlDelete, new { id_Unidad = id_Unidad});
             }
         }
 

@@ -53,19 +53,19 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.15604cm</Width>
+                  <Width>1.95496cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.79104cm</Width>
+                  <Width>2.58996cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.79104cm</Width>
+                  <Width>1.72394cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.79104cm</Width>
+                  <Width>2.53704cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>7.23604cm</Width>
+                  <Width>5.47392cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -420,9 +420,9 @@
               </SortExpression>
             </SortExpressions>
             <Top>0.60537cm</Top>
-            <Left>0.34203cm</Left>
+            <Left>1.9259cm</Left>
             <Height>1.2cm</Height>
-            <Width>17.7652cm</Width>
+            <Width>14.27982cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -431,9 +431,9 @@
           </Tablix>
           <Line Name="Line1">
             <Top>1.98176cm</Top>
-            <Left>0.34203cm</Left>
+            <Left>1.9259cm</Left>
             <Height>0cm</Height>
-            <Width>17.7652cm</Width>
+            <Width>14.27982cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -457,7 +457,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox3</rd:DefaultName>
             <Top>2.12287cm</Top>
-            <Left>2.49807cm</Left>
+            <Left>3.89144cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>2</ZIndex>
@@ -487,7 +487,7 @@
             </Paragraphs>
             <rd:DefaultName>ConsumoLitros1</rd:DefaultName>
             <Top>2.12287cm</Top>
-            <Left>5.28911cm</Left>
+            <Left>6.68248cm</Left>
             <Height>0.6cm</Height>
             <Width>2.79104cm</Width>
             <ZIndex>3</ZIndex>
@@ -519,7 +519,7 @@
             </Paragraphs>
             <rd:DefaultName>ConsumoPesos1</rd:DefaultName>
             <Top>2.12287cm</Top>
-            <Left>8.22126cm</Left>
+            <Left>9.61463cm</Left>
             <Height>0.6cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>4</ZIndex>
@@ -596,7 +596,7 @@
                 </Paragraph>
               </Paragraphs>
               <Top>1.86654cm</Top>
-              <Left>0.34203cm</Left>
+              <Left>1.9259cm</Left>
               <Height>0.65292cm</Height>
               <Width>7.73812cm</Width>
               <ZIndex>1</ZIndex>
