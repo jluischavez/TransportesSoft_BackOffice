@@ -32,13 +32,21 @@ namespace TransportesSoft_BackOffice.Forms
         private BindingSource bindingSourceClientes = new BindingSource();
         public ContClientes ClienteSeleccionado { get; private set; }
         public event EventHandler<ContClientes> ClienteSeleccionadoEvent;
+
+        /*CONTABILIDAD REMOLQUES*/
+        private List<ContRemolques> lContRemolques;
+        private Service_ContRemolques lServiceContRemolques;
+        private BindingSource bindingSourceRemolques = new BindingSource();
+        public ContClientes RemolqueSeleccionado { get; private set; }
+        public event EventHandler<ContRemolques> RemolqueSeleccionadoEvent;
         
         private TipoBusqueda TipoFormulario;
         #endregion
         public enum TipoBusqueda
         {
             ContUnidades = 1,
-            ContClientes = 2
+            ContClientes = 2,
+            ContRemolques = 3
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -59,7 +67,13 @@ namespace TransportesSoft_BackOffice.Forms
                 lContClientes = new List<ContClientes>();
                 lServiceContClientes = new Service_ContClientes();
                 BuscarClientes();
-            };
+            }
+            else if (TipoFormulario == TipoBusqueda.ContRemolques)
+            {
+                lContRemolques = new List<ContRemolques>();
+                lServiceContRemolques = new Service_ContRemolques();
+                BuscarRemolques();
+            }
         }
         #endregion
         #region "Private"
@@ -88,7 +102,22 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error", "Error al consultar las unidades: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error", "Error al consultar los clientes: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BuscarRemolques()
+        {
+            try
+            {
+                lContRemolques = lServiceContRemolques.ObtenerRemolques();
+                bindingSourceRemolques.DataSource = lContRemolques;
+                DGV_Unidades.DataSource = bindingSourceRemolques;
+                ConfigurarGridRemolques();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error", "Error al consultar los remolques: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -101,7 +130,10 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.AllowUserToResizeColumns = false;     
             DGV_Unidades.AllowUserToResizeRows = false;        
             DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect; 
-            DGV_Unidades.MultiSelect = false;                  
+            DGV_Unidades.MultiSelect = false;
+
+            DGV_Unidades.Columns["id_Unidad"].Width = 50;
+            DGV_Unidades.Columns["Serie"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             DGV_Unidades.Columns["Kilometraje"].Visible = false;
             DGV_Unidades.Columns["FechaActualizacion"].Visible = false;
@@ -120,10 +152,48 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DGV_Unidades.MultiSelect = false;
 
+            DGV_Unidades.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             DGV_Unidades.Columns["Direccion"].Visible = false;
             DGV_Unidades.Columns["Telefono"].Visible = false;
         }
 
+        private void ConfigurarGridRemolques()
+        {
+            DGV_Unidades.ReadOnly = true;
+            DGV_Unidades.AllowUserToAddRows = false;
+            DGV_Unidades.AllowUserToDeleteRows = false;
+            DGV_Unidades.AllowUserToOrderColumns = false;
+            DGV_Unidades.AllowUserToResizeColumns = false;
+            DGV_Unidades.AllowUserToResizeRows = false;
+            DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV_Unidades.MultiSelect = false;
+
+            // Cambiar encabezado de "Year" a "Año"
+            DGV_Unidades.Columns["Year"].HeaderText = "Año";
+            DGV_Unidades.Columns["id_Remolque"].HeaderText = "ID";
+
+            // Ordenar columnas
+            DGV_Unidades.Columns["id_Remolque"].DisplayIndex = 0;
+            DGV_Unidades.Columns["Year"].DisplayIndex = 1;
+            DGV_Unidades.Columns["Placas"].DisplayIndex = 2;
+            DGV_Unidades.Columns["Modelo"].DisplayIndex = 3;
+
+            // Ajustar ancho fijo para columnas pequeñas
+            DGV_Unidades.Columns["id_Remolque"].Width = 40;
+            DGV_Unidades.Columns["Year"].Width = 60;
+            DGV_Unidades.Columns["Placas"].Width = 70;
+
+            // Que "Modelo" llene el espacio restante
+            DGV_Unidades.Columns["Modelo"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            // Ocultar columnas innecesarias
+            DGV_Unidades.Columns["Marca"].Visible = false;
+            DGV_Unidades.Columns["Serie"].Visible = false;
+            DGV_Unidades.Columns["Fecha_Llantas"].Visible = false;
+            DGV_Unidades.Columns["Fecha_Fisico_SCT"].Visible = false;
+            DGV_Unidades.Columns["Impermeabilizacion"].Visible = false;
+        }
         /*Se ejecuta al dar doble click en un row del grid o al dar click en aceptar*/
         private void RegresarInformacion(int rowIndex)
         {
@@ -155,6 +225,14 @@ namespace TransportesSoft_BackOffice.Forms
                 };
 
                 ClienteSeleccionadoEvent?.Invoke(this, unidad);
+            }
+            else if(TipoFormulario == TipoBusqueda.ContRemolques)
+            {
+                ContRemolques Remolque = new ContRemolques
+                {
+                    //id_Remolque = 
+                };
+                RemolqueSeleccionadoEvent?.Invoke(this, Remolque);
             }
 
             this.Close();
@@ -208,7 +286,7 @@ namespace TransportesSoft_BackOffice.Forms
 
                 if (string.IsNullOrEmpty(filtro))
                 {
-                    bindingSourceUnidades.DataSource = lContClientes;
+                    bindingSourceClientes.DataSource = lContClientes;
                 }
                 else
                 {
@@ -217,7 +295,7 @@ namespace TransportesSoft_BackOffice.Forms
                                     u.Nombre.ToLower().Contains(filtro))
                         .ToList();
 
-                    bindingSourceUnidades.DataSource = filtradas;
+                    bindingSourceClientes.DataSource = filtradas;
                 }
             }
 

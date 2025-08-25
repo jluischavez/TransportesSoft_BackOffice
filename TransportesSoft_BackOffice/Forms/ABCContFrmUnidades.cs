@@ -41,7 +41,7 @@ namespace TransportesSoft_BackOffice.Forms
             try
             {
 
-                if (!ValidarKilometraje(Convert.ToInt32(txtKilometraje.Text), Convert.ToInt32(txtProxMantenimiento.Text)))
+                if (!lServiceContUnidades.ValidarKilometraje(Convert.ToInt32(txtKilometraje.Text), Convert.ToInt32(txtProxMantenimiento.Text)))
                 {
                     ContUnidades unidad = new ContUnidades();
                     unidad.Marca = txtMarca.Text.ToUpper();
@@ -93,7 +93,13 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 ContFrmBuscar frmBuscar = new ContFrmBuscar("Unidades", ContFrmBuscar.TipoBusqueda.ContUnidades);
                 frmBuscar.MdiParent = this.MdiParent;
-                frmBuscar.FormBorderStyle = FormBorderStyle.Sizable;
+
+                frmBuscar.FormBorderStyle = FormBorderStyle.FixedDialog;
+                frmBuscar.StartPosition = FormStartPosition.Manual;
+
+                int x = (this.MdiParent.ClientSize.Width - frmBuscar.Width) / 2;
+                int y = (this.MdiParent.ClientSize.Height - frmBuscar.Height) / 2;
+                frmBuscar.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
 
                 frmBuscar.UnidadSeleccionadaEvent += FrmBuscar_UnidadSeleccionada;
 
@@ -135,14 +141,27 @@ namespace TransportesSoft_BackOffice.Forms
             CBOperadores.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private bool ValidarKilometraje(int kilometraje, int proximomantenimiento)
-        {
-            // Si ProximoMantenimiento es 0, se permite cualquier kilometraje
-            if (proximomantenimiento == 0)
-                return true;
+        
 
-            // Si no, el kilometraje debe ser mayor o igual
-            return kilometraje >= proximomantenimiento;
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (esConsulta)
+                {
+                    DialogResult result = MessageBox.Show($"¿Estás seguro que deseas eliminar la unidad {txtID.Text} {txtSerie.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        lServiceContUnidades.EliminarUnidad(Convert.ToInt32(txtID.Text));
+                    }
+                    Limpiar();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

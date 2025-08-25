@@ -30,15 +30,14 @@ namespace TransportesSoft_BackOffice
             this.IsMdiContainer = true;
             this.WindowState = FormWindowState.Maximized;
 
-            ConfiguracionFondo();
+            ConfiguracionMDI();
             this.Text = this.Text + " Versión: " + Application.ProductVersion;
             Main_Resize(this, EventArgs.Empty);
         }
 
 
         #region "Private"
-
-        private void ConfiguracionFondo()
+        private void ConfiguracionMDI()
         {
             lserviceConfSucLocal = new Service_ConfSucursalLocal();
             lConfSucursalLocal = lserviceConfSucLocal.ObtenerConfiguracionSucursalLocal();
@@ -80,12 +79,12 @@ namespace TransportesSoft_BackOffice
 
         }
 
+        #endregion
+        #region "Formularios"
         private void aBCDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFactory.AbrirFormulario<ABCContFrmUnidades>(this);
         }
-
-        #endregion
 
         private void consumoDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -101,8 +100,19 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ABCContFrmClientes>(this);
         }
+
+        private void aBCDeRemolquesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ABCContFrmRemolques>(this);
+        }
+        #endregion
+
+
     }
 
+
+
+    /*CLASE FACTORY PARA CREAR FORMULARIOS*/
     public static class FormFactory
     {
         public static void AbrirFormulario<T>(Form mdiParent) where T : Form, new()

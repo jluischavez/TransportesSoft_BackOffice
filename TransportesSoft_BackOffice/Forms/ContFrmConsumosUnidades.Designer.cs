@@ -117,10 +117,10 @@
             // txtConsumoEnPesos
             // 
             this.txtConsumoEnPesos.Location = new System.Drawing.Point(140, 112);
-            this.txtConsumoEnPesos.MaxLength = 4;
+            this.txtConsumoEnPesos.MaxLength = 5;
             this.txtConsumoEnPesos.Name = "txtConsumoEnPesos";
             this.txtConsumoEnPesos.Size = new System.Drawing.Size(195, 20);
-            this.txtConsumoEnPesos.TabIndex = 11;
+            this.txtConsumoEnPesos.TabIndex = 4;
             this.txtConsumoEnPesos.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConsumoEnPesos_KeyPress);
             // 
             // LblConsumoPesos
@@ -135,11 +135,11 @@
             // txtComentarios
             // 
             this.txtComentarios.Location = new System.Drawing.Point(140, 142);
-            this.txtComentarios.MaxLength = 5;
+            this.txtComentarios.MaxLength = 50;
             this.txtComentarios.Multiline = true;
             this.txtComentarios.Name = "txtComentarios";
             this.txtComentarios.Size = new System.Drawing.Size(195, 63);
-            this.txtComentarios.TabIndex = 10;
+            this.txtComentarios.TabIndex = 5;
             // 
             // txtConsumoLitros
             // 
@@ -147,7 +147,7 @@
             this.txtConsumoLitros.MaxLength = 3;
             this.txtConsumoLitros.Name = "txtConsumoLitros";
             this.txtConsumoLitros.Size = new System.Drawing.Size(195, 20);
-            this.txtConsumoLitros.TabIndex = 8;
+            this.txtConsumoLitros.TabIndex = 3;
             this.txtConsumoLitros.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConsumoLitros_KeyPress);
             // 
             // BTGuardar
