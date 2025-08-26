@@ -30,9 +30,9 @@
         {
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.DTFecha = new System.Windows.Forms.DateTimePicker();
+            this.DTImpermeabilizacion = new System.Windows.Forms.DateTimePicker();
+            this.DTFechaFisicoSCT = new System.Windows.Forms.DateTimePicker();
+            this.DTFechaLlantas = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.txtPlacas = new System.Windows.Forms.TextBox();
             this.LblProxMantenimiento = new System.Windows.Forms.Label();
             this.txtMarca = new System.Windows.Forms.TextBox();
-            this.txtKilometraje = new System.Windows.Forms.TextBox();
+            this.txtSerie = new System.Windows.Forms.TextBox();
             this.txtModelo = new System.Windows.Forms.TextBox();
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.LblID = new System.Windows.Forms.Label();
@@ -67,9 +67,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.DTFecha);
+            this.groupBox1.Controls.Add(this.DTImpermeabilizacion);
+            this.groupBox1.Controls.Add(this.DTFechaFisicoSCT);
+            this.groupBox1.Controls.Add(this.DTFechaLlantas);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -81,7 +81,7 @@
             this.groupBox1.Controls.Add(this.txtPlacas);
             this.groupBox1.Controls.Add(this.LblProxMantenimiento);
             this.groupBox1.Controls.Add(this.txtMarca);
-            this.groupBox1.Controls.Add(this.txtKilometraje);
+            this.groupBox1.Controls.Add(this.txtSerie);
             this.groupBox1.Controls.Add(this.txtModelo);
             this.groupBox1.Location = new System.Drawing.Point(18, 42);
             this.groupBox1.Name = "groupBox1";
@@ -89,29 +89,29 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
-            // dateTimePicker2
+            // DTImpermeabilizacion
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker2.Location = new System.Drawing.Point(140, 216);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(195, 20);
-            this.dateTimePicker2.TabIndex = 14;
+            this.DTImpermeabilizacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTImpermeabilizacion.Location = new System.Drawing.Point(140, 216);
+            this.DTImpermeabilizacion.Name = "DTImpermeabilizacion";
+            this.DTImpermeabilizacion.Size = new System.Drawing.Size(195, 20);
+            this.DTImpermeabilizacion.TabIndex = 14;
             // 
-            // dateTimePicker1
+            // DTFechaFisicoSCT
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(140, 190);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(195, 20);
-            this.dateTimePicker1.TabIndex = 13;
+            this.DTFechaFisicoSCT.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTFechaFisicoSCT.Location = new System.Drawing.Point(140, 190);
+            this.DTFechaFisicoSCT.Name = "DTFechaFisicoSCT";
+            this.DTFechaFisicoSCT.Size = new System.Drawing.Size(195, 20);
+            this.DTFechaFisicoSCT.TabIndex = 13;
             // 
-            // DTFecha
+            // DTFechaLlantas
             // 
-            this.DTFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DTFecha.Location = new System.Drawing.Point(140, 164);
-            this.DTFecha.Name = "DTFecha";
-            this.DTFecha.Size = new System.Drawing.Size(195, 20);
-            this.DTFecha.TabIndex = 12;
+            this.DTFechaLlantas.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DTFechaLlantas.Location = new System.Drawing.Point(140, 164);
+            this.DTFechaLlantas.Name = "DTFechaLlantas";
+            this.DTFechaLlantas.Size = new System.Drawing.Size(195, 20);
+            this.DTFechaLlantas.TabIndex = 12;
             // 
             // label3
             // 
@@ -187,7 +187,7 @@
             // txtPlacas
             // 
             this.txtPlacas.Location = new System.Drawing.Point(140, 138);
-            this.txtPlacas.MaxLength = 10;
+            this.txtPlacas.MaxLength = 6;
             this.txtPlacas.Name = "txtPlacas";
             this.txtPlacas.Size = new System.Drawing.Size(195, 20);
             this.txtPlacas.TabIndex = 5;
@@ -209,13 +209,13 @@
             this.txtMarca.Size = new System.Drawing.Size(195, 20);
             this.txtMarca.TabIndex = 1;
             // 
-            // txtKilometraje
+            // txtSerie
             // 
-            this.txtKilometraje.Location = new System.Drawing.Point(140, 86);
-            this.txtKilometraje.MaxLength = 999999;
-            this.txtKilometraje.Name = "txtKilometraje";
-            this.txtKilometraje.Size = new System.Drawing.Size(195, 20);
-            this.txtKilometraje.TabIndex = 3;
+            this.txtSerie.Location = new System.Drawing.Point(140, 86);
+            this.txtSerie.MaxLength = 999999;
+            this.txtSerie.Name = "txtSerie";
+            this.txtSerie.Size = new System.Drawing.Size(195, 20);
+            this.txtSerie.TabIndex = 3;
             // 
             // txtModelo
             // 
@@ -233,6 +233,7 @@
             this.BtnGuardar.TabIndex = 17;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = true;
+            this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // LblID
             // 
@@ -265,6 +266,8 @@
             this.Name = "ABCContFrmRemolques";
             this.ShowIcon = false;
             this.Text = "Control de Remolques";
+            this.Load += new System.EventHandler(this.ABCContFrmRemolques_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ABCContFrmRemolques_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -284,7 +287,7 @@
         private System.Windows.Forms.TextBox txtPlacas;
         private System.Windows.Forms.Label LblProxMantenimiento;
         private System.Windows.Forms.TextBox txtMarca;
-        private System.Windows.Forms.TextBox txtKilometraje;
+        private System.Windows.Forms.TextBox txtSerie;
         private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Button BtnGuardar;
         private System.Windows.Forms.Label LblID;
@@ -292,8 +295,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker DTFecha;
+        private System.Windows.Forms.DateTimePicker DTImpermeabilizacion;
+        private System.Windows.Forms.DateTimePicker DTFechaFisicoSCT;
+        private System.Windows.Forms.DateTimePicker DTFechaLlantas;
     }
 }

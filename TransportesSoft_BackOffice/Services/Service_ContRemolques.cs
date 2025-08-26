@@ -23,5 +23,14 @@ namespace TransportesSoft_BackOffice.Services
 
             return lContRemolques;
         }
+
+        public void GuardarRemolque(ContRemolques lContRemolque)
+        {
+            lRepoContRemolques.GuardarRemolque(lContRemolque);
+        }
+        public void ActualizarRemolque(ContRemolques lRemolque)
+        {
+            lRepoContRemolques.ActualizarRemolque(lRemolque); 
+        }
     }
 }

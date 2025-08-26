@@ -140,6 +140,8 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.Columns["id_Operador"].Visible = false;
             DGV_Unidades.Columns["ProximoMantenimiento"].Visible = false;
             DGV_Unidades.Columns["Descripcion"].Visible = false;
+            DGV_Unidades.Columns["Estatus"].Visible = false;
+            DGV_Unidades.Columns["id_Remolque"].Visible = false;
         }
         private void ConfigurarGridClientes()
         {
@@ -193,8 +195,13 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.Columns["Fecha_Llantas"].Visible = false;
             DGV_Unidades.Columns["Fecha_Fisico_SCT"].Visible = false;
             DGV_Unidades.Columns["Impermeabilizacion"].Visible = false;
+            DGV_Unidades.Columns["Descripcion"].Visible = false;
         }
-        /*Se ejecuta al dar doble click en un row del grid o al dar click en aceptar*/
+
+        /// <summary>
+        /// Se ejecuta al dar doble click en un row del grid o al dar click en aceptar
+        /// </summary>
+        /// <param name="rowIndex"></param>
         private void RegresarInformacion(int rowIndex)
         {
             if (rowIndex < 0) return;
@@ -230,7 +237,15 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 ContRemolques Remolque = new ContRemolques
                 {
-                    //id_Remolque = 
+                    id_Remolque = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Remolque"].Value),
+                    Marca = DGV_Unidades.Rows[rowIndex].Cells["Marca"].Value?.ToString(),
+                    Modelo = DGV_Unidades.Rows[rowIndex].Cells["Modelo"].Value?.ToString(),
+                    Serie = DGV_Unidades.Rows[rowIndex].Cells["Serie"].Value?.ToString(),
+                    Year = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["Year"].Value),
+                    Placas = DGV_Unidades.Rows[rowIndex].Cells["Placas"].Value?.ToString(),
+                    Fecha_Llantas = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["Fecha_Llantas"].Value),
+                    Fecha_Fisico_SCT = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["Fecha_Fisico_SCT"].Value),
+                    Impermeabilizacion = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["Impermeabilizacion"].Value),
                 };
                 RemolqueSeleccionadoEvent?.Invoke(this, Remolque);
             }
@@ -296,6 +311,25 @@ namespace TransportesSoft_BackOffice.Forms
                         .ToList();
 
                     bindingSourceClientes.DataSource = filtradas;
+                }
+            }
+            /*CONT REMOLQUES*/
+            else if(TipoFormulario == TipoBusqueda.ContRemolques)
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    bindingSourceRemolques.DataSource = lContRemolques;
+                }
+                else
+                {
+                    var filtradas = lContRemolques
+                        .Where(u => u.id_Remolque.ToString().Contains(filtro) ||
+                                    u.Placas.ToLower().Contains(filtro) ||
+                                    u.Modelo.ToLower().Contains(filtro) ||
+                                    u.Year.ToString().Contains(filtro))
+                        .ToList();
+
+                    bindingSourceRemolques.DataSource = filtradas;
                 }
             }
 

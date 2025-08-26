@@ -47,8 +47,19 @@ namespace TransportesSoft_BackOffice.Services
             if (proximomantenimiento == 0)
                 return true;
 
-            // Si no, el kilometraje debe ser mayor o igual
-            return kilometraje >= proximomantenimiento;
+            if (kilometraje <= proximomantenimiento)
+                return false;
+
+
+            return true;
+        }
+
+        public bool ValidarDatosObligatoriosGuardado(string lMarca, string lSerie)
+        {
+            if (string.IsNullOrEmpty(lMarca) || string.IsNullOrEmpty(lSerie))
+                return false;
+
+            return true;
         }
     }
 }

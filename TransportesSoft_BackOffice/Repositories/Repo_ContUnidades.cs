@@ -49,8 +49,8 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlInsert = "Insert into ContUnidades(Marca, Serie, Kilometraje, FechaActualizacion, id_Operador, ProximoMantenimiento) " +
-                    "Values(@Marca, @Serie, @Kilometraje, @FechaActualizacion, @id_Operador, @ProximoMantenimiento)";
+                var sqlInsert = "Insert into ContUnidades(Marca, Serie, Kilometraje, FechaActualizacion, id_Operador, ProximoMantenimiento, Estatus, id_Remolque) " +
+                    "Values(@Marca, @Serie, @Kilometraje, @FechaActualizacion, @id_Operador, @ProximoMantenimiento, @Estatus, @id_Remolque)";
                 var result = db.Execute(sqlInsert, new
                 {
                     Marca = unidad.Marca,
@@ -58,7 +58,9 @@ namespace TransportesSoft_BackOffice.Repositories
                     Kilometraje = unidad.Kilometraje,
                     FechaActualizacion = DateTime.Now,
                     id_Operador = unidad.id_Operador,
-                    ProximoMantenimiento = unidad.ProximoMantenimiento
+                    ProximoMantenimiento = unidad.ProximoMantenimiento,
+                    Estatus = unidad.Estatus,
+                    id_Remolque = unidad.id_Remolque
                 });
             }
         }
@@ -72,7 +74,8 @@ namespace TransportesSoft_BackOffice.Repositories
             using (var db = new SqlConnection(ConnectionString))
             {
                 var sqlEdit = "UPDATE ContUnidades set Marca=@Marca, Serie=@Serie, Kilometraje=@Kilometraje, FechaActualizacion=@FechaActualizacion, " +
-                    "ProximoMantenimiento=@ProximoMantenimiento, id_Operador = @id_Operador WHERE id_Unidad=@id_Unidad";
+                    "ProximoMantenimiento=@ProximoMantenimiento, id_Operador = @id_Operador, Estatus=@Estatus, id_Remolque=@id_Remolque " +
+                    "WHERE id_Unidad=@id_Unidad";
                 var result = db.Execute(sqlEdit, new
                 {
                     Marca = unidad.Marca,
@@ -81,7 +84,9 @@ namespace TransportesSoft_BackOffice.Repositories
                     FechaActualizacion = DateTime.Now,
                     id_Operador = unidad.id_Operador,
                     ProximoMantenimiento = unidad.ProximoMantenimiento,
-                    id_Unidad = unidad.id_Unidad
+                    id_Unidad = unidad.id_Unidad,
+                    Estatus = unidad.Estatus,
+                    id_Remolque = unidad.id_Remolque
                 });;
             }
         }
