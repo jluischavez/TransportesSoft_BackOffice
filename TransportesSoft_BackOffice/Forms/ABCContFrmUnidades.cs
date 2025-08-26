@@ -19,6 +19,8 @@ namespace TransportesSoft_BackOffice.Forms
         Boolean esConsulta = false;
         Service_ContOperadores lServContOperadores;
         List<ContOperadores> lContOperadores;
+        Service_ContRemolques lServiceContRemolques;
+        List<ContRemolques> lContRemolques;
         public ABCContFrmUnidades()
         {
             InitializeComponent();
@@ -26,6 +28,12 @@ namespace TransportesSoft_BackOffice.Forms
             this.KeyPreview = true;
             this.StartPosition = FormStartPosition.Manual;
             ObtenerDatos();
+            
+        }
+        private void ConfigurarFormulario()
+        {
+            txtKilometraje.Text = "0";
+            txtProxMantenimiento.Text = "0";
         }
         private void ObtenerDatos()
         {
@@ -35,33 +43,53 @@ namespace TransportesSoft_BackOffice.Forms
             CBOperadores.DataSource = lContOperadores;
             CBOperadores.DisplayMember = "Descripcion";
             CBOperadores.ValueMember = "id_Operador";
+            CBOperadores.SelectedIndex = -1;
+
+            /* Traemos Remolsques y llenamos el ComboBox*/
+            lServiceContRemolques = new Service_ContRemolques();
+            lContRemolques = lServiceContRemolques.ObtenerRemolques();
+            CBRemolques.DataSource = lContRemolques;
+            CBRemolques.DisplayMember = "Descripcion";
+            CBRemolques.ValueMember = "id_Remolque";
+            CBRemolques.SelectedIndex = -1;
         }
+        
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
 
-                if (!lServiceContUnidades.ValidarKilometraje(Convert.ToInt32(txtKilometraje.Text), Convert.ToInt32(txtProxMantenimiento.Text)))
+                if (lServiceContUnidades.ValidarKilometraje(Convert.ToInt32(txtKilometraje.Text), Convert.ToInt32(txtProxMantenimiento.Text)))
                 {
-                    ContUnidades unidad = new ContUnidades();
-                    unidad.Marca = txtMarca.Text.ToUpper();
-                    unidad.Kilometraje = Convert.ToInt32(txtKilometraje.Text);
-                    unidad.Serie = txtSerie.Text.ToUpper();
-                    unidad.ProximoMantenimiento = Convert.ToInt32(txtProxMantenimiento.Text);
-                    unidad.id_Operador = Convert.ToInt32(CBOperadores.SelectedValue);
-                    unidad.id_Unidad = Convert.ToInt32(txtID.Text);
-
-                    if (esConsulta == false)
+                    if (lServiceContUnidades.ValidarDatosObligatoriosGuardado(txtMarca.Text, txtSerie.Text))
                     {
-                        lServiceContUnidades.GuardarUnidad(unidad);
+                        ContUnidades unidad = new ContUnidades();
+                        unidad.Marca = txtMarca.Text.ToUpper();
+                        unidad.Kilometraje = Convert.ToInt32(txtKilometraje.Text);
+                        unidad.Serie = txtSerie.Text.ToUpper();
+                        unidad.ProximoMantenimiento = Convert.ToInt32(txtProxMantenimiento.Text);
+                        unidad.id_Operador = Convert.ToInt32(CBOperadores.SelectedValue);
+                        unidad.Estatus = "A";
+                        unidad.id_Remolque = Convert.ToInt32(CBRemolques.SelectedValue);
+
+                        if (esConsulta == false)
+                        {
+                            lServiceContUnidades.GuardarUnidad(unidad);
+                        }
+                        else
+                        {
+                            unidad.id_Unidad = Convert.ToInt32(txtID.Text);
+                            lServiceContUnidades.ActualizarUnidad(unidad);
+                        }
+                        MessageBox.Show("Se guardó la unidad correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        Limpiar();
                     }
                     else
                     {
-                        lServiceContUnidades.ActualizarUnidad(unidad);
+                        MessageBox.Show($"Los valores Marca y Serie con obligatorios.");
                     }
-                    MessageBox.Show("Se guardó la unidad correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    Limpiar();
+                   
                 }
                 else
                 {
@@ -78,9 +106,9 @@ namespace TransportesSoft_BackOffice.Forms
         private void Limpiar()
         {
             txtID.Text = String.Empty;
-            txtKilometraje.Text = String.Empty;
+            txtKilometraje.Text = "0";
             txtMarca.Text = String.Empty;
-            txtProxMantenimiento.Text = String.Empty;
+            txtProxMantenimiento.Text = "0";
             txtSerie.Text = String.Empty;
             esConsulta = false;
             CBOperadores.DataSource = null;
@@ -139,6 +167,8 @@ namespace TransportesSoft_BackOffice.Forms
         private void ABCContFrmUnidades_Load(object sender, EventArgs e)
         {
             CBOperadores.DropDownStyle = ComboBoxStyle.DropDownList;
+            CBRemolques.DropDownStyle = ComboBoxStyle.DropDownList;
+            ConfigurarFormulario();
         }
 
         
@@ -162,6 +192,18 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show(ex.Message);
             }
             
+        }
+
+        private void txtKilometraje_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtKilometraje.Text))
+                txtKilometraje.Text = "0";
+        }
+
+        private void txtProxMantenimiento_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtProxMantenimiento.Text))
+                txtProxMantenimiento.Text = "0";
         }
     }
 }

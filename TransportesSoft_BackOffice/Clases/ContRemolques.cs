@@ -19,5 +19,6 @@ namespace TransportesSoft_BackOffice.Clases
         public DateTime Fecha_Fisico_SCT { get; set; }
         public DateTime Impermeabilizacion { get; set; }
 
+        public string Descripcion => $"{id_Remolque} - {Placas} - {Marca})";
     }
 }
