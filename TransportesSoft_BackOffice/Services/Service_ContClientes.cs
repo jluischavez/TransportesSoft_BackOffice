@@ -34,5 +34,16 @@ namespace TransportesSoft_BackOffice.Services
             lRepoContClientes.ActualizarCliente(lCliente);
         }
 
+        public void EliminarCliente(int id_Cliente)
+        {
+            lRepoContClientes.EliminarCliente(id_Cliente);
+        }
+        public bool ValidarInfoAntesDeGuardar(string Nombre)
+        {
+            if (string.IsNullOrEmpty(Nombre))
+                return false;
+
+            return true;
+        }
     }
 }

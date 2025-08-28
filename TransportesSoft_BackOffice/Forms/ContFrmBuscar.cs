@@ -158,6 +158,7 @@ namespace TransportesSoft_BackOffice.Forms
 
             DGV_Unidades.Columns["Direccion"].Visible = false;
             DGV_Unidades.Columns["Telefono"].Visible = false;
+            DGV_Unidades.Columns["Estatus"].Visible = false;
         }
 
         private void ConfigurarGridRemolques()
@@ -348,8 +349,22 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Debe seleccionar una fila antes de continuar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
         #endregion
 
-
+        private void DGV_Unidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (TipoFormulario == TipoBusqueda.ContClientes)
+            {
+                if (DGV_Unidades.Columns["Estatus"] != null && e.RowIndex >= 0)
+                {
+                    var estatusValue = DGV_Unidades.Rows[e.RowIndex].Cells["Estatus"].Value?.ToString();
+                    if (estatusValue == "C")
+                    {
+                        DGV_Unidades.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(234, 171, 56);
+                    }
+                }
+            }
+        }
     }
 }

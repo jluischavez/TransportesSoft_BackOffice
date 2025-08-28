@@ -16,12 +16,29 @@ namespace TransportesSoft_BackOffice.Forms
     {
         Service_ContClientes lServiceContClientes;
         ContClientes lContClientes;
-        Boolean esConsulta = false;
+        Boolean _esConsulta = false;
 
+        /// <summary>
+        /// Propiedad que establece un estado al botón eliminar, el cual cambiará dependiendo de si es consulta o no.
+        /// </summary>
+        private bool EsConsulta
+        {
+            get => _esConsulta;
+            set
+            {
+                if (_esConsulta != value)
+                {
+                    _esConsulta = value;
+                    BtnEliminar.Enabled = _esConsulta; // Actualiza el botón automáticamente
+                }
+            }
+        }
         public ABCContFrmClientes()
         {
             InitializeComponent();
+            this.KeyPreview = true;
             lServiceContClientes = new Service_ContClientes();
+            txtID.TextChanged += txtID_TextChanged;
         }
 
 
@@ -39,7 +56,12 @@ namespace TransportesSoft_BackOffice.Forms
         {
             try
             {
-                if (e.KeyCode == Keys.F3)
+                if (e.KeyCode == Keys.Back)
+                {
+                    txtID.Clear(); // Borra todo el texto
+                    e.SuppressKeyPress = true; // Opcional: evita que el sonido de tecla se reproduzca
+                }
+                else if (e.KeyCode == Keys.F3)
                 {
                     ContFrmBuscar frmBuscar = new ContFrmBuscar("Clientes", ContFrmBuscar.TipoBusqueda.ContClientes);
                     frmBuscar.MdiParent = this.MdiParent;
@@ -65,40 +87,58 @@ namespace TransportesSoft_BackOffice.Forms
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
+            GuardarCliente();
+        }
+        #endregion
+        #region "Private"
+        private void GuardarCliente()
+        {
             try
             {
-                lContClientes = new ContClientes();
-                lContClientes.Direccion = txtDireccion.Text.ToUpper();
-                lContClientes.Telefono = txtTelefono.Text;
-                lContClientes.Nombre = txtNombre.Text.ToUpper();
 
-                if (!esConsulta)
+                DialogResult result = MessageBox.Show($"¿Deseas guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    lServiceContClientes.GuardarCliente(lContClientes);
-                }
-                else
-                {
-                    lContClientes.id_Client = Convert.ToInt32(txtID.Text);
-                    lServiceContClientes.ActualizarCliente(lContClientes);
-                }
+                    if (lServiceContClientes.ValidarInfoAntesDeGuardar(txtNombre.Text))
+                    {
+                        lContClientes = new ContClientes();
+                        lContClientes.Direccion = txtDireccion.Text.ToUpper();
+                        lContClientes.Telefono = txtTelefono.Text;
+                        lContClientes.Nombre = txtNombre.Text.ToUpper();
 
-                MessageBox.Show("Se guardó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Limpiar();
+                        if (!_esConsulta)
+                        {
+                            lServiceContClientes.GuardarCliente(lContClientes);
+                        }
+                        else
+                        {
+                            lContClientes.Estatus = "A";
+                            lContClientes.id_Client = Convert.ToInt32(txtID.Text);
+                            lServiceContClientes.ActualizarCliente(lContClientes);
+                        }
+
+                        MessageBox.Show("Se guardó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El campo Nombre es obligatorio de capturar.", "Verificar la información.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        #endregion
-        #region "Private"
         private void FrmBuscar_ClienteSeleccionado(object sender, ContClientes unidad)
         {
             txtID.Text = unidad.id_Client.ToString();
             txtTelefono.Text = unidad.Telefono.ToString();
             txtNombre.Text = unidad.Nombre;
             txtDireccion.Text = unidad.Direccion.ToString();
-            esConsulta = true;
+            EsConsulta = true;
         }
         private void Limpiar()
         {
@@ -106,14 +146,61 @@ namespace TransportesSoft_BackOffice.Forms
             txtDireccion.Text = String.Empty;
             txtNombre.Text = String.Empty;
             txtTelefono.Text = String.Empty;
-            esConsulta = false;
+            EsConsulta = false;
         }
 
         #endregion
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (_esConsulta)
+                {
+                    DialogResult result = MessageBox.Show($"¿Estás seguro que deseas eliminar el cliente {txtID.Text} - {txtNombre.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        lServiceContClientes.EliminarCliente(Convert.ToInt32(txtID.Text));
 
+                        MessageBox.Show("Se eliminó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    Limpiar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtID_TextChanged(object sender, EventArgs e)
+        {
+            // Si antes era consulta y ahora el campo está vacío, se interpreta como nuevo registro
+            if (_esConsulta && string.IsNullOrWhiteSpace(txtID.Text))
+            {
+                EsConsulta = false;
+                Limpiar(); // Limpia todos los campos
+            }
+        }
+
+        private void ABCContFrmClientes_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.N)
+            {
+                Limpiar();
+                e.SuppressKeyPress = true;
+            }
+            if (e.Control && e.KeyCode == Keys.G)
+            {
+                GuardarCliente();
+            }
+        }
+
+        private void ABCContFrmClientes_Load(object sender, EventArgs e)
+        {
+            /*Establece estado del btnEliminar*/
+            EsConsulta = false;
+            BtnEliminar.Enabled = false;
         }
     }
 }
