@@ -49,15 +49,32 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContClientes set Nombre=@Nombre, Direccion=@Direccion, Telefono=@Telefono " +
-                    "WHERE id_Client=@id_Client";
+                var sqlEdit = "UPDATE ContClientes set Nombre=@Nombre, Direccion=@Direccion, Telefono=@Telefono, Estatus=@Estatus" +
+                    " WHERE id_Client=@id_Client";
                 var result = db.Execute(sqlEdit, new
                 {
                     Nombre = lCliente.Nombre,
                     Direccion = lCliente.Direccion,
                     Telefono = lCliente.Telefono,
+                    Estatus = lCliente.Estatus,
                     id_Client = lCliente.id_Client
                 }); ;
+            }
+        }
+
+        /// <summary>
+        /// EliminarCliente no Elimina, solo actualiza estatus en base de datos.
+        /// </summary>
+        /// <param name="id_Unidad"></param>
+        public void EliminarCliente(int id_Client)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContClientes set Estatus=@Estatus " +
+                   "WHERE id_Client=@id_Client";
+                var result = db.Execute(sqlEdit, new { id_Client = id_Client, Estatus = 'C' });
+                //var sqlDelete = "DELETE FROM ContUnidades WHERE id_Unidad=@id_Unidad";
+                //db.Execute(sqlDelete, new { id_Unidad = id_Unidad});
             }
         }
     }

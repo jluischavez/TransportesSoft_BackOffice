@@ -108,6 +108,12 @@
     <Compile Include="Forms\ABCContFrmClientes.Designer.cs">
       <DependentUpon>ABCContFrmClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ABCContFrmOperadores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ABCContFrmOperadores.Designer.cs">
+      <DependentUpon>ABCContFrmOperadores.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ABCContFrmRemolques.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Forms\ABCContFrmClientes.resx">
       <DependentUpon>ABCContFrmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ABCContFrmOperadores.resx">
+      <DependentUpon>ABCContFrmOperadores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ABCContFrmRemolques.resx">
       <DependentUpon>ABCContFrmRemolques.cs</DependentUpon>

@@ -44,6 +44,7 @@
             this.DGV_Unidades.Size = new System.Drawing.Size(339, 325);
             this.DGV_Unidades.TabIndex = 1;
             this.DGV_Unidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Unidades_CellDoubleClick);
+            this.DGV_Unidades.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGV_Unidades_CellFormatting);
             // 
             // BtnAceptar
             // 

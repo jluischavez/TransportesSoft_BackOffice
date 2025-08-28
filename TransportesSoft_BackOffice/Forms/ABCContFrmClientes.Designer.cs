@@ -134,6 +134,7 @@
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(49, 20);
             this.txtID.TabIndex = 1;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
             // 
             // BtnEliminar
@@ -163,6 +164,8 @@
             this.Name = "ABCContFrmClientes";
             this.ShowIcon = false;
             this.Text = "Control de Clientes";
+            this.Load += new System.EventHandler(this.ABCContFrmClientes_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ABCContFrmClientes_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
