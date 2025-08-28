@@ -41,10 +41,10 @@
             this.LblID = new System.Windows.Forms.Label();
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.CBOperadores = new System.Windows.Forms.ComboBox();
-            this.BtnEliminar = new System.Windows.Forms.Button();
             this.CBRemolques = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.CBOperadores = new System.Windows.Forms.ComboBox();
+            this.BtnEliminar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,6 +135,7 @@
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(49, 20);
             this.txtID.TabIndex = 1;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
             // 
             // LblID
@@ -176,6 +177,23 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // CBRemolques
+            // 
+            this.CBRemolques.FormattingEnabled = true;
+            this.CBRemolques.Location = new System.Drawing.Point(140, 164);
+            this.CBRemolques.Name = "CBRemolques";
+            this.CBRemolques.Size = new System.Drawing.Size(195, 21);
+            this.CBRemolques.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 167);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Remolque:";
+            // 
             // CBOperadores
             // 
             this.CBOperadores.FormattingEnabled = true;
@@ -193,27 +211,10 @@
             this.BtnEliminar.Location = new System.Drawing.Point(30, 251);
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.BtnEliminar.TabIndex = 14;
+            this.BtnEliminar.TabIndex = 7;
             this.BtnEliminar.Text = "Eliminar";
             this.BtnEliminar.UseVisualStyleBackColor = true;
             this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
-            // 
-            // CBRemolques
-            // 
-            this.CBRemolques.FormattingEnabled = true;
-            this.CBRemolques.Location = new System.Drawing.Point(140, 164);
-            this.CBRemolques.Name = "CBRemolques";
-            this.CBRemolques.Size = new System.Drawing.Size(195, 21);
-            this.CBRemolques.TabIndex = 6;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 167);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Remolque:";
             // 
             // ABCContFrmUnidades
             // 

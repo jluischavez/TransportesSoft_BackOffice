@@ -365,6 +365,17 @@ namespace TransportesSoft_BackOffice.Forms
                     }
                 }
             }
+            else if (TipoFormulario == TipoBusqueda.ContUnidades)
+            {
+                if (DGV_Unidades.Columns["Estatus"] != null && e.RowIndex >= 0)
+                {
+                    var estatusValue = DGV_Unidades.Rows[e.RowIndex].Cells["Estatus"].Value?.ToString();
+                    if (estatusValue == "C")
+                    {
+                        DGV_Unidades.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(234, 171, 56);
+                    }
+                }
+            }
         }
     }
 }

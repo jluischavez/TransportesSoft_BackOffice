@@ -34,13 +34,14 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlInsert = "Insert into ContClientes(Nombre, Direccion, Telefono) " +
-                    "Values(@Nombre, @Direccion, @Telefono)";
+                var sqlInsert = "Insert into ContClientes(Nombre, Direccion, Telefono, Estatus) " +
+                    "Values(@Nombre, @Direccion, @Telefono, @Estatus)";
                 var result = db.Execute(sqlInsert, new
                 {
                     Nombre = lCliente.Nombre,
                     Direccion = lCliente.Direccion,
-                    Telefono = lCliente.Telefono
+                    Telefono = lCliente.Telefono,
+                    Estatus = lCliente.Estatus
                 });
             }
         }
