@@ -89,68 +89,6 @@ namespace TransportesSoft_BackOffice.Forms
         {
             GuardarCliente();
         }
-        #endregion
-        #region "Private"
-        private void GuardarCliente()
-        {
-            try
-            {
-
-                DialogResult result = MessageBox.Show($"¿Deseas guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    if (lServiceContClientes.ValidarInfoAntesDeGuardar(txtNombre.Text))
-                    {
-                        lContClientes = new ContClientes();
-                        lContClientes.Direccion = txtDireccion.Text.ToUpper();
-                        lContClientes.Telefono = txtTelefono.Text;
-                        lContClientes.Nombre = txtNombre.Text.ToUpper();
-
-                        if (!_esConsulta)
-                        {
-                            lServiceContClientes.GuardarCliente(lContClientes);
-                        }
-                        else
-                        {
-                            lContClientes.Estatus = "A";
-                            lContClientes.id_Client = Convert.ToInt32(txtID.Text);
-                            lServiceContClientes.ActualizarCliente(lContClientes);
-                        }
-
-                        MessageBox.Show("Se guardó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Limpiar();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El campo Nombre es obligatorio de capturar.", "Verificar la información.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-        private void FrmBuscar_ClienteSeleccionado(object sender, ContClientes unidad)
-        {
-            txtID.Text = unidad.id_Client.ToString();
-            txtTelefono.Text = unidad.Telefono.ToString();
-            txtNombre.Text = unidad.Nombre;
-            txtDireccion.Text = unidad.Direccion.ToString();
-            EsConsulta = true;
-        }
-        private void Limpiar()
-        {
-            txtID.Text = String.Empty;
-            txtDireccion.Text = String.Empty;
-            txtNombre.Text = String.Empty;
-            txtTelefono.Text = String.Empty;
-            EsConsulta = false;
-        }
-
-        #endregion
-
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
             try
@@ -202,5 +140,69 @@ namespace TransportesSoft_BackOffice.Forms
             EsConsulta = false;
             BtnEliminar.Enabled = false;
         }
+        #endregion
+        #region "Private"
+        private void GuardarCliente()
+        {
+            try
+            {
+
+                DialogResult result = MessageBox.Show($"¿Deseas guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    if (lServiceContClientes.ValidarInfoAntesDeGuardar(txtNombre.Text))
+                    {
+                        lContClientes = new ContClientes();
+                        lContClientes.Direccion = txtDireccion.Text.ToUpper();
+                        lContClientes.Telefono = txtTelefono.Text;
+                        lContClientes.Nombre = txtNombre.Text.ToUpper();
+                        lContClientes.Estatus = "A";
+                        if (!_esConsulta)
+                        {
+                            lServiceContClientes.GuardarCliente(lContClientes);
+                        }
+                        else
+                        {
+                            lContClientes.id_Client = Convert.ToInt32(txtID.Text);
+                            lServiceContClientes.ActualizarCliente(lContClientes);
+                        }
+
+                        MessageBox.Show("Se guardó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Limpiar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El campo Nombre es obligatorio de capturar.", "Verificar la información.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void FrmBuscar_ClienteSeleccionado(object sender, ContClientes unidad)
+        {
+            txtID.Text = unidad.id_Client.ToString();
+            txtTelefono.Text = unidad.Telefono.ToString();
+            txtNombre.Text = unidad.Nombre;
+            txtDireccion.Text = unidad.Direccion.ToString();
+            EsConsulta = true;
+        }
+        private void Limpiar()
+        {
+            txtID.Text = String.Empty;
+            txtDireccion.Text = String.Empty;
+            txtNombre.Text = String.Empty;
+            txtTelefono.Text = String.Empty;
+            EsConsulta = false;
+        }
+
+        #endregion
+
+        
+
+       
     }
 }

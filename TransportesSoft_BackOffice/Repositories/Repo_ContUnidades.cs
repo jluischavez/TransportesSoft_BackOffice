@@ -33,7 +33,7 @@ namespace TransportesSoft_BackOffice.Repositories
 
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContUnidades WHERE Estatus='A'";
+                var sql = "SELECT * FROM ContUnidades";
                 lContUnidades = db.Query<ContUnidades>(sql).ToList();
 
                 return lContUnidades;
@@ -103,8 +103,6 @@ namespace TransportesSoft_BackOffice.Repositories
                 var sqlEdit = "UPDATE ContUnidades set Estatus=@Estatus " +
                    "WHERE id_Unidad=@id_Unidad";
                 var result = db.Execute(sqlEdit, new { id_Unidad = id_Unidad, Estatus='C' });
-                //var sqlDelete = "DELETE FROM ContUnidades WHERE id_Unidad=@id_Unidad";
-                //db.Execute(sqlDelete, new { id_Unidad = id_Unidad});
             }
         }
 

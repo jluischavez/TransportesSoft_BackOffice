@@ -18,21 +18,18 @@ namespace TransportesSoft_BackOffice
 {
     public partial class Main : Form
     {
-        ConfSucursalLocal lConfSucursalLocal;
-        Service_ConfSucursalLocal lserviceConfSucLocal;
+        private ConfSucursalLocal lConfSucursalLocal;
+        private Service_ConfSucursalLocal lserviceConfSucLocal;
 
         public Main()
         {
             InitializeComponent();
-
-            this.Resize += Main_Resize;
 
             this.IsMdiContainer = true;
             this.WindowState = FormWindowState.Maximized;
 
             ConfiguracionMDI();
             this.Text = this.Text + " Versión: " + Application.ProductVersion;
-            Main_Resize(this, EventArgs.Empty);
         }
 
 
@@ -48,35 +45,36 @@ namespace TransportesSoft_BackOffice
             {
                 if (ctl is MdiClient mdiClient)
                 {
+                    // Activar DoubleBuffered por reflexión
+                    typeof(Control).InvokeMember("DoubleBuffered",
+                        System.Reflection.BindingFlags.SetProperty |
+                        System.Reflection.BindingFlags.Instance |
+                        System.Reflection.BindingFlags.NonPublic,
+                        null, mdiClient, new object[] { true });
+
+                    // Eliminar cualquier imagen de fondo previa
+                    mdiClient.BackgroundImage = null;
+
+                    // Dibujar imagen manualmente sin repetir
                     mdiClient.Paint += (s, e) =>
                     {
-                        e.Graphics.DrawImage(fondoImagen, mdiClient.ClientRectangle);
+                        e.Graphics.Clear(mdiClient.BackColor); // Limpia fondo
+                        e.Graphics.DrawImage(fondoImagen, new Rectangle(0, 0, mdiClient.Width, mdiClient.Height));
                     };
 
-                    // Maneja el Resize para redibujar el fondo
-                    mdiClient.Resize += (s, e) =>
-                    {
-                        mdiClient.Invalidate(); // Fuerza repintado
-                    };
-
+                    mdiClient.Resize += (s, e) => mdiClient.Invalidate(); // Redibuja al cambiar tamaño
                     mdiClient.Invalidate(); // Pintado inicial
                     break;
                 }
             }
 
-
-
             string rawConnection = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             var builder = new SqlConnectionStringBuilder(rawConnection);
 
-            string instancia = builder.DataSource;       // Ej: "SQLServer\\Instancia"
-            string baseDatos = builder.InitialCatalog;   // Ej: "MiBaseDeDatos"
+            string instancia = builder.DataSource;
+            string baseDatos = builder.InitialCatalog;
 
             toolStripStatusConexion.Text = $"BD: {baseDatos} | Instancia: {instancia}";
-        }
-        private void Main_Resize(object sender, EventArgs e)
-        {
-
         }
 
         #endregion

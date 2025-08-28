@@ -38,7 +38,7 @@ namespace TransportesSoft_BackOffice.Forms
         public FormReporte(TipoReporte tipoReporte)
         {
 
-            SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
             InitializeComponent();
         }
@@ -47,7 +47,7 @@ namespace TransportesSoft_BackOffice.Forms
         public FormReporte(TipoReporte tipoReporte, DateTime FechaInicial, DateTime FechaFinal, int idunidad)
         {
 
-            SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
             InitializeComponent();
             if (tipoReporte == TipoReporte.ContabilidadConsumoUnidades)
