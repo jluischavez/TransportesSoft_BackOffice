@@ -103,6 +103,8 @@
     <Compile Include="Clases\ContOperadores.cs" />
     <Compile Include="Clases\ContRemolques.cs" />
     <Compile Include="Clases\ContUnidades.cs" />
+    <Compile Include="Clases\ContViajes.cs" />
+    <Compile Include="Clases\ContViajesYOperador.cs" />
     <Compile Include="Forms\ABCContFrmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +165,12 @@
     <Compile Include="Forms\RptsFrmConsumoUnidadesPorFecha.Designer.cs">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RptsFrmViajesPorFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RptsFrmViajesPorFecha.Designer.cs">
+      <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repo_ConfSucursalLocal.cs" />
@@ -171,12 +179,14 @@
     <Compile Include="Repositories\Repo_ContOperadores.cs" />
     <Compile Include="Repositories\Repo_ContRemolques.cs" />
     <Compile Include="Repositories\Repo_ContUnidades.cs" />
+    <Compile Include="Repositories\Repo_ContViajes.cs" />
     <Compile Include="Services\Service_ConfSucursalLocal.cs" />
     <Compile Include="Services\Service_ContClientes.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
     <Compile Include="Services\Service_ContOperadores.cs" />
     <Compile Include="Services\Service_ContRemolques.cs" />
     <Compile Include="Services\Service_ContUnidades.cs" />
+    <Compile Include="Services\Service_ContViajes.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Forms\ABCContFrmClientes.resx">
       <DependentUpon>ABCContFrmClientes.cs</DependentUpon>
@@ -208,6 +218,9 @@
     <EmbeddedResource Include="Forms\RptsFrmConsumoUnidadesPorFecha.resx">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RptsFrmViajesPorFecha.resx">
+      <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -219,9 +232,16 @@
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
     <EmbeddedResource Include="Reports\RptConsumoUnidadPorFecha.rdlc" />
+    <EmbeddedResource Include="Reports\RptViajesPorFecha.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ConfSucursalLocal.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContClientes.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContConsumoUnidades.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContOperadores.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContRemolques.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContUnidades.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContViajes.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContViajesYOperador.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

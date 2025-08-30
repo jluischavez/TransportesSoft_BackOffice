@@ -29,10 +29,14 @@ namespace TransportesSoft_BackOffice.Forms
         Service_ConfSucursalLocal lServcontSucLocal;
         ConfSucursalLocal lConfSucLocal;
 
+        /*Cont Viajes*/
+        Service_ContViajes lServContViajes;
+        List<ContViajesYOperador> lListContViajesYOperador;
         public enum TipoReporte
         {
             ContabilidadUnidades = 1,
-            ContabilidadConsumoUnidades = 2
+            ContabilidadConsumoUnidades = 2,
+            ContavilidadViajesPorFecha = 3
         }
         #region "Constructor"
         public FormReporte(TipoReporte tipoReporte)
@@ -43,8 +47,8 @@ namespace TransportesSoft_BackOffice.Forms
             InitializeComponent();
         }
 
-        /**CONSTRUCTOR DE CONSUMO DE UNIDADES**/
-        public FormReporte(TipoReporte tipoReporte, DateTime FechaInicial, DateTime FechaFinal, int idunidad)
+        /**CONSTRUCTOR DE CONSUMO DE UNIDADES Y DE VIAJES**/
+        public FormReporte(TipoReporte tipoReporte, DateTime FechaInicial, DateTime FechaFinal, int ID)
         {
 
             //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
@@ -52,7 +56,13 @@ namespace TransportesSoft_BackOffice.Forms
             InitializeComponent();
             if (tipoReporte == TipoReporte.ContabilidadConsumoUnidades)
             {
-                    RptContConsumoUnidadesPorFecha(FechaInicial, FechaFinal, idunidad);
+                RptContConsumoUnidadesPorFecha(FechaInicial, FechaFinal, ID);
+                this.Text = "Reporte de Consumo de Unidades por fecha.";
+            }
+            else if (tipoReporte == TipoReporte.ContavilidadViajesPorFecha)
+            {
+                RptContViajesPorFecha(FechaInicial, FechaFinal, ID);
+                this.Text = "Reporte de viajes por fecha.";
             }
         }
         #endregion
@@ -99,6 +109,49 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
 
+
+        private void RptContViajesPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idCliente)
+        {
+            try
+            {
+                lServContViajes = new Service_ContViajes();
+                if (idCliente == 0)
+                {
+                    lListContViajesYOperador = lServContViajes.ObtenerViajesPorFecha(FechaInicial, FechaFinal);
+                }
+                else
+                {
+                    lListContViajesYOperador = lServContViajes.ObtenerViajesPorFechaPorCliente(FechaInicial, FechaFinal, idCliente);
+                }
+
+                if (lListContViajesYOperador.Count == 0)
+                {
+                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                lServcontSucLocal = new Service_ConfSucursalLocal();
+                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+
+                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+                string reportPath = Path.Combine(projectRoot, "Reports", "RptViajesPorFecha.rdlc");
+
+                ReportDataSource rds = new ReportDataSource("DSContViajesYOperador", lListContViajesYOperador);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.ReportPath = reportPath;
+
+                /*Agrega la sucursal*/
+                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+                reportViewer1.LocalReport.SetParameters(paramSucursal);
+
+                reportViewer1.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void FormReporte_Load(object sender, EventArgs e)
         {
             reportViewer1.Dock = DockStyle.Fill;
