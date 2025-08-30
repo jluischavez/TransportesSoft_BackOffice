@@ -13,5 +13,7 @@ namespace TransportesSoft_BackOffice.Clases
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string Estatus { get; set; }
+
+        public string Descripcion => $"{id_Client} - {Nombre})";
     }
 }

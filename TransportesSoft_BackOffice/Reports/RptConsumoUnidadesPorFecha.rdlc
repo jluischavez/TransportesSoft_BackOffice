@@ -82,7 +82,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>id Unidad</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -112,7 +114,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Fecha</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -142,7 +146,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Consumo Litros</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -172,7 +178,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Consumo Pesos</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -202,7 +210,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Comentarios</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -334,7 +344,7 @@
                                 <TextRun>
                                   <Value>=Fields!ConsumoPesos.Value</Value>
                                   <Style>
-                                    <Format>'$'0.00;('$'0.00)</Format>
+                                    <Format>'$'#,0.00;('$'#,0.00)</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -449,7 +459,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>Totales:</Value>
-                    <Style />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -479,17 +491,21 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!ConsumoLitros.Value, "ContConsumoUnidades")</Value>
-                    <Style />
+                    <Style>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ConsumoLitros1</rd:DefaultName>
             <Top>2.12287cm</Top>
             <Left>6.68248cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.79104cm</Width>
+            <Width>1.51228cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -510,18 +526,21 @@
                   <TextRun>
                     <Value>=Sum(Fields!ConsumoPesos.Value, "ContConsumoUnidades")</Value>
                     <Style>
-                      <Format>'$'0.00;('$'0.00)</Format>
+                      <FontWeight>Bold</FontWeight>
+                      <Format>'$'#,0.00;('$'#,0.00)</Format>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ConsumoPesos1</rd:DefaultName>
-            <Top>2.12287cm</Top>
-            <Left>9.61463cm</Left>
+            <Top>2.15815cm</Top>
+            <Left>8.37115cm</Left>
             <Height>0.6cm</Height>
-            <Width>2.5cm</Width>
+            <Width>2.36065cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>

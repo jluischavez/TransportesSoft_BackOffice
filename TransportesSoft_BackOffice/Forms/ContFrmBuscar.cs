@@ -159,6 +159,7 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.Columns["Direccion"].Visible = false;
             DGV_Unidades.Columns["Telefono"].Visible = false;
             DGV_Unidades.Columns["Estatus"].Visible = false;
+            DGV_Unidades.Columns["Descripcion"].Visible = false;
         }
 
         private void ConfigurarGridRemolques()
