@@ -152,11 +152,13 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #region "Eventos"
         private void FormReporte_Load(object sender, EventArgs e)
         {
             reportViewer1.Dock = DockStyle.Fill;
             reportViewer1.ZoomMode = ZoomMode.PageWidth;
             reportViewer1.RefreshReport();
         }
+        #endregion
     }
 }

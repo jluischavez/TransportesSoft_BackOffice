@@ -37,16 +37,23 @@ namespace TransportesSoft_BackOffice.Forms
         private List<ContRemolques> lContRemolques;
         private Service_ContRemolques lServiceContRemolques;
         private BindingSource bindingSourceRemolques = new BindingSource();
-        public ContClientes RemolqueSeleccionado { get; private set; }
+        public ContRemolques RemolqueSeleccionado { get; private set; }
         public event EventHandler<ContRemolques> RemolqueSeleccionadoEvent;
-        
+        /*CONTABILIDAD OPERADORES*/
+        private List<ContOperadores> lContOperadores;
+        private Service_ContOperadores lServiceContOperadores;
+        private BindingSource bindingSourceOperadores = new BindingSource();
+        public ContOperadores OperadorSeleccionado { get; private set; }
+        public event EventHandler<ContOperadores> OperadorSeleccionadoEvent;
+
         private TipoBusqueda TipoFormulario;
         #endregion
         public enum TipoBusqueda
         {
             ContUnidades = 1,
             ContClientes = 2,
-            ContRemolques = 3
+            ContRemolques = 3,
+            ContOperadores = 4
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -73,6 +80,12 @@ namespace TransportesSoft_BackOffice.Forms
                 lContRemolques = new List<ContRemolques>();
                 lServiceContRemolques = new Service_ContRemolques();
                 BuscarRemolques();
+            }
+            else if (TipoFormulario == TipoBusqueda.ContOperadores)
+            {
+                lContOperadores = new List<ContOperadores>();
+                lServiceContOperadores = new Service_ContOperadores();
+                BuscarOperadores();
             }
         }
         #endregion
@@ -105,7 +118,6 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error", "Error al consultar los clientes: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void BuscarRemolques()
         {
             try
@@ -120,7 +132,32 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error", "Error al consultar los remolques: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void BuscarOperadores()
+        {
+            lContOperadores = lServiceContOperadores.ObtenerOperadores();
+            bindingSourceOperadores.DataSource = lContOperadores;
+            DGV_Unidades.DataSource = bindingSourceOperadores;
+            ConfigurarGridOperadores();
+        }
+        private void ConfigurarGridOperadores()
+        {
+            DGV_Unidades.ReadOnly = true;
+            DGV_Unidades.AllowUserToAddRows = false;
+            DGV_Unidades.AllowUserToDeleteRows = false;
+            DGV_Unidades.AllowUserToOrderColumns = false;
+            DGV_Unidades.AllowUserToResizeColumns = false;
+            DGV_Unidades.AllowUserToResizeRows = false;
+            DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV_Unidades.MultiSelect = false;
 
+            DGV_Unidades.Columns["id_Operador"].Width = 50;
+            DGV_Unidades.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            DGV_Unidades.Columns["FechaIngreso"].Visible = false;
+            DGV_Unidades.Columns["FechaEgreso"].Visible = false;
+            DGV_Unidades.Columns["Estatus"].Visible = false;
+            DGV_Unidades.Columns["Descripcion"].Visible = false;
+        }
         private void ConfigurarGridUnidades()
         {
             DGV_Unidades.ReadOnly = true;                      
@@ -161,7 +198,6 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.Columns["Estatus"].Visible = false;
             DGV_Unidades.Columns["Descripcion"].Visible = false;
         }
-
         private void ConfigurarGridRemolques()
         {
             DGV_Unidades.ReadOnly = true;
@@ -251,6 +287,18 @@ namespace TransportesSoft_BackOffice.Forms
                 };
                 RemolqueSeleccionadoEvent?.Invoke(this, Remolque);
             }
+            else if(TipoFormulario == TipoBusqueda.ContOperadores)
+            {
+                ContOperadores Operador = new ContOperadores()
+                {
+                    id_Operador = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Operador"].Value),
+                    Nombre = DGV_Unidades.Rows[rowIndex].Cells["Nombre"].Value?.ToString(),
+                    FechaIngreso = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaIngreso"].Value),
+                    FechaEgreso = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaEgreso"].Value)
+                };
+
+                OperadorSeleccionadoEvent?.Invoke(this, Operador);
+            }
 
             this.Close();
         }
@@ -260,7 +308,6 @@ namespace TransportesSoft_BackOffice.Forms
         {
             RegresarInformacion(e.RowIndex);
         }
-
         private void BntReporte_Click(object sender, EventArgs e)
         {
             Document doc = new Document();
@@ -274,7 +321,6 @@ namespace TransportesSoft_BackOffice.Forms
 
             doc.Close();
         }
-
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {
             string filtro = txtBuscar.Text.Trim().ToLower();
@@ -334,10 +380,25 @@ namespace TransportesSoft_BackOffice.Forms
                     bindingSourceRemolques.DataSource = filtradas;
                 }
             }
+            /*CONT OPERADORES*/
+            else if (TipoFormulario == TipoBusqueda.ContOperadores)
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    bindingSourceOperadores.DataSource = lContOperadores;
+                }
+                else
+                {
+                    var filtradas = lContOperadores
+                        .Where(u => u.Nombre.ToString().Contains(filtro))
+                        .ToList();
+
+                    bindingSourceOperadores.DataSource = filtradas;
+                }
+            }
 
             DGV_Unidades.Refresh();
         }
-
         private void BtnAceptar_Click(object sender, EventArgs e)
         {
             if (DGV_Unidades.CurrentRow != null)
@@ -350,9 +411,6 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Debe seleccionar una fila antes de continuar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-        #endregion
-
         private void DGV_Unidades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (TipoFormulario == TipoBusqueda.ContClientes)
@@ -377,6 +435,23 @@ namespace TransportesSoft_BackOffice.Forms
                     }
                 }
             }
+            else if (TipoFormulario == TipoBusqueda.ContRemolques)
+            {
+
+            }
+            else if (TipoFormulario == TipoBusqueda.ContOperadores)
+            {
+
+                if (DGV_Unidades.Columns["Estatus"] != null && e.RowIndex >= 0)
+                {
+                    var estatusValue = DGV_Unidades.Rows[e.RowIndex].Cells["Estatus"].Value?.ToString();
+                    if (estatusValue == "C")
+                    {
+                        DGV_Unidades.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(234, 171, 56);
+                    }
+                }
+            }
         }
+        #endregion
     }
 }

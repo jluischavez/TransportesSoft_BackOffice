@@ -34,5 +34,61 @@ namespace TransportesSoft_BackOffice.Repositories
                 return lContOperadores;
             }
         }
+
+        /// <summary>
+        /// Genera un registro nuevo de operador.
+        /// </summary>
+        /// <param name="operador"></param>
+        public void GuadarUnidad(ContOperadores operador)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlInsert = "INSERT INTO ContOperadores(Nombre, FechaIngreso, FechaEgreso, Estatus) " +
+                    "Values(@Nombre, @FechaIngreso, @FechaEgreso, @Estatus)";
+                var result = db.Execute(sqlInsert, new
+                {
+                    Nombre = operador.Nombre,
+                    FechaIngreso = operador.FechaIngreso,
+                    FechaEgreso = operador.FechaEgreso,
+                    Estatus = operador.Estatus
+                });
+            }
+        }
+
+
+        /// <summary>
+        /// Actualiza los campos de un operador en base de datos.
+        /// </summary>
+        /// <param name="operador"></param>
+        public void ActualizarOperador(ContOperadores operador)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContOperadores set Nombre=@Nombre, FechaIngreso=@FechaIngreso, FechaEgreso=@FechaEgreso, Estatus=@Estatus " +
+                    "WHERE id_Operador=@id_Operador";
+                var result = db.Execute(sqlEdit, new
+                {
+                    Nombre = operador.Nombre,
+                    FechaIngreso = operador.FechaIngreso,
+                    FechaEgreso = operador.FechaEgreso,
+                    Estatus = operador.Estatus,
+                    id_Operador = operador.id_Operador
+                }); ;
+            }
+        }
+
+        /// <summary>
+        /// EliminarOperador no Elimina, solo actualiza status en base de datos.
+        /// </summary>
+        /// <param name="id_Operador"></param>
+        public void EliminarOperador(int id_Operador)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContOperadores set Estatus=@Estatus " +
+                   "WHERE id_Operador=@id_Operador";
+                var result = db.Execute(sqlEdit, new { id_Operador = id_Operador, Estatus = 'C' });
+            }
+        }
     }
 }

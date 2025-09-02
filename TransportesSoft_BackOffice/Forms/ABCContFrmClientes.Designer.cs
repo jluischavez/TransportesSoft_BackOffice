@@ -161,6 +161,8 @@
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.LblID);
             this.Controls.Add(this.txtID);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ABCContFrmClientes";
             this.ShowIcon = false;
             this.Text = "Control de Clientes";

@@ -42,9 +42,10 @@ namespace TransportesSoft_BackOffice
             this.aBCDeRemolquesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consumoDeUnidadesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.viajesPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.viajesPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBCDeOperadoresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -74,12 +75,14 @@ namespace TransportesSoft_BackOffice
             // aBCDeClientesToolStripMenuItem
             // 
             this.aBCDeClientesToolStripMenuItem.Name = "aBCDeClientesToolStripMenuItem";
-            this.aBCDeClientesToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.aBCDeClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aBCDeClientesToolStripMenuItem.Text = "ABC de Clientes";
             this.aBCDeClientesToolStripMenuItem.Click += new System.EventHandler(this.aBCDeClientesToolStripMenuItem_Click);
             // 
             // operadoresToolStripMenuItem
             // 
+            this.operadoresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aBCDeOperadoresToolStripMenuItem});
             this.operadoresToolStripMenuItem.Name = "operadoresToolStripMenuItem";
             this.operadoresToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
             this.operadoresToolStripMenuItem.Text = "Operadores";
@@ -118,7 +121,7 @@ namespace TransportesSoft_BackOffice
             // aBCDeRemolquesToolStripMenuItem
             // 
             this.aBCDeRemolquesToolStripMenuItem.Name = "aBCDeRemolquesToolStripMenuItem";
-            this.aBCDeRemolquesToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
+            this.aBCDeRemolquesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aBCDeRemolquesToolStripMenuItem.Text = "ABC de Remolques";
             this.aBCDeRemolquesToolStripMenuItem.Click += new System.EventHandler(this.aBCDeRemolquesToolStripMenuItem_Click);
             // 
@@ -138,6 +141,13 @@ namespace TransportesSoft_BackOffice
             this.consumoDeUnidadesToolStripMenuItem1.Text = "Consumo de Unidades Por Fecha";
             this.consumoDeUnidadesToolStripMenuItem1.Click += new System.EventHandler(this.consumoDeUnidadesToolStripMenuItem1_Click);
             // 
+            // viajesPorFechaToolStripMenuItem
+            // 
+            this.viajesPorFechaToolStripMenuItem.Name = "viajesPorFechaToolStripMenuItem";
+            this.viajesPorFechaToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.viajesPorFechaToolStripMenuItem.Text = "Viajes Por Fecha";
+            this.viajesPorFechaToolStripMenuItem.Click += new System.EventHandler(this.viajesPorFechaToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -154,12 +164,12 @@ namespace TransportesSoft_BackOffice
             this.toolStripStatusConexion.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusConexion.Text = "Conexion";
             // 
-            // viajesPorFechaToolStripMenuItem
+            // aBCDeOperadoresToolStripMenuItem
             // 
-            this.viajesPorFechaToolStripMenuItem.Name = "viajesPorFechaToolStripMenuItem";
-            this.viajesPorFechaToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.viajesPorFechaToolStripMenuItem.Text = "Viajes Por Fecha";
-            this.viajesPorFechaToolStripMenuItem.Click += new System.EventHandler(this.viajesPorFechaToolStripMenuItem_Click);
+            this.aBCDeOperadoresToolStripMenuItem.Name = "aBCDeOperadoresToolStripMenuItem";
+            this.aBCDeOperadoresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aBCDeOperadoresToolStripMenuItem.Text = "ABC de Operadores";
+            this.aBCDeOperadoresToolStripMenuItem.Click += new System.EventHandler(this.aBCDeOperadoresToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -197,6 +207,7 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem aBCDeClientesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBCDeRemolquesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viajesPorFechaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aBCDeOperadoresToolStripMenuItem;
     }
 }
 

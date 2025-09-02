@@ -48,7 +48,8 @@ namespace TransportesSoft_BackOffice.Forms
             ObtenerDatos();
             
         }
-        private void ConfigurarFormulario()
+        #region "Private"
+        private void ConfigucionFormulario()
         {
             txtKilometraje.Text = "0";
             txtProxMantenimiento.Text = "0";
@@ -65,7 +66,7 @@ namespace TransportesSoft_BackOffice.Forms
             CBOperadores.ValueMember = "id_Operador";
             CBOperadores.SelectedIndex = -1;
 
-            /* Traemos Remolsques y llenamos el ComboBox*/
+            /* Traemos Remolques y llenamos el ComboBox*/
             lServiceContRemolques = new Service_ContRemolques();
             lContRemolques = lServiceContRemolques.ObtenerRemolques();
             CBRemolques.DataSource = lContRemolques;
@@ -74,10 +75,7 @@ namespace TransportesSoft_BackOffice.Forms
             CBRemolques.SelectedIndex = -1;
         }
         
-        private void BtnGuardar_Click(object sender, EventArgs e)
-        {
-            GuardarUnidad();
-        }
+    
 
         private void GuardarUnidad()
         {
@@ -138,6 +136,7 @@ namespace TransportesSoft_BackOffice.Forms
             txtSerie.Text = String.Empty;
             EsConsulta = false;
             CBOperadores.DataSource = null;
+            CBRemolques.DataSource = null;
             ObtenerDatos();
         }
         private void FrmBuscar_UnidadSeleccionada(object sender, ContUnidades unidad)
@@ -150,8 +149,12 @@ namespace TransportesSoft_BackOffice.Forms
             txtSerie.Text = unidad.Serie;
             EsConsulta = true;
         }
-
+        #endregion
         #region "Eventos"
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+            GuardarUnidad();
+        }
         private void txtID_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Back)
@@ -203,10 +206,8 @@ namespace TransportesSoft_BackOffice.Forms
         {
             CBOperadores.DropDownStyle = ComboBoxStyle.DropDownList;
             CBRemolques.DropDownStyle = ComboBoxStyle.DropDownList;
-            ConfigurarFormulario();
+            ConfigucionFormulario();
         }
-
-        
 
         private void BtnEliminar_Click(object sender, EventArgs e)
         {
