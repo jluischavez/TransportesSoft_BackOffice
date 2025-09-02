@@ -16,6 +16,6 @@ namespace TransportesSoft_BackOffice.Clases
         public DateTime FechaEgreso { get; set; }
         public string Estatus { get; set; }
 
-        public string Descripcion => $"{id_Operador} - {Nombre})";
+        public string Descripcion => $"{id_Operador} - {Nombre}";
     }
 }

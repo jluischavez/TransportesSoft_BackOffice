@@ -107,12 +107,18 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<RptsFrmViajesPorFecha>(this);
         }
-        #endregion
-
         private void aBCDeOperadoresToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFactory.AbrirFormulario<ABCContFrmOperadores>(this);
         }
+
+        private void próximosMantenimientosDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<RptsFrmMantenimientoUnidades>(this);
+        }
+        #endregion
+
+
     }
 
 
