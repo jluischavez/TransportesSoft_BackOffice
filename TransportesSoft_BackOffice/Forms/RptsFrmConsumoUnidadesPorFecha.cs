@@ -23,6 +23,7 @@ namespace TransportesSoft_BackOffice.Forms
             CboUnidades.Enabled = false;
         }
 
+        #region "Eventos"
         private void BtnImprimir_Click(object sender, EventArgs e)
         {
             DateTime fechaInicial = DTFechaInicial.Value.Date;
@@ -43,6 +44,24 @@ namespace TransportesSoft_BackOffice.Forms
                 lreport.BringToFront();
             }
         }
+        private void CBTodasUnidades_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CBUnidadSeleccionada.Checked)
+            {
+                CboUnidades.Enabled = true;
+            }
+            else
+            {
+                CboUnidades.Enabled = false;
+            }
+        }
+
+        private void RptsFrmConsumoUnidadesPorFecha_Load(object sender, EventArgs e)
+        {
+            CboUnidades.DropDownStyle = ComboBoxStyle.DropDownList;
+        }
+        #endregion
+        #region "Private"
         private bool ValidarFechas(DateTime fechaInicial, DateTime fechaFinal)
         {
             DateTime hoy = DateTime.Today;
@@ -85,22 +104,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
 
         }
-
-        private void CBTodasUnidades_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CBUnidadSeleccionada.Checked)
-            {
-                CboUnidades.Enabled = true;
-            }
-            else
-            {
-                CboUnidades.Enabled = false;
-            }
-        }
-
-        private void RptsFrmConsumoUnidadesPorFecha_Load(object sender, EventArgs e)
-        {
-            CboUnidades.DropDownStyle = ComboBoxStyle.DropDownList;
-        }
+        #endregion
+ 
     }
 }

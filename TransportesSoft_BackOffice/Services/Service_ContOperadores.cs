@@ -13,7 +13,6 @@ namespace TransportesSoft_BackOffice.Services
         List<ContOperadores> lContOperadores;
         Repo_ContOperadores lRepoContOperadores;
 
-
         public Service_ContOperadores()
         {
             lContOperadores = new List<ContOperadores>();
@@ -25,6 +24,28 @@ namespace TransportesSoft_BackOffice.Services
             lContOperadores = lRepoContOperadores.ObtenerOperadores();
 
             return lContOperadores;
+        }
+
+        public void GuardarOperador(ContOperadores operador)
+        {
+            lRepoContOperadores.GuadarUnidad(operador);
+        }
+
+        public void ActualizarOperador(ContOperadores operador)
+        {
+            lRepoContOperadores.ActualizarOperador(operador);
+        }
+
+        public void EliminarOperador(int id_Operador)
+        {
+            lRepoContOperadores.EliminarOperador(id_Operador);
+        }
+        public bool ValidarOperador(string lNombre)
+        {
+            if (String.IsNullOrEmpty(lNombre))
+                return false;
+
+            return true;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace TransportesSoft_BackOffice.Forms
             this.KeyPreview = true;
         }
 
+        #region "Private"
         private void ObtenerUnidades()
         {
             try
@@ -37,13 +38,26 @@ namespace TransportesSoft_BackOffice.Forms
                 CBUnidades.DisplayMember = "Descripcion";
                 CBUnidades.ValueMember = "id_Unidad";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al consultar: ", "Error" + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-             
-        }
 
+        }
+        private void Limpiar()
+        {
+            DTFecha.Value = DateTime.Now;
+            txtComentarios.Text = String.Empty;
+            txtConsumoEnPesos.Text = String.Empty;
+            txtConsumoLitros.Text = String.Empty;
+            CBUnidades.DataSource = null;
+
+
+            ObtenerUnidades();
+        }
+        #endregion
+
+        #region "Eventos"
         private void BTGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -66,19 +80,6 @@ namespace TransportesSoft_BackOffice.Forms
             }
             
         }
-
-        private void Limpiar()
-        {
-            DTFecha.Value = DateTime.Now;
-            txtComentarios.Text = String.Empty;
-            txtConsumoEnPesos.Text = String.Empty;
-            txtConsumoLitros.Text = String.Empty;
-            CBUnidades.DataSource = null;
-
-
-            ObtenerUnidades();
-        }
-
         private void ContFrmConsumosUnidades_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Control && e.KeyCode == Keys.N)
@@ -109,5 +110,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             CBUnidades.DropDownStyle = ComboBoxStyle.DropDownList;
         }
+        #endregion
+
     }
 }

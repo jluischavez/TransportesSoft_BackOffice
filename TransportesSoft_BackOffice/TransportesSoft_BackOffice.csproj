@@ -231,7 +231,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
-    <EmbeddedResource Include="Reports\RptConsumoUnidadPorFecha.rdlc" />
     <EmbeddedResource Include="Reports\RptViajesPorFecha.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ConfSucursalLocal.datasource" />

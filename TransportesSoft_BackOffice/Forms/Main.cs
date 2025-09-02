@@ -103,18 +103,23 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ABCContFrmRemolques>(this);
         }
-
-        #endregion
-
         private void viajesPorFechaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFactory.AbrirFormulario<RptsFrmViajesPorFecha>(this);
+        }
+        #endregion
+
+        private void aBCDeOperadoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ABCContFrmOperadores>(this);
         }
     }
 
 
 
-    /*CLASE FACTORY PARA CREAR FORMULARIOS*/
+    /// <summary>
+    /// CLASE FACTORY PARA CREAR FORMULARIOS
+    /// </summary>
     public static class FormFactory
     {
         public static void AbrirFormulario<T>(Form mdiParent) where T : Form, new()

@@ -42,7 +42,7 @@ namespace TransportesSoft_BackOffice.Forms
             lServiceContRemolques = new Service_ContRemolques();
             ConfiguraFormulario();
         }
-
+        #region "Private"
         private void ConfiguraFormulario()
         {
             /*Llena el combo años*/
@@ -59,8 +59,6 @@ namespace TransportesSoft_BackOffice.Forms
             BtnEliminar.Enabled = false;
         }
 
-        
-
         private void Limpiar()
         {
             txtID.Text = string.Empty;
@@ -74,7 +72,21 @@ namespace TransportesSoft_BackOffice.Forms
             DTImpermeabilizacion.Text = DateTime.Now.ToString();
             EsConsulta = false;
         }
-
+        private void FrmBuscar_RemolqueSeleccionado(object sender, ContRemolques remolque)
+        {
+            txtID.Text = remolque.id_Remolque.ToString();
+            txtMarca.Text = remolque.Marca;
+            txtModelo.Text = remolque.Modelo;
+            txtSerie.Text = remolque.Serie;
+            CBOYear.Text = remolque.Year.ToString();
+            txtPlacas.Text = remolque.Placas;
+            DTFechaLlantas.Text = remolque.Fecha_Llantas.ToString();
+            DTFechaFisicoSCT.Text = remolque.Fecha_Fisico_SCT.ToString();
+            DTImpermeabilizacion.Text = remolque.Impermeabilizacion.ToString();
+            EsConsulta = true;
+        }
+        #endregion
+        #region "Eventos"
         private void txtID_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -101,21 +113,6 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void FrmBuscar_RemolqueSeleccionado(object sender, ContRemolques remolque)
-        {
-            txtID.Text = remolque.id_Remolque.ToString();
-            txtMarca.Text = remolque.Marca;
-            txtModelo.Text = remolque.Modelo;
-            txtSerie.Text = remolque.Serie;
-            CBOYear.Text = remolque.Year.ToString();
-            txtPlacas.Text = remolque.Placas;
-            DTFechaLlantas.Text = remolque.Fecha_Llantas.ToString();
-            DTFechaFisicoSCT.Text = remolque.Fecha_Fisico_SCT.ToString();
-            DTImpermeabilizacion.Text = remolque.Impermeabilizacion.ToString();
-            EsConsulta = true;
-        }
-
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -162,5 +159,6 @@ namespace TransportesSoft_BackOffice.Forms
                 e.SuppressKeyPress = true;
             }
         }
+        #endregion
     }
 }
