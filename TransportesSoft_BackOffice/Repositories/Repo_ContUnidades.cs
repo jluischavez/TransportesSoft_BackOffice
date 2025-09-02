@@ -106,8 +106,36 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
+        public List<ContUnidades> ObtenerTodasUnidadesPorMantenimiento()
+        {
+            lContUnidades = new List<ContUnidades>();
 
-     }
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContUnidades " +
+                    "WHERE ESTATUS = 'A'" +
+                    " ORDER BY (ProximoMantenimiento - Kilometraje) desc";
+                lContUnidades = db.Query<ContUnidades>(sql).ToList();
+
+                return lContUnidades;
+            }
+        }
+
+        public List<ContUnidades> ObtenerTodasUnidadesPorMantenimientoYKilometraje(int KilometrajeLimite)
+        {
+            lContUnidades = new List<ContUnidades>();
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContUnidades" +
+                    " WHERE (ProximoMantenimiento - Kilometraje) <= @KilometrajeLimite AND Estatus = 'A'" +
+                    " ORDER BY (ProximoMantenimiento - Kilometraje) desc";
+                lContUnidades = db.Query<ContUnidades>(sql, new { KilometrajeLimite = KilometrajeLimite }).ToList();
+
+                return lContUnidades;
+            }
+        }
+    }
 }
 
                 

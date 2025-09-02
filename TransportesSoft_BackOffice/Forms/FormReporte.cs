@@ -36,7 +36,8 @@ namespace TransportesSoft_BackOffice.Forms
         {
             ContabilidadUnidades = 1,
             ContabilidadConsumoUnidades = 2,
-            ContavilidadViajesPorFecha = 3
+            ContabilidadViajesPorFecha = 3,
+            UnidadesPorMantenimiento = 4
         }
         #region "Constructor"
         public FormReporte(TipoReporte tipoReporte)
@@ -59,10 +60,21 @@ namespace TransportesSoft_BackOffice.Forms
                 RptContConsumoUnidadesPorFecha(FechaInicial, FechaFinal, ID);
                 this.Text = "Reporte de Consumo de Unidades por fecha.";
             }
-            else if (tipoReporte == TipoReporte.ContavilidadViajesPorFecha)
+            else if (tipoReporte == TipoReporte.ContabilidadViajesPorFecha)
             {
                 RptContViajesPorFecha(FechaInicial, FechaFinal, ID);
                 this.Text = "Reporte de viajes por fecha.";
+            }
+        }
+        /*CONSTRUCTOR DE REPORTE DE MANTENIMIENTO DE UNIDADES*/
+        public FormReporte(TipoReporte tipoReporte, int kilometrajeMantenimiento)
+        {
+            InitializeComponent();
+
+            if(tipoReporte == TipoReporte.UnidadesPorMantenimiento)
+            {
+                RptMantenimientoUnidades(kilometrajeMantenimiento);
+                this.Text = "Reporte de mantenimiento de unidades.";
             }
         }
         #endregion
@@ -108,8 +120,6 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error al generar reporte.", "Error." + ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
-
-
         private void RptContViajesPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idCliente)
         {
             try
@@ -148,6 +158,50 @@ namespace TransportesSoft_BackOffice.Forms
                 reportViewer1.RefreshReport();
             }
             catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void RptMantenimientoUnidades(int kilometrajeMantenimiento)
+        {
+            try
+            {
+                lServiceContUnidades = new Service_ContUnidades();
+                lContUnidades = new List<ContUnidades>();
+                if (kilometrajeMantenimiento == 0)
+                {
+                    lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimiento();
+                }
+                else
+                {
+                    lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimientoYKilometraje(kilometrajeMantenimiento);
+                }
+
+                if (lContUnidades.Count == 0)
+                {
+                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+
+                lServcontSucLocal = new Service_ConfSucursalLocal();
+                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+
+                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+                string reportPath = Path.Combine(projectRoot, "Reports", "RptMantenimientoUnidades.rdlc");
+
+                ReportDataSource rds = new ReportDataSource("DSContUnidades", lContUnidades);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.ReportPath = reportPath;
+
+                /*Agrega la sucursal*/
+                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+                reportViewer1.LocalReport.SetParameters(paramSucursal);
+
+                reportViewer1.RefreshReport();
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

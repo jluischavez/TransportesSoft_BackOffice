@@ -82,9 +82,14 @@ namespace TransportesSoft_BackOffice.Forms
                 idUnidad = Convert.ToInt32(CboClienteSeleccionado.SelectedValue);
             }
             // Ejecutar lógica del reporte
-            FormReporte lreport = new FormReporte(FormReporte.TipoReporte.ContavilidadViajesPorFecha,fechaInicial, fechaFinal, idUnidad);
+            FormReporte lreport = new FormReporte(FormReporte.TipoReporte.ContabilidadViajesPorFecha,fechaInicial, fechaFinal, idUnidad);
                 lreport.MdiParent = this.MdiParent;
                 lreport.FormBorderStyle = FormBorderStyle.Sizable;
+                lreport.StartPosition = FormStartPosition.Manual;
+
+                int x = (this.MdiParent.ClientSize.Width - lreport.Width) / 2;
+                int y = (this.MdiParent.ClientSize.Height - lreport.Height) / 2;
+                lreport.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
                 lreport.Show();
                 lreport.BringToFront();
             }

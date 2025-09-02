@@ -24,5 +24,7 @@ namespace TransportesSoft_BackOffice.Clases
         public string Comentarios { get; set; }
         public decimal Maniobra { get; set; }
         public int id_Operador { get; set; }
+        public int id_Unidad { get; set; }
+        public int id_Remolque { get; set; }
     }
 }

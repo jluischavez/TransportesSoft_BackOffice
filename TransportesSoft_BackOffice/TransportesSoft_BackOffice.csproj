@@ -165,6 +165,12 @@
     <Compile Include="Forms\RptsFrmConsumoUnidadesPorFecha.Designer.cs">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RptsFrmMantenimientoUnidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RptsFrmMantenimientoUnidades.Designer.cs">
+      <DependentUpon>RptsFrmMantenimientoUnidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RptsFrmViajesPorFecha.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -218,6 +224,9 @@
     <EmbeddedResource Include="Forms\RptsFrmConsumoUnidadesPorFecha.resx">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RptsFrmMantenimientoUnidades.resx">
+      <DependentUpon>RptsFrmMantenimientoUnidades.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RptsFrmViajesPorFecha.resx">
       <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
     </EmbeddedResource>
@@ -231,6 +240,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
+    <EmbeddedResource Include="Reports\RptMantenimientoUnidades.rdlc" />
     <EmbeddedResource Include="Reports\RptViajesPorFecha.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ConfSucursalLocal.datasource" />

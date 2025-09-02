@@ -40,20 +40,27 @@ namespace TransportesSoft_BackOffice.Services
         {
             lRepoContUnidades.EliminarUnidad(id_Unidad);
         }
-
+        public List<ContUnidades> ObtenerUnidadesPorMantenimiento()
+        {
+            return lRepoContUnidades.ObtenerTodasUnidadesPorMantenimiento();
+        }
+        public List<ContUnidades> ObtenerUnidadesPorMantenimientoYKilometraje(int Kilometraje)
+        {
+            return lRepoContUnidades.ObtenerTodasUnidadesPorMantenimientoYKilometraje(Kilometraje);
+        }
+        #region "Validaciones"
         public bool ValidarKilometraje(int kilometraje, int proximomantenimiento)
         {
             // Si ProximoMantenimiento es 0, se permite cualquier kilometraje
             if (proximomantenimiento == 0)
                 return true;
 
-            if (kilometraje <= proximomantenimiento)
+            if (kilometraje >= proximomantenimiento)
                 return false;
 
 
             return true;
         }
-
         public bool ValidarDatosObligatoriosGuardado(string lMarca, string lSerie)
         {
             if (string.IsNullOrEmpty(lMarca) || string.IsNullOrEmpty(lSerie))
@@ -61,5 +68,6 @@ namespace TransportesSoft_BackOffice.Services
 
             return true;
         }
+        #endregion
     }
 }
