@@ -29,6 +29,16 @@ namespace TransportesSoft_BackOffice.Repositories
                 return lContClientes;
             }
         }
+        public List<ContClientes> ObtenerClientesActivos()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContClientes " +
+                    "WHERE Estatus = 'A'";
+                lContClientes = db.Query<ContClientes>(sql).ToList();
+                return lContClientes;
+            }
+        }
 
         public void GuardarCliente(ContClientes lCliente)
         {

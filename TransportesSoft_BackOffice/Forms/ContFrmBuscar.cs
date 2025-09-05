@@ -254,6 +254,7 @@ namespace TransportesSoft_BackOffice.Forms
                     Kilometraje = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["Kilometraje"].Value),
                     FechaActualizacion = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaActualizacion"].Value),
                     id_Operador = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Operador"].Value),
+                    id_Remolque = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Remolque"].Value),
                     ProximoMantenimiento = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["ProximoMantenimiento"].Value)
                 };
 

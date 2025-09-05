@@ -33,5 +33,17 @@ namespace TransportesSoft_BackOffice.Services
             lListContViajesYOperador = RepoContViajes.ObtenerViajesPorFechaPorCliente(FechaInicial, FechaFinal, id_Client);
             return lListContViajesYOperador;
         }
+        public bool ValidarFolioFactura(string FolioFactura)
+        {
+            return RepoContViajes.ValidarFolioFactura(FolioFactura);
+        }
+        public bool ValidarNumeroTransporte(int NumeroTransporte)
+        {
+            return RepoContViajes.ValidarNumeroTransporte(NumeroTransporte);
+        }
+        public void GuardarViaje(ContViajes objViaje)
+        {
+            RepoContViajes.GuardarViaje(objViaje);
+        }
     }
 }

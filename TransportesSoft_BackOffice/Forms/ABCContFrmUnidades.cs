@@ -147,6 +147,7 @@ namespace TransportesSoft_BackOffice.Forms
             CBOperadores.SelectedValue = unidad.id_Operador;
             txtProxMantenimiento.Text = unidad.ProximoMantenimiento.ToString();
             txtSerie.Text = unidad.Serie;
+            CBRemolques.SelectedValue = unidad.id_Remolque;
             EsConsulta = true;
         }
         #endregion

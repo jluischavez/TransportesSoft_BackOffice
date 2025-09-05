@@ -35,6 +35,33 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
+        public ContOperadores OperadorPorID(int IDOperador)
+        {
+            ContOperadores Operador = new ContOperadores();
+            using (SqlConnection db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContOperadores " +
+                    "WHERE id_Operador = @id_Operador";
+
+                Operador = db.QueryFirst<ContOperadores>(sql, new
+                {
+                    id_Operador = IDOperador
+                });
+            }
+            return Operador;
+        }
+        public List<ContOperadores> ObtenerOperadoresActivos()
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContOperadores " +
+                    "WHERE Estatus = 'A'";
+                lContOperadores = db.Query<ContOperadores>(sql).ToList();
+
+                return lContOperadores;
+            }
+        }
+
         /// <summary>
         /// Genera un registro nuevo de operador.
         /// </summary>
