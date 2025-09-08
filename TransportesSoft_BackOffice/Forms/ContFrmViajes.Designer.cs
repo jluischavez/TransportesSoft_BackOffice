@@ -70,7 +70,7 @@
             this.CBClientes.Location = new System.Drawing.Point(113, 29);
             this.CBClientes.Name = "CBClientes";
             this.CBClientes.Size = new System.Drawing.Size(151, 21);
-            this.CBClientes.TabIndex = 0;
+            this.CBClientes.TabIndex = 1;
             // 
             // CBOrigen
             // 
@@ -78,7 +78,7 @@
             this.CBOrigen.Location = new System.Drawing.Point(113, 160);
             this.CBOrigen.Name = "CBOrigen";
             this.CBOrigen.Size = new System.Drawing.Size(151, 21);
-            this.CBOrigen.TabIndex = 1;
+            this.CBOrigen.TabIndex = 6;
             // 
             // label1
             // 
@@ -212,7 +212,7 @@
             this.CBDestino.Location = new System.Drawing.Point(113, 187);
             this.CBDestino.Name = "CBDestino";
             this.CBDestino.Size = new System.Drawing.Size(151, 21);
-            this.CBDestino.TabIndex = 16;
+            this.CBDestino.TabIndex = 7;
             // 
             // CBOperadores
             // 
@@ -220,7 +220,7 @@
             this.CBOperadores.Location = new System.Drawing.Point(113, 352);
             this.CBOperadores.Name = "CBOperadores";
             this.CBOperadores.Size = new System.Drawing.Size(151, 21);
-            this.CBOperadores.TabIndex = 17;
+            this.CBOperadores.TabIndex = 13;
             // 
             // DTFechaViaje
             // 
@@ -228,7 +228,7 @@
             this.DTFechaViaje.Location = new System.Drawing.Point(113, 56);
             this.DTFechaViaje.Name = "DTFechaViaje";
             this.DTFechaViaje.Size = new System.Drawing.Size(151, 20);
-            this.DTFechaViaje.TabIndex = 18;
+            this.DTFechaViaje.TabIndex = 2;
             // 
             // txtFolioFactura
             // 
@@ -236,7 +236,7 @@
             this.txtFolioFactura.MaxLength = 25;
             this.txtFolioFactura.Name = "txtFolioFactura";
             this.txtFolioFactura.Size = new System.Drawing.Size(151, 20);
-            this.txtFolioFactura.TabIndex = 19;
+            this.txtFolioFactura.TabIndex = 4;
             // 
             // DTFechaFactura
             // 
@@ -244,7 +244,7 @@
             this.DTFechaFactura.Location = new System.Drawing.Point(113, 82);
             this.DTFechaFactura.Name = "DTFechaFactura";
             this.DTFechaFactura.Size = new System.Drawing.Size(151, 20);
-            this.DTFechaFactura.TabIndex = 20;
+            this.DTFechaFactura.TabIndex = 3;
             // 
             // txtNumeroTransporte
             // 
@@ -252,7 +252,7 @@
             this.txtNumeroTransporte.MaxLength = 6;
             this.txtNumeroTransporte.Name = "txtNumeroTransporte";
             this.txtNumeroTransporte.Size = new System.Drawing.Size(151, 20);
-            this.txtNumeroTransporte.TabIndex = 21;
+            this.txtNumeroTransporte.TabIndex = 5;
             this.txtNumeroTransporte.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress_1);
             // 
             // txtIVA
@@ -260,7 +260,7 @@
             this.txtIVA.Location = new System.Drawing.Point(113, 245);
             this.txtIVA.Name = "txtIVA";
             this.txtIVA.Size = new System.Drawing.Size(151, 20);
-            this.txtIVA.TabIndex = 23;
+            this.txtIVA.TabIndex = 9;
             this.txtIVA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
             this.txtIVA.Leave += new System.EventHandler(this.txtMonto_Leave);
             this.txtIVA.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
@@ -270,7 +270,7 @@
             this.txtMonto.Location = new System.Drawing.Point(113, 219);
             this.txtMonto.Name = "txtMonto";
             this.txtMonto.Size = new System.Drawing.Size(151, 20);
-            this.txtMonto.TabIndex = 22;
+            this.txtMonto.TabIndex = 8;
             this.txtMonto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
             this.txtMonto.Leave += new System.EventHandler(this.txtMonto_Leave);
             this.txtMonto.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
@@ -280,7 +280,7 @@
             this.txtManiobra.Location = new System.Drawing.Point(113, 297);
             this.txtManiobra.Name = "txtManiobra";
             this.txtManiobra.Size = new System.Drawing.Size(151, 20);
-            this.txtManiobra.TabIndex = 25;
+            this.txtManiobra.TabIndex = 11;
             this.txtManiobra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
             this.txtManiobra.Leave += new System.EventHandler(this.txtMonto_Leave);
             this.txtManiobra.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
@@ -290,7 +290,7 @@
             this.txtRetenciones.Location = new System.Drawing.Point(113, 271);
             this.txtRetenciones.Name = "txtRetenciones";
             this.txtRetenciones.Size = new System.Drawing.Size(151, 20);
-            this.txtRetenciones.TabIndex = 24;
+            this.txtRetenciones.TabIndex = 10;
             this.txtRetenciones.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
             this.txtRetenciones.Leave += new System.EventHandler(this.txtMonto_Leave);
             this.txtRetenciones.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
@@ -301,7 +301,7 @@
             this.txtTotal.Location = new System.Drawing.Point(113, 326);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(151, 20);
-            this.txtTotal.TabIndex = 26;
+            this.txtTotal.TabIndex = 12;
             this.txtTotal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
             this.txtTotal.Leave += new System.EventHandler(this.txtMonto_Leave);
             // 
@@ -312,7 +312,7 @@
             this.txtComentarios.Multiline = true;
             this.txtComentarios.Name = "txtComentarios";
             this.txtComentarios.Size = new System.Drawing.Size(252, 33);
-            this.txtComentarios.TabIndex = 27;
+            this.txtComentarios.TabIndex = 14;
             // 
             // groupBox1
             // 
@@ -347,7 +347,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 38);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(377, 431);
-            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Captura de datos: ";
             // 
@@ -360,16 +360,17 @@
             this.BtnEliminar.Location = new System.Drawing.Point(21, 475);
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.BtnEliminar.TabIndex = 30;
+            this.BtnEliminar.TabIndex = 4;
             this.BtnEliminar.Text = "Eliminar";
             this.BtnEliminar.UseVisualStyleBackColor = true;
+            this.BtnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // BtnGuardar
             // 
             this.BtnGuardar.Location = new System.Drawing.Point(302, 475);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
-            this.BtnGuardar.TabIndex = 29;
+            this.BtnGuardar.TabIndex = 3;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = true;
             this.BtnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
@@ -389,7 +390,9 @@
             this.txtID.Location = new System.Drawing.Point(39, 12);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(49, 20);
-            this.txtID.TabIndex = 31;
+            this.txtID.TabIndex = 1;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
+            this.txtID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtID_KeyDown);
             // 
             // ContFrmViajes
             // 
@@ -404,6 +407,7 @@
             this.Name = "ContFrmViajes";
             this.ShowIcon = false;
             this.Text = "Registro de viajes";
+            this.Load += new System.EventHandler(this.ContFrmViajes_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ContFrmViajes_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

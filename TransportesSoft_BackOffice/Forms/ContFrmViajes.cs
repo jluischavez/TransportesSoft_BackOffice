@@ -24,7 +24,26 @@ namespace TransportesSoft_BackOffice.Forms
         private List<Municipios> lListMunicipios;
         private List<ContOperadores> lListOperadores;
 
-        
+        Boolean _esConsulta = false;
+
+        /// <summary>
+        /// Propiedad que establece un estado al botón eliminar, el cual cambiará dependiendo de si es consulta o no.
+        /// </summary>
+        private bool EsConsulta
+        {
+            get => _esConsulta;
+            set
+            {
+                if (_esConsulta != value)
+                {
+                    _esConsulta = value;
+                    BtnEliminar.Enabled = _esConsulta; // Actualiza el botón automáticamente
+                    txtFolioFactura.Enabled = !_esConsulta;
+                    txtNumeroTransporte.Enabled = !_esConsulta;
+                }
+            }
+        }
+
         public ContFrmViajes()
         {
             InitializeComponent();
@@ -38,6 +57,7 @@ namespace TransportesSoft_BackOffice.Forms
             DTFechaFactura.Value = DateTime.Now;
             DTFechaViaje.Value = DateTime.Now;
             txtFolioFactura.Text = String.Empty;
+            txtID.Text = string.Empty;
 
             txtNumeroTransporte.Text = String.Empty;
             txtMonto.Text = "0.00";
@@ -48,6 +68,8 @@ namespace TransportesSoft_BackOffice.Forms
 
             txtComentarios.Text = String.Empty;
             lServiceViajes = new Service_ContViajes();
+
+            EsConsulta = false;
         }
         private void ConfiguracionFormulario()
         {
@@ -100,7 +122,7 @@ namespace TransportesSoft_BackOffice.Forms
             decimal IVA = Convert.ToDecimal(txtIVA.Text);
             decimal Retenciones = Convert.ToDecimal(txtRetenciones.Text);
             decimal Maniobra = Convert.ToDecimal(txtManiobra.Text);
-            decimal total = Monto - IVA - Retenciones - Maniobra;
+            decimal total = Monto + IVA - Retenciones - Maniobra;
 
             txtTotal.Text = total.ToString();
         }
@@ -122,19 +144,19 @@ namespace TransportesSoft_BackOffice.Forms
 
                     objViaje.FechaViaje = DTFechaViaje.Value;
                     objViaje.FechaFactura = DTFechaFactura.Value;
-                    if (!lServiceViajes.ValidarFolioFactura(txtFolioFactura.Text))
+                    if (!lServiceViajes.ValidarFolioFactura(txtFolioFactura.Text) && !_esConsulta)
                     {
                         MessageBox.Show($"El FolioFactura {txtFolioFactura.Text} ya fue registrado anteriormente.","Error al guardar.", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
                         return false;
                     }
                     objViaje.Factura = txtFolioFactura.Text;
 
-                    if (!lServiceViajes.ValidarNumeroTransporte(Convert.ToInt32(txtNumeroTransporte.Text)))
+                    if (!lServiceViajes.ValidarNumeroTransporte(Convert.ToInt32(txtNumeroTransporte.Text)) && !_esConsulta)
                     {
                         MessageBox.Show($"El NumeroTransporte {txtNumeroTransporte.Text} ya fue registrado anteriormente.", "Error al guardar.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
-                        objViaje.NumeroTansporte = Convert.ToInt32(txtNumeroTransporte.Text);
+                        objViaje.NumeroTransporte = Convert.ToInt32(txtNumeroTransporte.Text);
 
                     /*DESTINO Y ORIGEN*/
                     Municipios OrigenSeleccionado = lListMunicipios
@@ -163,7 +185,15 @@ namespace TransportesSoft_BackOffice.Forms
 
                     if (ValidarInfoGuardado(objViaje))
                     {
-                        lServiceViajes.GuardarViaje(objViaje);
+                        if (!_esConsulta)
+                        {
+                            lServiceViajes.GuardarViaje(objViaje);
+                        }
+                        else
+                        {
+                            objViaje.id_viaje = Convert.ToInt32(txtID.Text);
+                            lServiceViajes.ActualizarViaje(objViaje);
+                        }
                         MessageBox.Show("Se guardó el viaje correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Limpiar();
                     }
@@ -189,7 +219,7 @@ namespace TransportesSoft_BackOffice.Forms
                 return false;
             if (string.IsNullOrEmpty(objViaje.Factura))
                 return false;
-            if (objViaje.NumeroTansporte == 0)
+            if (objViaje.NumeroTransporte == 0)
                 return false;
             if (string.IsNullOrEmpty(objViaje.Origen) || string.IsNullOrEmpty(objViaje.Destino))
                 return false;
@@ -204,6 +234,25 @@ namespace TransportesSoft_BackOffice.Forms
             }
 
             return true;
+        }
+        private void FrmBuscar_ViajeSeleccionado(object sender, ContViajes viaje)
+        {
+            txtID.Text = viaje.id_viaje.ToString();
+            CBClientes.SelectedValue = viaje.id_Client;
+            DTFechaViaje.Value = viaje.FechaViaje;
+            DTFechaFactura.Value = viaje.FechaFactura;
+            txtFolioFactura.Text = viaje.Factura;
+            txtNumeroTransporte.Text = viaje.NumeroTransporte.ToString();
+            CBOrigen.SelectedIndex = CBOrigen.FindStringExact(viaje.Origen);
+            CBDestino.SelectedIndex = CBDestino.FindStringExact(viaje.Destino);
+            txtMonto.Text = viaje.Monto.ToString("N2");
+            txtIVA.Text = viaje.IVA.ToString("N2");
+            txtRetenciones.Text = viaje.Retenciones.ToString("N2");
+            txtManiobra.Text = viaje.Maniobra.ToString("N2");
+            txtTotal.Text = viaje.Total.ToString("N2");
+            CBOperadores.SelectedValue = viaje.id_Operador;
+            txtComentarios.Text = viaje.Comentarios;
+            EsConsulta = true;
         }
         #endregion
         #region "Eventos"
@@ -262,11 +311,81 @@ namespace TransportesSoft_BackOffice.Forms
         {
             GuardarViaje();
         }
-        #endregion
+        private void txtID_TextChanged(object sender, EventArgs e)
+        {
+            // Si antes era consulta y ahora el campo está vacío, se interpreta como nuevo registro
+            if (_esConsulta && string.IsNullOrWhiteSpace(txtID.Text))
+            {
+                EsConsulta = false;
+                Limpiar(); // Limpia todos los campos
+            }
+        }
 
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_esConsulta)
+                {
+                    DialogResult result = MessageBox.Show($"¿Estás seguro que deseas eliminar el viaje {txtID.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        lServiceViajes.EliminarViaje(Convert.ToInt32(txtID.Text));
+
+                        MessageBox.Show("Se eliminó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    Limpiar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ContFrmViajes_Load(object sender, EventArgs e)
+        {
+            /*Establece estado del btnEliminar*/
+            EsConsulta = false;
+            BtnEliminar.Enabled = false;
+        }
         private void txtMonto_Validating(object sender, CancelEventArgs e)
         {
             CalcularTotales();
         }
+
+        private void txtID_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.KeyCode == Keys.Back)
+                {
+                    txtID.Clear(); // Borra todo el texto
+                    e.SuppressKeyPress = true; // Opcional: evita que el sonido de tecla se reproduzca
+                }
+                else if (e.KeyCode == Keys.F3)
+                {
+                    ContFrmBusquedaViajes frmBuscar = new ContFrmBusquedaViajes();
+                    frmBuscar.MdiParent = this.MdiParent;
+
+                    frmBuscar.FormBorderStyle = FormBorderStyle.FixedDialog;
+                    frmBuscar.StartPosition = FormStartPosition.Manual;
+
+                    int x = (this.MdiParent.ClientSize.Width - frmBuscar.Width) / 2;
+                    int y = (this.MdiParent.ClientSize.Height - frmBuscar.Height) / 2;
+                    frmBuscar.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+
+                    frmBuscar.ViajeSeleccionadoEvent += FrmBuscar_ViajeSeleccionado;
+
+                    frmBuscar.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
     }
 }

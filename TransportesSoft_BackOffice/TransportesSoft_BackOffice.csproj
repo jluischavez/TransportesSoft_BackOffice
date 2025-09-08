@@ -136,6 +136,12 @@
     <Compile Include="Forms\ContFrmBuscar.Designer.cs">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ContFrmBusquedaViajes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmBusquedaViajes.Designer.cs">
+      <DependentUpon>ContFrmBusquedaViajes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContFrmConsumosUnidades.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmBuscar.resx">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmBusquedaViajes.resx">
+      <DependentUpon>ContFrmBusquedaViajes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmConsumosUnidades.resx">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>

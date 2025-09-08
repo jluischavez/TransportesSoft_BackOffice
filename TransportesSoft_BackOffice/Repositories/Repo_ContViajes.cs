@@ -40,7 +40,7 @@ namespace TransportesSoft_BackOffice.Repositories
                     return lListContViajesYOperador;
                 }
         }
-        public List<ContViajes> ObtenerViajes()
+        public List<ContViajes> ObtenerTodosLosViajes()
         {
             lListContViajes = new List<ContViajes>();
             using (var db = new SqlConnection(ConnectionString))
@@ -118,7 +118,7 @@ namespace TransportesSoft_BackOffice.Repositories
                     FechaViaje = objViaje.FechaViaje,
                     FechaFactura = objViaje.FechaFactura,
                     Factura = objViaje.Factura,
-                    NumeroTransporte = objViaje.NumeroTansporte,
+                    NumeroTransporte = objViaje.NumeroTransporte,
                     Origen = objViaje.Origen,
                     Destino = objViaje.Destino,
                     Monto = objViaje.Monto,
@@ -130,6 +130,58 @@ namespace TransportesSoft_BackOffice.Repositories
                     id_Operador = objViaje.id_Operador,
                     id_Unidad = objViaje.id_Unidad,
                     id_Remolque = objViaje.id_Remolque
+                });
+            }
+        }
+
+        /// <summary>
+        /// Actualiza los campos de un viaje en base de datos.
+        /// </summary>
+        /// <param name="viaje"></param>
+        public void ActualizarViaje(ContViajes viaje)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContViajes set id_Client=@id_Client,NombreCliente=@NombreCliente,FechaViaje=@FechaViaje,FechaFactura=@FechaFactura, " +
+                    "Factura=@Factura,NumeroTransporte=@NumeroTransporte,Origen=@Origen,Destino=@Destino,Monto=@Monto,IVA=@IVA,Retenciones=@Retenciones, " +
+                    "Total=@Total,Comentarios=@Comentarios,Maniobra=@Maniobra,id_Operador=@id_Operador,id_Unidad=@id_Unidad,id_Remolque=@id_Remolque " +
+                    "WHERE id_Viaje=@id_Viaje";
+                var result = db.Execute(sqlEdit, new
+                {
+                    id_Client = viaje.id_Client,
+                    NombreCliente = viaje.NombreCliente,
+                    FechaViaje = viaje.FechaViaje,
+                    FechaFactura = viaje.FechaFactura,
+                    Factura = viaje.Factura,
+                    NumeroTransporte = viaje.NumeroTransporte,
+                    Origen = viaje.Origen,
+                    Destino = viaje.Destino,
+                    Monto = viaje.Monto,
+                    IVA = viaje.IVA,
+                    Retenciones = viaje.Retenciones,
+                    Total = viaje.Total,
+                    Comentarios = viaje.Comentarios,
+                    Maniobra = viaje.Maniobra,
+                    id_Operador = viaje.id_Operador,
+                    id_Unidad = viaje.id_Unidad,
+                    id_Remolque = viaje.id_Remolque,
+                    id_Viaje = viaje.id_viaje
+                }); ;
+            }
+        }
+
+        /// <summary>
+        /// Elimina Viaje por ID
+        /// </summary>
+        /// <param name="id_Viaje"></param>
+        public void EliminarViaje(int id_Viaje)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlDelete = "DELETE FROM ContViajes WHERE id_Viaje=@id_Viaje";
+                var result = db.Execute(sqlDelete, new
+                {
+                    id_Viaje = id_Viaje
                 });
             }
         }
