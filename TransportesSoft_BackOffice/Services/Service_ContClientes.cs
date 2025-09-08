@@ -24,6 +24,11 @@ namespace TransportesSoft_BackOffice.Services
             return lContClientes;
         }
 
+        public List<ContClientes> ObtenerClientesActivos()
+        {
+            return lRepoContClientes.ObtenerClientesActivos();
+        }
+
         public void GuardarCliente(ContClientes lCliente)
         {
             lRepoContClientes.GuardarCliente(lCliente);

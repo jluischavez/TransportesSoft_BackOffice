@@ -105,6 +105,7 @@
     <Compile Include="Clases\ContUnidades.cs" />
     <Compile Include="Clases\ContViajes.cs" />
     <Compile Include="Clases\ContViajesYOperador.cs" />
+    <Compile Include="Clases\Municipios.cs" />
     <Compile Include="Forms\ABCContFrmClientes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +135,12 @@
     </Compile>
     <Compile Include="Forms\ContFrmBuscar.Designer.cs">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ContFrmBusquedaViajes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmBusquedaViajes.Designer.cs">
+      <DependentUpon>ContFrmBusquedaViajes.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ContFrmConsumosUnidades.cs">
       <SubType>Form</SubType>
@@ -186,6 +193,7 @@
     <Compile Include="Repositories\Repo_ContRemolques.cs" />
     <Compile Include="Repositories\Repo_ContUnidades.cs" />
     <Compile Include="Repositories\Repo_ContViajes.cs" />
+    <Compile Include="Repositories\Repo_Municipios.cs" />
     <Compile Include="Services\Service_ConfSucursalLocal.cs" />
     <Compile Include="Services\Service_ContClientes.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
@@ -193,6 +201,7 @@
     <Compile Include="Services\Service_ContRemolques.cs" />
     <Compile Include="Services\Service_ContUnidades.cs" />
     <Compile Include="Services\Service_ContViajes.cs" />
+    <Compile Include="Services\Service_Municipios.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Forms\ABCContFrmClientes.resx">
       <DependentUpon>ABCContFrmClientes.cs</DependentUpon>
@@ -208,6 +217,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmBuscar.resx">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmBusquedaViajes.resx">
+      <DependentUpon>ContFrmBusquedaViajes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmConsumosUnidades.resx">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>

@@ -14,7 +14,7 @@ namespace TransportesSoft_BackOffice.Clases
         public DateTime FechaViaje { get; set; }
         public DateTime FechaFactura { get; set; }
         public string Factura { get; set; }
-        public int NumeroTansporte { get; set; }
+        public int NumeroTransporte { get; set; }
         public string Origen { get; set; }
         public string Destino { get; set; }
         public decimal Monto { get; set; }

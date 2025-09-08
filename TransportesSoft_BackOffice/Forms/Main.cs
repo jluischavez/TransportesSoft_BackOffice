@@ -116,6 +116,10 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<RptsFrmMantenimientoUnidades>(this);
         }
+        private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ContFrmViajes>(this);
+        }
         #endregion
 
 

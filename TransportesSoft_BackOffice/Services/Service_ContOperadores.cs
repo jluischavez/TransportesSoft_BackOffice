@@ -25,7 +25,15 @@ namespace TransportesSoft_BackOffice.Services
 
             return lContOperadores;
         }
+        public List<ContOperadores> ObtenerOperadoresActivos()
+        {
+            return lRepoContOperadores.ObtenerOperadoresActivos();
+        }
 
+        public ContOperadores OperadorPorID(int idOperador)
+        {
+            return lRepoContOperadores.OperadorPorID(idOperador);
+        }
         public void GuardarOperador(ContOperadores operador)
         {
             lRepoContOperadores.GuadarUnidad(operador);

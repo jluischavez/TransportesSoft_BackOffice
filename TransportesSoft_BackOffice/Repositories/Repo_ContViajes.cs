@@ -40,7 +40,7 @@ namespace TransportesSoft_BackOffice.Repositories
                     return lListContViajesYOperador;
                 }
         }
-        public List<ContViajes> ObtenerViajes()
+        public List<ContViajes> ObtenerTodosLosViajes()
         {
             lListContViajes = new List<ContViajes>();
             using (var db = new SqlConnection(ConnectionString))
@@ -70,6 +70,119 @@ namespace TransportesSoft_BackOffice.Repositories
                 lListContViajesYOperador = db.Query<ContViajesYOperador>(sql, parametros).ToList();
 
                 return lListContViajesYOperador;
+            }
+        }
+        /*VALIDACIONES*/
+        public bool ValidarFolioFactura(string folioFactura)
+        {
+            List<ContViajes> viajes = new List<ContViajes>();
+            using (SqlConnection db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContViajes " +
+                    "WHERE Factura = @FolioFactura";
+                viajes = db.Query<ContViajes>(sql, new {FolioFactura = folioFactura}).ToList();
+            }
+            if (viajes.Count == 0)
+                return true;
+            else
+                return false;
+        }
+        public bool ValidarNumeroTransporte(int NumeroTransporte)
+        {
+            List<ContViajes> viajes = new List<ContViajes>();
+            using (SqlConnection db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContViajes " +
+                    "WHERE NumeroTransporte = @NumeroTransporte";
+                viajes = db.Query<ContViajes>(sql, new { NumeroTransporte = NumeroTransporte }).ToList();
+            }
+            if (viajes.Count == 0)
+                return true;
+            else
+                return false;
+        }
+        /*END VALIDACIONES*/
+
+        public void GuardarViaje(ContViajes objViaje)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlInsert = "INSERT INTO ContViajes(id_Client, NombreCliente, FechaViaje, FechaFactura, Factura, NumeroTransporte, Origen, Destino, Monto, IVA, Retenciones, Total, Comentarios, Maniobra, " +
+                    "id_Operador, id_Unidad, id_Remolque) " +
+                    "Values(@id_Client, @NombreCliente, @FechaViaje, @FechaFactura, @Factura, @NumeroTransporte, @Origen, @Destino, @Monto, @IVA, @Retenciones, @Total, @Comentarios, @Maniobra, " +
+                    "@id_Operador, @id_Unidad, @id_Remolque)";
+                var result = db.Execute(sqlInsert, new
+                {
+                    id_Client = objViaje.id_Client,
+                    NombreCliente = objViaje.NombreCliente,
+                    FechaViaje = objViaje.FechaViaje,
+                    FechaFactura = objViaje.FechaFactura,
+                    Factura = objViaje.Factura,
+                    NumeroTransporte = objViaje.NumeroTransporte,
+                    Origen = objViaje.Origen,
+                    Destino = objViaje.Destino,
+                    Monto = objViaje.Monto,
+                    Maniobra = objViaje.Maniobra,
+                    IVA = objViaje.IVA,
+                    Retenciones = objViaje.Retenciones,
+                    Total = objViaje.Total,
+                    Comentarios = objViaje.Comentarios,
+                    id_Operador = objViaje.id_Operador,
+                    id_Unidad = objViaje.id_Unidad,
+                    id_Remolque = objViaje.id_Remolque
+                });
+            }
+        }
+
+        /// <summary>
+        /// Actualiza los campos de un viaje en base de datos.
+        /// </summary>
+        /// <param name="viaje"></param>
+        public void ActualizarViaje(ContViajes viaje)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlEdit = "UPDATE ContViajes set id_Client=@id_Client,NombreCliente=@NombreCliente,FechaViaje=@FechaViaje,FechaFactura=@FechaFactura, " +
+                    "Factura=@Factura,NumeroTransporte=@NumeroTransporte,Origen=@Origen,Destino=@Destino,Monto=@Monto,IVA=@IVA,Retenciones=@Retenciones, " +
+                    "Total=@Total,Comentarios=@Comentarios,Maniobra=@Maniobra,id_Operador=@id_Operador,id_Unidad=@id_Unidad,id_Remolque=@id_Remolque " +
+                    "WHERE id_Viaje=@id_Viaje";
+                var result = db.Execute(sqlEdit, new
+                {
+                    id_Client = viaje.id_Client,
+                    NombreCliente = viaje.NombreCliente,
+                    FechaViaje = viaje.FechaViaje,
+                    FechaFactura = viaje.FechaFactura,
+                    Factura = viaje.Factura,
+                    NumeroTransporte = viaje.NumeroTransporte,
+                    Origen = viaje.Origen,
+                    Destino = viaje.Destino,
+                    Monto = viaje.Monto,
+                    IVA = viaje.IVA,
+                    Retenciones = viaje.Retenciones,
+                    Total = viaje.Total,
+                    Comentarios = viaje.Comentarios,
+                    Maniobra = viaje.Maniobra,
+                    id_Operador = viaje.id_Operador,
+                    id_Unidad = viaje.id_Unidad,
+                    id_Remolque = viaje.id_Remolque,
+                    id_Viaje = viaje.id_viaje
+                }); ;
+            }
+        }
+
+        /// <summary>
+        /// Elimina Viaje por ID
+        /// </summary>
+        /// <param name="id_Viaje"></param>
+        public void EliminarViaje(int id_Viaje)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sqlDelete = "DELETE FROM ContViajes WHERE id_Viaje=@id_Viaje";
+                var result = db.Execute(sqlDelete, new
+                {
+                    id_Viaje = id_Viaje
+                });
             }
         }
     }

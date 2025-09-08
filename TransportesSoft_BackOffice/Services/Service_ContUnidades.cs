@@ -35,7 +35,10 @@ namespace TransportesSoft_BackOffice.Services
         {
             lRepoContUnidades.ActualizarUnidad(unidad);
         }
-
+        public ContUnidades UnidadPorID(int idOperador)
+        {
+            return lRepoContUnidades.UnidadPorIDOperador(idOperador);
+        }
         public void EliminarUnidad(int id_Unidad)
         {
             lRepoContUnidades.EliminarUnidad(id_Unidad);

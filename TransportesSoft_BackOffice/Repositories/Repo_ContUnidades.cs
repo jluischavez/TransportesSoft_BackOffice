@@ -40,6 +40,23 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
+        public ContUnidades UnidadPorIDOperador(int idOperador)
+        {
+            ContUnidades lUnidad = new ContUnidades();
+
+            using (SqlConnection db = new SqlConnection(ConnectionString))
+            {
+                string sql = "SELECT * FROM ContUnidades " +
+                    "WHERE id_Operador = @id_Operador";
+                lUnidad = db.QueryFirst<ContUnidades>(sql, new
+                {
+                    id_Operador = idOperador
+                });
+            }
+
+            return lUnidad;
+        }
+
 
         /// <summary>
         /// Genera un registro nuevo de unidad.

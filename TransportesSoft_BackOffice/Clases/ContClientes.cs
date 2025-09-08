@@ -14,6 +14,6 @@ namespace TransportesSoft_BackOffice.Clases
         public string Telefono { get; set; }
         public string Estatus { get; set; }
 
-        public string Descripcion => $"{id_Client} - {Nombre})";
+        public string Descripcion => $"{id_Client} - {Nombre}";
     }
 }
