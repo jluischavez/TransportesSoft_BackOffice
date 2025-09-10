@@ -10,14 +10,14 @@ using TransportesSoft_BackOffice.Clases;
 
 namespace TransportesSoft_BackOffice.Repositories
 {
-    public class Repo_ContOperadores
+    public class Repo_ContOperadoresCat
     {
 
 
         private string ConnectionString;
         private List<ContOperadores> lContOperadores;
 
-        public Repo_ContOperadores()
+        public Repo_ContOperadoresCat()
         {
             lContOperadores = new List<ContOperadores>();
             ConnectionString = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
@@ -28,7 +28,7 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContOperadores";
+                var sql = "SELECT * FROM ContOperadoresCat";
                 lContOperadores = db.Query<ContOperadores>(sql).ToList();
 
                 return lContOperadores;
@@ -40,7 +40,7 @@ namespace TransportesSoft_BackOffice.Repositories
             ContOperadores Operador = new ContOperadores();
             using (SqlConnection db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContOperadores " +
+                var sql = "SELECT * FROM ContOperadoresCat " +
                     "WHERE id_Operador = @id_Operador";
 
                 Operador = db.QueryFirst<ContOperadores>(sql, new
@@ -54,7 +54,7 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContOperadores " +
+                var sql = "SELECT * FROM ContOperadoresCat " +
                     "WHERE Estatus = 'A'";
                 lContOperadores = db.Query<ContOperadores>(sql).ToList();
 
@@ -70,7 +70,7 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlInsert = "INSERT INTO ContOperadores(Nombre, FechaIngreso, FechaEgreso, Estatus) " +
+                var sqlInsert = "INSERT INTO ContOperadoresCat(Nombre, FechaIngreso, FechaEgreso, Estatus) " +
                     "Values(@Nombre, @FechaIngreso, @FechaEgreso, @Estatus)";
                 var result = db.Execute(sqlInsert, new
                 {
@@ -91,7 +91,7 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContOperadores set Nombre=@Nombre, FechaIngreso=@FechaIngreso, FechaEgreso=@FechaEgreso, Estatus=@Estatus " +
+                var sqlEdit = "UPDATE ContOperadoresCat set Nombre=@Nombre, FechaIngreso=@FechaIngreso, FechaEgreso=@FechaEgreso, Estatus=@Estatus " +
                     "WHERE id_Operador=@id_Operador";
                 var result = db.Execute(sqlEdit, new
                 {
@@ -112,7 +112,7 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContOperadores set Estatus=@Estatus " +
+                var sqlEdit = "UPDATE ContOperadoresCat set Estatus=@Estatus " +
                    "WHERE id_Operador=@id_Operador";
                 var result = db.Execute(sqlEdit, new { id_Operador = id_Operador, Estatus = 'C' });
             }

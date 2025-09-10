@@ -14,7 +14,7 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class ABCContFrmOperadores : Form
     {
-        private Service_ContOperadores lServContOperadores;
+        private Service_ContOperadoresCat lServContOperadores;
         private Boolean _esConsulta;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace TransportesSoft_BackOffice.Forms
         #region "Private"
         private void ConfiguracionFormulario()
         {
-            lServContOperadores = new Service_ContOperadores();
+            lServContOperadores = new Service_ContOperadoresCat();
             this.KeyPreview = true;
             DTFechaIngreso.Value = new DateTime(1900, 1, 1);
             DTFechaEgreso.Value = new DateTime(1900, 1, 1);

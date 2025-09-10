@@ -14,14 +14,14 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class ContFrmViajes : Form
     {
-        private Service_ContClientes lServiceClientes;
-        private Service_Municipios lServiceMunicipios;
-        private Service_ContOperadores lServiceOperadores;
-        private Service_ContUnidades lServiceUnidades;
+        private Service_ContClientesCat lServiceClientes;
+        private Service_MunicipiosCat lServiceMunicipios;
+        private Service_ContOperadoresCat lServiceOperadores;
+        private Service_ContUnidadesCat lServiceUnidades;
         private Service_ContViajes lServiceViajes;
 
-        private List<ContClientes> lListContClientes;
-        private List<Municipios> lListMunicipios;
+        private List<ContClientesCat> lListContClientes;
+        private List<MunicipiosCat> lListMunicipios;
         private List<ContOperadores> lListOperadores;
 
         Boolean _esConsulta = false;
@@ -76,8 +76,8 @@ namespace TransportesSoft_BackOffice.Forms
             try
             {
                 /*Llenar Combo Clientes*/
-                lServiceClientes = new Service_ContClientes();
-                lListContClientes = new List<ContClientes>();
+                lServiceClientes = new Service_ContClientesCat();
+                lListContClientes = new List<ContClientesCat>();
                 lListContClientes = lServiceClientes.ObtenerClientesActivos();
                 CBClientes.DataSource = lListContClientes;
                 CBClientes.DisplayMember = "Descripcion";
@@ -86,8 +86,8 @@ namespace TransportesSoft_BackOffice.Forms
                 CBClientes.DropDownStyle = ComboBoxStyle.DropDownList;
 
                 /*Llenar Combos Origen y Destino*/
-                lServiceMunicipios = new Service_Municipios();
-                lListMunicipios = new List<Municipios>();
+                lServiceMunicipios = new Service_MunicipiosCat();
+                lListMunicipios = new List<MunicipiosCat>();
                 lListMunicipios = lServiceMunicipios.ObtenerMunicipios();
                 CBOrigen.DataSource = lListMunicipios;
                 CBOrigen.DisplayMember = "Nombre";
@@ -95,14 +95,14 @@ namespace TransportesSoft_BackOffice.Forms
                 CBOrigen.SelectedIndex = -1;
                 CBOrigen.DropDownStyle = ComboBoxStyle.DropDownList;
 
-                CBDestino.DataSource = new List<Municipios>(lListMunicipios);
+                CBDestino.DataSource = new List<MunicipiosCat>(lListMunicipios);
                 CBDestino.DisplayMember = "Nombre";
                 CBDestino.ValueMember = "idMunicipio";
                 CBDestino.SelectedIndex = -1;
                 CBDestino.DropDownStyle = ComboBoxStyle.DropDownList;
 
                 /*Llenar ComboOperadores*/
-                lServiceOperadores = new Service_ContOperadores();
+                lServiceOperadores = new Service_ContOperadoresCat();
                 lListOperadores = new List<ContOperadores>();
                 lListOperadores = lServiceOperadores.ObtenerOperadoresActivos();
                 CBOperadores.DataSource = lListOperadores;
@@ -138,7 +138,7 @@ namespace TransportesSoft_BackOffice.Forms
                     objViaje.id_Client = Convert.ToInt32(CBClientes.SelectedValue);
 
                     // Buscar el cliente en la lista original
-                    ContClientes clienteSeleccionado = lListContClientes
+                    ContClientesCat clienteSeleccionado = lListContClientes
                         .FirstOrDefault(c => c.id_Client == Convert.ToInt32(CBClientes.SelectedValue));
                     objViaje.NombreCliente = clienteSeleccionado?.Nombre ?? string.Empty;
 
@@ -159,11 +159,11 @@ namespace TransportesSoft_BackOffice.Forms
                         objViaje.NumeroTransporte = Convert.ToInt32(txtNumeroTransporte.Text);
 
                     /*DESTINO Y ORIGEN*/
-                    Municipios OrigenSeleccionado = lListMunicipios
-                        .FirstOrDefault(c => c.idMunicipio == Convert.ToInt32(CBOrigen.SelectedValue));
+                    MunicipiosCat OrigenSeleccionado = lListMunicipios
+                        .FirstOrDefault(c => c.IdMunicipio == Convert.ToInt32(CBOrigen.SelectedValue));
                     objViaje.Origen = OrigenSeleccionado?.Nombre ?? String.Empty;
-                    Municipios DestinoSeleccionado = lListMunicipios
-                        .FirstOrDefault(c => c.idMunicipio == Convert.ToInt32(CBDestino.SelectedValue));
+                    MunicipiosCat DestinoSeleccionado = lListMunicipios
+                        .FirstOrDefault(c => c.IdMunicipio == Convert.ToInt32(CBDestino.SelectedValue));
                     objViaje.Destino = DestinoSeleccionado?.Nombre ?? String.Empty;
 
                     /* COSTOS $$ */
@@ -178,8 +178,8 @@ namespace TransportesSoft_BackOffice.Forms
                     objViaje.Comentarios = txtComentarios.Text;
 
                     /*Consulta datos de unidad y remolque*/
-                    lServiceUnidades = new Service_ContUnidades();
-                    ContUnidades objUnidad = lServiceUnidades.UnidadPorID(objViaje.id_Operador);
+                    lServiceUnidades = new Service_ContUnidadesCat();
+                    ContUnidadesCat objUnidad = lServiceUnidades.UnidadPorID(objViaje.id_Operador);
                     objViaje.id_Unidad = objUnidad.id_Unidad;
                     objViaje.id_Remolque = objUnidad.id_Remolque;
 

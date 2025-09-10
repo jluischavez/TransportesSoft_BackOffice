@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TransportesSoft_BackOffice.Clases
 {
-    public class ContClientes
+    public class ContClientesCat
     {
         public int id_Client { get; set; }
         public string Nombre { get; set; }

@@ -8,33 +8,33 @@ using TransportesSoft_BackOffice.Repositories;
 
 namespace TransportesSoft_BackOffice.Services
 {
-    public class Service_ContClientes
+    public class Service_ContClientesCat
     {
 
-        List<ContClientes> lContClientes;
-        Repo_ContClientes lRepoContClientes;
-        public Service_ContClientes()
+        List<ContClientesCat> lContClientes;
+        Repo_ContClientesCat lRepoContClientes;
+        public Service_ContClientesCat()
         {
-            lRepoContClientes = new Repo_ContClientes();
+            lRepoContClientes = new Repo_ContClientesCat();
         }
 
-        public List<ContClientes> ObtenerClientes()
+        public List<ContClientesCat> ObtenerClientes()
         {
             lContClientes = lRepoContClientes.ObtenerClientes();
             return lContClientes;
         }
 
-        public List<ContClientes> ObtenerClientesActivos()
+        public List<ContClientesCat> ObtenerClientesActivos()
         {
             return lRepoContClientes.ObtenerClientesActivos();
         }
 
-        public void GuardarCliente(ContClientes lCliente)
+        public void GuardarCliente(ContClientesCat lCliente)
         {
             lRepoContClientes.GuardarCliente(lCliente);
         }
 
-        public void ActualizarCliente(ContClientes lCliente)
+        public void ActualizarCliente(ContClientesCat lCliente)
         {
             lRepoContClientes.ActualizarCliente(lCliente);
         }

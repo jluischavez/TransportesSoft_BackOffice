@@ -14,8 +14,8 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class ABCContFrmRemolques : Form
     {
-        private Service_ContRemolques lServiceContRemolques;
-        private ContRemolques lContRemolques;
+        private Service_ContRemolquesCat lServiceContRemolques;
+        private ContRemolquesCat lContRemolques;
         private Boolean _esConsulta;
 
 
@@ -39,7 +39,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             InitializeComponent();
             this.KeyPreview = true;
-            lServiceContRemolques = new Service_ContRemolques();
+            lServiceContRemolques = new Service_ContRemolquesCat();
             ConfiguraFormulario();
         }
         #region "Private"
@@ -72,7 +72,7 @@ namespace TransportesSoft_BackOffice.Forms
             DTImpermeabilizacion.Text = DateTime.Now.ToString();
             EsConsulta = false;
         }
-        private void FrmBuscar_RemolqueSeleccionado(object sender, ContRemolques remolque)
+        private void FrmBuscar_RemolqueSeleccionado(object sender, ContRemolquesCat remolque)
         {
             txtID.Text = remolque.id_Remolque.ToString();
             txtMarca.Text = remolque.Marca;
@@ -117,7 +117,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             try
             {
-                lContRemolques = new ContRemolques();
+                lContRemolques = new ContRemolquesCat();
                 lContRemolques.Marca = txtMarca.Text.ToUpper();
                 lContRemolques.Modelo = txtModelo.Text.ToUpper();
                 lContRemolques.Serie = txtSerie.Text.ToUpper();

@@ -14,8 +14,8 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class RptsFrmConsumoUnidadesPorFecha : Form
     {
-        private List<ContUnidades> lContUnidades;
-        private Service_ContUnidades lServContUnidades;
+        private List<ContUnidadesCat> lContUnidades;
+        private Service_ContUnidadesCat lServContUnidades;
         public RptsFrmConsumoUnidadesPorFecha()
         {
             InitializeComponent();
@@ -92,7 +92,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             try
             {
-                lServContUnidades = new Service_ContUnidades();
+                lServContUnidades = new Service_ContUnidadesCat();
                 lContUnidades = lServContUnidades.ObtenerUnidades();
                 CboUnidades.DataSource = lContUnidades;
                 CboUnidades.DisplayMember = "Descripcion";
