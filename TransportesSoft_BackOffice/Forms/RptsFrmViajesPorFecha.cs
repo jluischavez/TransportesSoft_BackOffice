@@ -14,8 +14,8 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class RptsFrmViajesPorFecha : Form
     {
-        Service_ContClientes lServiceContClientes;
-        List<ContClientes> lListContClientes;
+        Service_ContClientesCat lServiceContClientes;
+        List<ContClientesCat> lListContClientes;
         public RptsFrmViajesPorFecha()
         {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             try
             {
-                lServiceContClientes = new Service_ContClientes();
+                lServiceContClientes = new Service_ContClientesCat();
                 lListContClientes = lServiceContClientes.ObtenerClientes();
                 CboClienteSeleccionado.DataSource = lListContClientes;
                 CboClienteSeleccionado.DisplayMember = "Descripcion";

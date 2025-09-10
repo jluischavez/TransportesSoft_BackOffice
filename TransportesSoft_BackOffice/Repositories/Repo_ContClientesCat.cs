@@ -10,41 +10,41 @@ using TransportesSoft_BackOffice.Clases;
 
 namespace TransportesSoft_BackOffice.Repositories
 {
-    public class Repo_ContClientes
+    public class Repo_ContClientesCat
     {
         private string ConnectionString;
-        List<ContClientes> lContClientes;
-        public Repo_ContClientes()
+        List<ContClientesCat> lContClientes;
+        public Repo_ContClientesCat()
         {
-            lContClientes = new List<ContClientes>();
+            lContClientes = new List<ContClientesCat>();
             ConnectionString = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
         }
 
-        public List<ContClientes> ObtenerClientes()
+        public List<ContClientesCat> ObtenerClientes()
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContClientes";
-                lContClientes = db.Query<ContClientes>(sql).ToList();
+                var sql = "SELECT * FROM ContClientesCat";
+                lContClientes = db.Query<ContClientesCat>(sql).ToList();
                 return lContClientes;
             }
         }
-        public List<ContClientes> ObtenerClientesActivos()
+        public List<ContClientesCat> ObtenerClientesActivos()
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContClientes " +
+                var sql = "SELECT * FROM ContClientesCat " +
                     "WHERE Estatus = 'A'";
-                lContClientes = db.Query<ContClientes>(sql).ToList();
+                lContClientes = db.Query<ContClientesCat>(sql).ToList();
                 return lContClientes;
             }
         }
 
-        public void GuardarCliente(ContClientes lCliente)
+        public void GuardarCliente(ContClientesCat lCliente)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlInsert = "Insert into ContClientes(Nombre, Direccion, Telefono, Estatus) " +
+                var sqlInsert = "Insert into ContClientesCat(Nombre, Direccion, Telefono, Estatus) " +
                     "Values(@Nombre, @Direccion, @Telefono, @Estatus)";
                 var result = db.Execute(sqlInsert, new
                 {
@@ -56,11 +56,11 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
-        public void ActualizarCliente(ContClientes lCliente)
+        public void ActualizarCliente(ContClientesCat lCliente)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContClientes set Nombre=@Nombre, Direccion=@Direccion, Telefono=@Telefono, Estatus=@Estatus" +
+                var sqlEdit = "UPDATE ContClientesCat set Nombre=@Nombre, Direccion=@Direccion, Telefono=@Telefono, Estatus=@Estatus" +
                     " WHERE id_Client=@id_Client";
                 var result = db.Execute(sqlEdit, new
                 {
@@ -81,7 +81,7 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContClientes set Estatus=@Estatus " +
+                var sqlEdit = "UPDATE ContClientesCat set Estatus=@Estatus " +
                    "WHERE id_Client=@id_Client";
                 var result = db.Execute(sqlEdit, new { id_Client = id_Client, Estatus = 'C' });
                 //var sqlDelete = "DELETE FROM ContUnidades WHERE id_Unidad=@id_Unidad";

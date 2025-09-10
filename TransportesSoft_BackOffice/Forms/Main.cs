@@ -29,7 +29,7 @@ namespace TransportesSoft_BackOffice
             this.WindowState = FormWindowState.Maximized;
 
             ConfiguracionMDI();
-            this.Text = this.Text + " Versión: " + Application.ProductVersion;
+            this.Text = this.Text + " | Sucursal: " + lConfSucursalLocal.NombreSucursal + " | Versión: " + Application.ProductVersion;
         }
 
 
@@ -79,10 +79,6 @@ namespace TransportesSoft_BackOffice
 
         #endregion
         #region "Formularios"
-        private void aBCDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormFactory.AbrirFormulario<ABCContFrmUnidades>(this);
-        }
 
         private void consumoDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -107,11 +103,6 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<RptsFrmViajesPorFecha>(this);
         }
-        private void aBCDeOperadoresToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormFactory.AbrirFormulario<ABCContFrmOperadores>(this);
-        }
-
         private void próximosMantenimientosDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFactory.AbrirFormulario<RptsFrmMantenimientoUnidades>(this);
@@ -120,12 +111,26 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ContFrmViajes>(this);
         }
+        private void aBCDeOperadoresToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ABCContFrmOperadores>(this);
+        }
+        private void aBCDeUnidadesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ABCContFrmUnidades>(this);
+        }
+        private void aBCDeRemolquesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ABCContFrmRemolques>(this);
+        }
+        private void aBCDeMunicipiosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ABCFrmMunicipios>(this);
+        }
         #endregion
 
 
     }
-
-
 
     /// <summary>
     /// CLASE FACTORY PARA CREAR FORMULARIOS
@@ -136,9 +141,9 @@ namespace TransportesSoft_BackOffice
         {
             var formulario = new T();
             formulario.MdiParent = mdiParent;
-            formulario.FormBorderStyle = FormBorderStyle.FixedDialog;
             formulario.StartPosition = FormStartPosition.Manual;
 
+            /*UBICACION*/
             int x = (mdiParent.ClientSize.Width - formulario.Width) / 2;
             int y = (mdiParent.ClientSize.Height - formulario.Height) / 2;
             formulario.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));

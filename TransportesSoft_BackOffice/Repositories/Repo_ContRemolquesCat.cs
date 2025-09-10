@@ -10,33 +10,33 @@ using TransportesSoft_BackOffice.Clases;
 
 namespace TransportesSoft_BackOffice.Repositories
 {
-    public class Repo_ContRemolques
+    public class Repo_ContRemolquesCat
     {
 
         private string ConnectionString;
-        List<ContRemolques> lContRemolques;
+        List<ContRemolquesCat> lContRemolques;
 
-        public Repo_ContRemolques()
+        public Repo_ContRemolquesCat()
         {
-            lContRemolques = new List<ContRemolques>();
+            lContRemolques = new List<ContRemolquesCat>();
             ConnectionString = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
         }
 
-        public List<ContRemolques> ObtenerRemolques()
+        public List<ContRemolquesCat> ObtenerRemolques()
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = "SELECT * FROM ContRemolques";
-                lContRemolques = db.Query<ContRemolques>(sql).ToList();
+                var sql = "SELECT * FROM ContRemolquesCat";
+                lContRemolques = db.Query<ContRemolquesCat>(sql).ToList();
                 return lContRemolques;
             }
         }
 
-        public void GuardarRemolque(ContRemolques lRemolque)
+        public void GuardarRemolque(ContRemolquesCat lRemolque)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlInsert = "Insert into ContRemolques(Marca, Modelo, Serie, Year, Placas, Fecha_Llantas, Fecha_Fisico_SCT, Impermeabilizacion) " +
+                var sqlInsert = "Insert into ContRemolquesCat(Marca, Modelo, Serie, Year, Placas, Fecha_Llantas, Fecha_Fisico_SCT, Impermeabilizacion) " +
                     "Values(@Marca, @Modelo, @Serie, @Year, @Placas, @Fecha_Llantas, @Fecha_Fisico_SCT, @Impermeabilizacion)";
                 var result = db.Execute(sqlInsert, new
                 {
@@ -52,11 +52,11 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
-        public void ActualizarRemolque(ContRemolques lRemolque)
+        public void ActualizarRemolque(ContRemolquesCat lRemolque)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContRemolques set Marca=@Marca, Modelo=@Modelo, Serie=@Serie, Year=@Year, " +
+                var sqlEdit = "UPDATE ContRemolquesCat set Marca=@Marca, Modelo=@Modelo, Serie=@Serie, Year=@Year, " +
                     "Placas=@Placas, Fecha_Llantas=@Fecha_Llantas, Fecha_Fisico_SCT=@Fecha_Fisico_SCT, Impermeabilizacion=@Impermeabilizacion " +
                     "WHERE id_Remolque=@id_Remolque";
                 var result = db.Execute(sqlEdit, new

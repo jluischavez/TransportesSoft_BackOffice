@@ -8,15 +8,15 @@ using TransportesSoft_BackOffice.Repositories;
 
 namespace TransportesSoft_BackOffice.Services
 {
-    public class Service_ContOperadores
+    public class Service_ContOperadoresCat
     {
         List<ContOperadores> lContOperadores;
-        Repo_ContOperadores lRepoContOperadores;
+        Repo_ContOperadoresCat lRepoContOperadores;
 
-        public Service_ContOperadores()
+        public Service_ContOperadoresCat()
         {
             lContOperadores = new List<ContOperadores>();
-            lRepoContOperadores = new Repo_ContOperadores();
+            lRepoContOperadores = new Repo_ContOperadoresCat();
         }
 
         public List<ContOperadores> ObtenerOperadores()

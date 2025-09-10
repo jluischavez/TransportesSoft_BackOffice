@@ -20,31 +20,39 @@ namespace TransportesSoft_BackOffice.Forms
     {
         #region "Declaraciones"
         /*CONTABILIDAD UNIDADES*/
-        private List<ContUnidades> lContUnidades;
-        private Service_ContUnidades lServiceContUnidades;
+        private List<ContUnidadesCat> lContUnidades;
+        private Service_ContUnidadesCat lServiceContUnidades;
         private BindingSource bindingSourceUnidades = new BindingSource();
-        public ContUnidades UnidadSeleccionada { get; private set; }
-        public event EventHandler<ContUnidades> UnidadSeleccionadaEvent;
+        public ContUnidadesCat UnidadSeleccionada { get; private set; }
+        public event EventHandler<ContUnidadesCat> UnidadSeleccionadaEvent;
 
         /*CONTABILIDAD CLIENTES*/
-        private List<ContClientes> lContClientes;
-        private Service_ContClientes lServiceContClientes;
+        private List<ContClientesCat> lContClientes;
+        private Service_ContClientesCat lServiceContClientes;
         private BindingSource bindingSourceClientes = new BindingSource();
-        public ContClientes ClienteSeleccionado { get; private set; }
-        public event EventHandler<ContClientes> ClienteSeleccionadoEvent;
+        public ContClientesCat ClienteSeleccionado { get; private set; }
+        public event EventHandler<ContClientesCat> ClienteSeleccionadoEvent;
 
         /*CONTABILIDAD REMOLQUES*/
-        private List<ContRemolques> lContRemolques;
-        private Service_ContRemolques lServiceContRemolques;
+        private List<ContRemolquesCat> lContRemolques;
+        private Service_ContRemolquesCat lServiceContRemolques;
         private BindingSource bindingSourceRemolques = new BindingSource();
-        public ContRemolques RemolqueSeleccionado { get; private set; }
-        public event EventHandler<ContRemolques> RemolqueSeleccionadoEvent;
+        public ContRemolquesCat RemolqueSeleccionado { get; private set; }
+        public event EventHandler<ContRemolquesCat> RemolqueSeleccionadoEvent;
+
         /*CONTABILIDAD OPERADORES*/
         private List<ContOperadores> lContOperadores;
-        private Service_ContOperadores lServiceContOperadores;
+        private Service_ContOperadoresCat lServiceContOperadores;
         private BindingSource bindingSourceOperadores = new BindingSource();
         public ContOperadores OperadorSeleccionado { get; private set; }
         public event EventHandler<ContOperadores> OperadorSeleccionadoEvent;
+
+        /*Municipios Cat*/
+        private List<MunicipiosCatYEstado> lMunicipiosCat;
+        private Service_MunicipiosCat lServiceMunicipiosCat;
+        private BindingSource bindingSourceMunicipiosCat = new BindingSource();
+        public MunicipiosCat MunicipioSeleccionado { get; private set; }
+        public event EventHandler<MunicipiosCat> MunicipioSeleccionadoEvent;
 
         private TipoBusqueda TipoFormulario;
         #endregion
@@ -53,7 +61,8 @@ namespace TransportesSoft_BackOffice.Forms
             ContUnidades = 1,
             ContClientes = 2,
             ContRemolques = 3,
-            ContOperadores = 4
+            ContOperadores = 4,
+            MunicipiosCat = 5
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -65,27 +74,33 @@ namespace TransportesSoft_BackOffice.Forms
             this.Text = this.Text + " " + titulo;
             if (TipoFormulario == TipoBusqueda.ContUnidades)
             {
-                lContUnidades = new List<ContUnidades>();
-                lServiceContUnidades = new Service_ContUnidades();
+                lContUnidades = new List<ContUnidadesCat>();
+                lServiceContUnidades = new Service_ContUnidadesCat();
                 BuscarUnidades();
             }
             else if (TipoFormulario == TipoBusqueda.ContClientes)
             {
-                lContClientes = new List<ContClientes>();
-                lServiceContClientes = new Service_ContClientes();
+                lContClientes = new List<ContClientesCat>();
+                lServiceContClientes = new Service_ContClientesCat();
                 BuscarClientes();
             }
             else if (TipoFormulario == TipoBusqueda.ContRemolques)
             {
-                lContRemolques = new List<ContRemolques>();
-                lServiceContRemolques = new Service_ContRemolques();
+                lContRemolques = new List<ContRemolquesCat>();
+                lServiceContRemolques = new Service_ContRemolquesCat();
                 BuscarRemolques();
             }
             else if (TipoFormulario == TipoBusqueda.ContOperadores)
             {
                 lContOperadores = new List<ContOperadores>();
-                lServiceContOperadores = new Service_ContOperadores();
+                lServiceContOperadores = new Service_ContOperadoresCat();
                 BuscarOperadores();
+            }
+            else if(TipoFormulario == TipoBusqueda.MunicipiosCat)
+            {
+                lMunicipiosCat = new List<MunicipiosCatYEstado>();
+                lServiceMunicipiosCat = new Service_MunicipiosCat();
+                BuscarMunicipios();
             }
         }
         #endregion
@@ -134,10 +149,48 @@ namespace TransportesSoft_BackOffice.Forms
         }
         private void BuscarOperadores()
         {
-            lContOperadores = lServiceContOperadores.ObtenerOperadores();
-            bindingSourceOperadores.DataSource = lContOperadores;
-            DGV_Unidades.DataSource = bindingSourceOperadores;
-            ConfigurarGridOperadores();
+            try
+            {
+                lContOperadores = lServiceContOperadores.ObtenerOperadores();
+                bindingSourceOperadores.DataSource = lContOperadores;
+                DGV_Unidades.DataSource = bindingSourceOperadores;
+                ConfigurarGridOperadores();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error", "Error al consultar los operadores: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void BuscarMunicipios()
+        {
+            try
+            {
+                lMunicipiosCat = lServiceMunicipiosCat.ObtenerMunicipiosYEstado();
+                bindingSourceMunicipiosCat.DataSource = lMunicipiosCat;
+                DGV_Unidades.DataSource = bindingSourceMunicipiosCat;
+                ConfigurarGridMunicipios();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error", "Error al consultar los municipios: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ConfigurarGridMunicipios()
+        {
+            DGV_Unidades.ReadOnly = true;
+            DGV_Unidades.AllowUserToAddRows = false;
+            DGV_Unidades.AllowUserToDeleteRows = false;
+            DGV_Unidades.AllowUserToOrderColumns = false;
+            DGV_Unidades.AllowUserToResizeColumns = false;
+            DGV_Unidades.AllowUserToResizeRows = false;
+            DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV_Unidades.MultiSelect = false;
+            DGV_Unidades.Columns["idMunicipio"].Width = 50;
+            DGV_Unidades.Columns["Estado"].Width = 120;
+            DGV_Unidades.Columns["Nombre"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DGV_Unidades.Columns["idEstado"].Visible = false;
+            DGV_Unidades.Columns["ClaveInegi"].Visible = false;
+            DGV_Unidades.Columns["Activo"].Visible = false;
         }
         private void ConfigurarGridOperadores()
         {
@@ -246,7 +299,7 @@ namespace TransportesSoft_BackOffice.Forms
 
             if (TipoFormulario == TipoBusqueda.ContUnidades)
             {
-                ContUnidades unidad = new ContUnidades
+                ContUnidadesCat unidad = new ContUnidadesCat
                 {
                     id_Unidad = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Unidad"].Value),
                     Marca = DGV_Unidades.Rows[rowIndex].Cells["Marca"].Value?.ToString(),
@@ -262,7 +315,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             else if (TipoFormulario == TipoBusqueda.ContClientes)
             {
-                ContClientes unidad = new ContClientes
+                ContClientesCat unidad = new ContClientesCat
                 {
                     id_Client = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Client"].Value),
                     Nombre = DGV_Unidades.Rows[rowIndex].Cells["Nombre"].Value?.ToString(),
@@ -274,7 +327,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             else if(TipoFormulario == TipoBusqueda.ContRemolques)
             {
-                ContRemolques Remolque = new ContRemolques
+                ContRemolquesCat Remolque = new ContRemolquesCat
                 {
                     id_Remolque = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Remolque"].Value),
                     Marca = DGV_Unidades.Rows[rowIndex].Cells["Marca"].Value?.ToString(),
@@ -300,8 +353,19 @@ namespace TransportesSoft_BackOffice.Forms
 
                 OperadorSeleccionadoEvent?.Invoke(this, Operador);
             }
+            else if(TipoFormulario == TipoBusqueda.MunicipiosCat)
+            {
+                MunicipiosCat Municipio = new MunicipiosCat()
+                {
+                    IdMunicipio = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["IdMunicipio"].Value),
+                    Nombre = DGV_Unidades.Rows[rowIndex].Cells["Nombre"].Value?.ToString(),
+                    IdEstado = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["IdEstado"].Value),
+                    ClaveInegi = DGV_Unidades.Rows[rowIndex].Cells["ClaveInegi"].Value?.ToString(),
+                };
+                MunicipioSeleccionadoEvent.Invoke(this, Municipio);
+            }
 
-            this.Close();
+                this.Close();
         }
         #endregion
         #region "Eventos"
@@ -391,14 +455,33 @@ namespace TransportesSoft_BackOffice.Forms
                 else
                 {
                     var filtradas = lContOperadores
-                        .Where(u => u.Nombre.ToString().Contains(filtro))
+                        .Where(u => u.Nombre.ToLower().Contains(filtro))
                         .ToList();
 
                     bindingSourceOperadores.DataSource = filtradas;
                 }
             }
+            /*MUNICIPIOS*/
+            else if(TipoFormulario == TipoBusqueda.MunicipiosCat)
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    bindingSourceMunicipiosCat.DataSource = lMunicipiosCat;
+                }
+                else
+                {
+                    var filtradas = lMunicipiosCat
+                        .Where(u => u.Nombre.ToLower().Contains(filtro) ||
+                        u.Estado.ToLower().Contains(filtro) ||
+                        u.idMunicipio.ToString().Contains(filtro) ||
+                        u.ClaveInegi.ToString().Contains(filtro))
+                        .ToList();
 
-            DGV_Unidades.Refresh();
+                    bindingSourceMunicipiosCat.DataSource = filtradas;
+                }
+            }
+
+                DGV_Unidades.Refresh();
         }
         private void BtnAceptar_Click(object sender, EventArgs e)
         {

@@ -18,8 +18,8 @@ namespace TransportesSoft_BackOffice.Forms
     public partial class FormReporte : Form
     {
         /*Cont Unidades*/
-        Service_ContUnidades lServiceContUnidades;
-        List<ContUnidades> lContUnidades;
+        Service_ContUnidadesCat lServiceContUnidades;
+        List<ContUnidadesCat> lContUnidades;
 
         /*Cont Consumo Unidades*/
         Service_ContConsumoUnidades lServiceConsumoUnidades;
@@ -166,8 +166,8 @@ namespace TransportesSoft_BackOffice.Forms
         {
             try
             {
-                lServiceContUnidades = new Service_ContUnidades();
-                lContUnidades = new List<ContUnidades>();
+                lServiceContUnidades = new Service_ContUnidadesCat();
+                lContUnidades = new List<ContUnidadesCat>();
                 if (kilometrajeMantenimiento == 0)
                 {
                     lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimiento();

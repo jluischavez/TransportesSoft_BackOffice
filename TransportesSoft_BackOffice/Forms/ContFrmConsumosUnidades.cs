@@ -16,13 +16,13 @@ namespace TransportesSoft_BackOffice.Forms
     {
         private List<ContConsumoUnidades> lContConsumoUnidades;
         private Service_ContConsumoUnidades lservContConsumoUnidades;
-        private Service_ContUnidades lServContUnidades;
-        private List<ContUnidades> lContUnidades;
+        private Service_ContUnidadesCat lServContUnidades;
+        private List<ContUnidadesCat> lContUnidades;
         public ContFrmConsumosUnidades()
         {
             InitializeComponent();
             lservContConsumoUnidades = new Service_ContConsumoUnidades();
-            lServContUnidades = new Service_ContUnidades();
+            lServContUnidades = new Service_ContUnidadesCat();
             ObtenerUnidades();
             this.KeyPreview = true;
         }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace TransportesSoft_BackOffice.Clases
 {
-    public class Municipios
+    public class MunicipiosCatYEstado
     {
         public int idMunicipio { get; set; }
         public int idEstado { get; set; }
+        public string Estado { get; set; }
         public string Nombre { get; set; }
         public string ClaveInegi { get; set; }
         public bool Activo { get; set; }

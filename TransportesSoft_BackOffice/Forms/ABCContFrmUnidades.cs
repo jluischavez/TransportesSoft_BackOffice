@@ -15,11 +15,11 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class ABCContFrmUnidades : Form
     {
-        Service_ContUnidades lServiceContUnidades;
-        Service_ContOperadores lServContOperadores;
+        Service_ContUnidadesCat lServiceContUnidades;
+        Service_ContOperadoresCat lServContOperadores;
         List<ContOperadores> lContOperadores;
-        Service_ContRemolques lServiceContRemolques;
-        List<ContRemolques> lContRemolques;
+        Service_ContRemolquesCat lServiceContRemolques;
+        List<ContRemolquesCat> lContRemolques;
 
 
         Boolean _esConsulta = false;
@@ -42,7 +42,7 @@ namespace TransportesSoft_BackOffice.Forms
         public ABCContFrmUnidades()
         {
             InitializeComponent();
-            lServiceContUnidades = new Service_ContUnidades();
+            lServiceContUnidades = new Service_ContUnidadesCat();
             this.KeyPreview = true;
             this.StartPosition = FormStartPosition.Manual;
             ObtenerDatos();
@@ -59,7 +59,7 @@ namespace TransportesSoft_BackOffice.Forms
         private void ObtenerDatos()
         {
             /* Traemos Operadores y llenamos el ComboBox */
-            lServContOperadores = new Service_ContOperadores();
+            lServContOperadores = new Service_ContOperadoresCat();
             lContOperadores = lServContOperadores.ObtenerOperadores();
             CBOperadores.DataSource = lContOperadores;
             CBOperadores.DisplayMember = "Descripcion";
@@ -67,7 +67,7 @@ namespace TransportesSoft_BackOffice.Forms
             CBOperadores.SelectedIndex = -1;
 
             /* Traemos Remolques y llenamos el ComboBox*/
-            lServiceContRemolques = new Service_ContRemolques();
+            lServiceContRemolques = new Service_ContRemolquesCat();
             lContRemolques = lServiceContRemolques.ObtenerRemolques();
             CBRemolques.DataSource = lContRemolques;
             CBRemolques.DisplayMember = "Descripcion";
@@ -88,7 +88,7 @@ namespace TransportesSoft_BackOffice.Forms
                     {
                         if (lServiceContUnidades.ValidarDatosObligatoriosGuardado(txtMarca.Text, txtSerie.Text))
                         {
-                            ContUnidades unidad = new ContUnidades();
+                            ContUnidadesCat unidad = new ContUnidadesCat();
                             unidad.Marca = txtMarca.Text.ToUpper();
                             unidad.Kilometraje = Convert.ToInt32(txtKilometraje.Text);
                             unidad.Serie = txtSerie.Text.ToUpper();
@@ -139,7 +139,7 @@ namespace TransportesSoft_BackOffice.Forms
             CBRemolques.DataSource = null;
             ObtenerDatos();
         }
-        private void FrmBuscar_UnidadSeleccionada(object sender, ContUnidades unidad)
+        private void FrmBuscar_UnidadSeleccionada(object sender, ContUnidadesCat unidad)
         {
             txtID.Text = unidad.id_Unidad.ToString();
             txtKilometraje.Text = unidad.Kilometraje.ToString();

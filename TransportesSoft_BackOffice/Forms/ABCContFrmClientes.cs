@@ -14,8 +14,8 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class ABCContFrmClientes : Form
     {
-        Service_ContClientes lServiceContClientes;
-        ContClientes lContClientes;
+        Service_ContClientesCat lServiceContClientes;
+        ContClientesCat lContClientes;
         Boolean _esConsulta = false;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             InitializeComponent();
             this.KeyPreview = true;
-            lServiceContClientes = new Service_ContClientes();
+            lServiceContClientes = new Service_ContClientesCat();
             txtID.TextChanged += txtID_TextChanged;
         }
 
@@ -152,7 +152,7 @@ namespace TransportesSoft_BackOffice.Forms
                 {
                     if (lServiceContClientes.ValidarInfoAntesDeGuardar(txtNombre.Text))
                     {
-                        lContClientes = new ContClientes();
+                        lContClientes = new ContClientesCat();
                         lContClientes.Direccion = txtDireccion.Text.ToUpper();
                         lContClientes.Telefono = txtTelefono.Text;
                         lContClientes.Nombre = txtNombre.Text.ToUpper();
@@ -182,7 +182,7 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show(ex.Message);
             }
         }
-        private void FrmBuscar_ClienteSeleccionado(object sender, ContClientes unidad)
+        private void FrmBuscar_ClienteSeleccionado(object sender, ContClientesCat unidad)
         {
             txtID.Text = unidad.id_Client.ToString();
             txtTelefono.Text = unidad.Telefono.ToString();

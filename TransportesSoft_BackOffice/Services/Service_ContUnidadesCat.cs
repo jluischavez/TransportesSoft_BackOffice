@@ -8,34 +8,34 @@ using TransportesSoft_BackOffice.Repositories;
 
 namespace TransportesSoft_BackOffice.Services
 {
-    public class Service_ContUnidades
+    public class Service_ContUnidadesCat
     {
-        List<ContUnidades> lContUnidades;
-        Repo_ContUnidades lRepoContUnidades;
+        List<ContUnidadesCat> lContUnidades;
+        Repo_ContUnidadesCat lRepoContUnidades;
 
-        public Service_ContUnidades()
+        public Service_ContUnidadesCat()
         {
-            lRepoContUnidades = new Repo_ContUnidades();
+            lRepoContUnidades = new Repo_ContUnidadesCat();
         }
 
 
-        public List<ContUnidades> ObtenerUnidades() 
+        public List<ContUnidadesCat> ObtenerUnidades() 
         {
-            lContUnidades = new List<ContUnidades>();
+            lContUnidades = new List<ContUnidadesCat>();
 
             lContUnidades = lRepoContUnidades.ObtenerUnidades();
 
             return lContUnidades;
         }
-        public void GuardarUnidad(ContUnidades unidad)
+        public void GuardarUnidad(ContUnidadesCat unidad)
         {
             lRepoContUnidades.GuadarUnidad(unidad);
         }
-        public void ActualizarUnidad(ContUnidades unidad)
+        public void ActualizarUnidad(ContUnidadesCat unidad)
         {
             lRepoContUnidades.ActualizarUnidad(unidad);
         }
-        public ContUnidades UnidadPorID(int idOperador)
+        public ContUnidadesCat UnidadPorID(int idOperador)
         {
             return lRepoContUnidades.UnidadPorIDOperador(idOperador);
         }
@@ -43,11 +43,11 @@ namespace TransportesSoft_BackOffice.Services
         {
             lRepoContUnidades.EliminarUnidad(id_Unidad);
         }
-        public List<ContUnidades> ObtenerUnidadesPorMantenimiento()
+        public List<ContUnidadesCat> ObtenerUnidadesPorMantenimiento()
         {
             return lRepoContUnidades.ObtenerTodasUnidadesPorMantenimiento();
         }
-        public List<ContUnidades> ObtenerUnidadesPorMantenimientoYKilometraje(int Kilometraje)
+        public List<ContUnidadesCat> ObtenerUnidadesPorMantenimientoYKilometraje(int Kilometraje)
         {
             return lRepoContUnidades.ObtenerTodasUnidadesPorMantenimientoYKilometraje(Kilometraje);
         }
