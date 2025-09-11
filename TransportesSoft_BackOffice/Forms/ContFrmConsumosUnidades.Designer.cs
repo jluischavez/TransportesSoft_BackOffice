@@ -40,6 +40,7 @@
             this.txtComentarios = new System.Windows.Forms.TextBox();
             this.txtConsumoLitros = new System.Windows.Forms.TextBox();
             this.BTGuardar = new System.Windows.Forms.Button();
+            this.LblPrecioActual = new System.Windows.Forms.Label();
             this.GB1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,6 +117,7 @@
             // 
             // txtConsumoEnPesos
             // 
+            this.txtConsumoEnPesos.Enabled = false;
             this.txtConsumoEnPesos.Location = new System.Drawing.Point(140, 112);
             this.txtConsumoEnPesos.MaxLength = 5;
             this.txtConsumoEnPesos.Name = "txtConsumoEnPesos";
@@ -148,7 +150,9 @@
             this.txtConsumoLitros.Name = "txtConsumoLitros";
             this.txtConsumoLitros.Size = new System.Drawing.Size(195, 20);
             this.txtConsumoLitros.TabIndex = 3;
+            this.txtConsumoLitros.TextChanged += new System.EventHandler(this.txtConsumoLitros_TextChanged);
             this.txtConsumoLitros.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtConsumoLitros_KeyPress);
+            this.txtConsumoLitros.Leave += new System.EventHandler(this.txtConsumoLitros_Leave);
             // 
             // BTGuardar
             // 
@@ -160,11 +164,21 @@
             this.BTGuardar.UseVisualStyleBackColor = true;
             this.BTGuardar.Click += new System.EventHandler(this.BTGuardar_Click);
             // 
+            // LblPrecioActual
+            // 
+            this.LblPrecioActual.AutoSize = true;
+            this.LblPrecioActual.Location = new System.Drawing.Point(27, 234);
+            this.LblPrecioActual.Name = "LblPrecioActual";
+            this.LblPrecioActual.Size = new System.Drawing.Size(73, 13);
+            this.LblPrecioActual.TabIndex = 27;
+            this.LblPrecioActual.Text = "Precio Actual:";
+            // 
             // ContFrmConsumosUnidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 260);
+            this.Controls.Add(this.LblPrecioActual);
             this.Controls.Add(this.BTGuardar);
             this.Controls.Add(this.GB1);
             this.MaximizeBox = false;
@@ -173,10 +187,12 @@
             this.ShowIcon = false;
             this.Text = "Control de consumo de diesel por unidad";
             this.Load += new System.EventHandler(this.ContFrmConsumosUnidades_Load);
+            this.Shown += new System.EventHandler(this.ContFrmConsumosUnidades_Shown);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ContFrmConsumosUnidades_KeyDown);
             this.GB1.ResumeLayout(false);
             this.GB1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -194,5 +210,6 @@
         private System.Windows.Forms.ComboBox CBUnidades;
         private System.Windows.Forms.DateTimePicker DTFecha;
         private System.Windows.Forms.Button BTGuardar;
+        private System.Windows.Forms.Label LblPrecioActual;
     }
 }
