@@ -127,6 +127,10 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ABCFrmMunicipios>(this);
         }
+        private void preciosDeDieselToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ContFrmPreciosDiesel>(this);
+        }
         #endregion
 
 

@@ -160,6 +160,12 @@
     <Compile Include="Forms\ContFrmConsumosUnidades.Designer.cs">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ContFrmPreciosDiesel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmPreciosDiesel.Designer.cs">
+      <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContFrmViajes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,6 +202,7 @@
     <Compile Include="Forms\RptsFrmViajesPorFecha.Designer.cs">
       <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContPreciosDiesel.cs" />
     <Compile Include="Models\EstadosCat.cs" />
     <Compile Include="Models\MunicipiosCatYEstado.cs" />
     <Compile Include="Program.cs" />
@@ -204,6 +211,7 @@
     <Compile Include="Repositories\Repo_ContClientesCat.cs" />
     <Compile Include="Repositories\Repo_ContConsumoUnidades.cs" />
     <Compile Include="Repositories\Repo_ContOperadoresCat.cs" />
+    <Compile Include="Repositories\Repo_ContPreciosDiesel.cs" />
     <Compile Include="Repositories\Repo_ContRemolquesCat.cs" />
     <Compile Include="Repositories\Repo_ContUnidadesCat.cs" />
     <Compile Include="Repositories\Repo_ContViajes.cs" />
@@ -213,6 +221,7 @@
     <Compile Include="Services\Service_ContClientesCat.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
     <Compile Include="Services\Service_ContOperadoresCat.cs" />
+    <Compile Include="Services\Service_ContPreciosDiesel.cs" />
     <Compile Include="Services\Service_ContRemolquesCat.cs" />
     <Compile Include="Services\Service_ContUnidadesCat.cs" />
     <Compile Include="Services\Service_ContViajes.cs" />
@@ -242,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmConsumosUnidades.resx">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmPreciosDiesel.resx">
+      <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmViajes.resx">
       <DependentUpon>ContFrmViajes.cs</DependentUpon>
