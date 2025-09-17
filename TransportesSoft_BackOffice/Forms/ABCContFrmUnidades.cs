@@ -51,8 +51,6 @@ namespace TransportesSoft_BackOffice.Forms
         #region "Private"
         private void ConfigucionFormulario()
         {
-            txtKilometraje.Text = "0";
-            txtProxMantenimiento.Text = "0";
             EsConsulta = false;
             BtnEliminar.Enabled = false;
         }
@@ -84,15 +82,11 @@ namespace TransportesSoft_BackOffice.Forms
                 DialogResult result = MessageBox.Show($"¿Deseas guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    if (lServiceContUnidades.ValidarKilometraje(Convert.ToInt32(txtKilometraje.Text), Convert.ToInt32(txtProxMantenimiento.Text)))
-                    {
                         if (lServiceContUnidades.ValidarDatosObligatoriosGuardado(txtMarca.Text, txtSerie.Text))
                         {
                             ContUnidadesCat unidad = new ContUnidadesCat();
                             unidad.Marca = txtMarca.Text.ToUpper();
-                            unidad.Kilometraje = Convert.ToInt32(txtKilometraje.Text);
                             unidad.Serie = txtSerie.Text.ToUpper();
-                            unidad.ProximoMantenimiento = Convert.ToInt32(txtProxMantenimiento.Text);
                             unidad.id_Operador = Convert.ToInt32(CBOperadores.SelectedValue);
                             unidad.Estatus = "A";
                             unidad.id_Remolque = Convert.ToInt32(CBRemolques.SelectedValue);
@@ -114,12 +108,6 @@ namespace TransportesSoft_BackOffice.Forms
                         {
                             MessageBox.Show($"Los valores Marca y Serie con obligatorios.");
                         }
-
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Kilometraje actual: {txtKilometraje.Text}\nPróximo mantenimiento: {txtProxMantenimiento.Text}\n\nVerifica los valores ingresados.");
-                    }
                 }
             }
             catch (Exception ex)
@@ -130,9 +118,7 @@ namespace TransportesSoft_BackOffice.Forms
         private void Limpiar()
         {
             txtID.Text = String.Empty;
-            txtKilometraje.Text = "0";
             txtMarca.Text = String.Empty;
-            txtProxMantenimiento.Text = "0";
             txtSerie.Text = String.Empty;
             EsConsulta = false;
             CBOperadores.DataSource = null;
@@ -142,10 +128,8 @@ namespace TransportesSoft_BackOffice.Forms
         private void FrmBuscar_UnidadSeleccionada(object sender, ContUnidadesCat unidad)
         {
             txtID.Text = unidad.id_Unidad.ToString();
-            txtKilometraje.Text = unidad.Kilometraje.ToString();
             txtMarca.Text = unidad.Marca;
             CBOperadores.SelectedValue = unidad.id_Operador;
-            txtProxMantenimiento.Text = unidad.ProximoMantenimiento.ToString();
             txtSerie.Text = unidad.Serie;
             CBRemolques.SelectedValue = unidad.id_Remolque;
             EsConsulta = true;
@@ -230,18 +214,6 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show(ex.Message);
             }
             
-        }
-
-        private void txtKilometraje_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtKilometraje.Text))
-                txtKilometraje.Text = "0";
-        }
-
-        private void txtProxMantenimiento_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtProxMantenimiento.Text))
-                txtProxMantenimiento.Text = "0";
         }
 
         private void txtID_TextChanged(object sender, EventArgs e)

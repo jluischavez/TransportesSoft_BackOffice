@@ -55,7 +55,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch(Exception ex)
             {
-
+                MessageBox.Show("Error al consultar: ", "Error" + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void ObtenerUnidades()

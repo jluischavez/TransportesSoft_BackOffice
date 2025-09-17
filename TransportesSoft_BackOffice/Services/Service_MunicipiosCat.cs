@@ -10,7 +10,6 @@ namespace TransportesSoft_BackOffice.Services
 {
     public class Service_MunicipiosCat
     {
-        List<MunicipiosCat> lMunicipios;
         Repo_MunicipiosCat lRepoMunicipios;
         public Service_MunicipiosCat()
         {

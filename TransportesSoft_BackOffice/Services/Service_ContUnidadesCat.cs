@@ -27,6 +27,12 @@ namespace TransportesSoft_BackOffice.Services
 
             return lContUnidades;
         }
+        public List<ContUnidadesCat> ObtenerTodasUnidadesActivas()
+        {
+            lContUnidades = new List<ContUnidadesCat>();
+            lContUnidades = lRepoContUnidades.ObtenerTodasUnidadesActivas();
+            return lContUnidades;
+        }
         public void GuardarUnidad(ContUnidadesCat unidad)
         {
             lRepoContUnidades.GuadarUnidad(unidad);
@@ -42,14 +48,6 @@ namespace TransportesSoft_BackOffice.Services
         public void EliminarUnidad(int id_Unidad)
         {
             lRepoContUnidades.EliminarUnidad(id_Unidad);
-        }
-        public List<ContUnidadesCat> ObtenerUnidadesPorMantenimiento()
-        {
-            return lRepoContUnidades.ObtenerTodasUnidadesPorMantenimiento();
-        }
-        public List<ContUnidadesCat> ObtenerUnidadesPorMantenimientoYKilometraje(int Kilometraje)
-        {
-            return lRepoContUnidades.ObtenerTodasUnidadesPorMantenimientoYKilometraje(Kilometraje);
         }
         #region "Validaciones"
         public bool ValidarKilometraje(int kilometraje, int proximomantenimiento)

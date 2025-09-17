@@ -73,7 +73,7 @@ namespace TransportesSoft_BackOffice.Forms
 
             if(tipoReporte == TipoReporte.UnidadesPorMantenimiento)
             {
-                RptMantenimientoUnidades(kilometrajeMantenimiento);
+                //RptMantenimientoUnidades(kilometrajeMantenimiento);
                 this.Text = "Reporte de mantenimiento de unidades.";
             }
         }
@@ -162,50 +162,50 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void RptMantenimientoUnidades(int kilometrajeMantenimiento)
-        {
-            try
-            {
-                lServiceContUnidades = new Service_ContUnidadesCat();
-                lContUnidades = new List<ContUnidadesCat>();
-                if (kilometrajeMantenimiento == 0)
-                {
-                    lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimiento();
-                }
-                else
-                {
-                    lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimientoYKilometraje(kilometrajeMantenimiento);
-                }
+        //private void RptMantenimientoUnidades(int kilometrajeMantenimiento)
+        //{
+        //    try
+        //    {
+        //        lServiceContUnidades = new Service_ContUnidadesCat();
+        //        lContUnidades = new List<ContUnidadesCat>();
+        //        if (kilometrajeMantenimiento == 0)
+        //        {
+        //            lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimiento();
+        //        }
+        //        else
+        //        {
+        //            lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimientoYKilometraje(kilometrajeMantenimiento);
+        //        }
 
-                if (lContUnidades.Count == 0)
-                {
-                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
+        //        if (lContUnidades.Count == 0)
+        //        {
+        //            MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //            return;
+        //        }
 
 
-                lServcontSucLocal = new Service_ConfSucursalLocal();
-                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+        //        lServcontSucLocal = new Service_ConfSucursalLocal();
+        //        lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
 
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptMantenimientoUnidades.rdlc");
+        //        string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+        //        string reportPath = Path.Combine(projectRoot, "Reports", "RptMantenimientoUnidades.rdlc");
 
-                ReportDataSource rds = new ReportDataSource("DSContUnidades", lContUnidades);
-                reportViewer1.LocalReport.DataSources.Clear();
-                reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+        //        ReportDataSource rds = new ReportDataSource("DSContUnidades", lContUnidades);
+        //        reportViewer1.LocalReport.DataSources.Clear();
+        //        reportViewer1.LocalReport.DataSources.Add(rds);
+        //        reportViewer1.LocalReport.ReportPath = reportPath;
 
-                /*Agrega la sucursal*/
-                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
-                reportViewer1.LocalReport.SetParameters(paramSucursal);
+        //        /*Agrega la sucursal*/
+        //        ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+        //        reportViewer1.LocalReport.SetParameters(paramSucursal);
 
-                reportViewer1.RefreshReport();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //        reportViewer1.RefreshReport();
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
         #region "Eventos"
         private void FormReporte_Load(object sender, EventArgs e)
         {

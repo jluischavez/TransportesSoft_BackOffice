@@ -30,7 +30,6 @@
         {
             this.DGV_Unidades = new System.Windows.Forms.DataGridView();
             this.BtnAceptar = new System.Windows.Forms.Button();
-            this.BntReporte = new System.Windows.Forms.Button();
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Unidades)).BeginInit();
@@ -56,17 +55,6 @@
             this.BtnAceptar.UseVisualStyleBackColor = true;
             this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
-            // BntReporte
-            // 
-            this.BntReporte.Enabled = false;
-            this.BntReporte.Location = new System.Drawing.Point(12, 369);
-            this.BntReporte.Name = "BntReporte";
-            this.BntReporte.Size = new System.Drawing.Size(75, 23);
-            this.BntReporte.TabIndex = 3;
-            this.BntReporte.Text = "Imprimir";
-            this.BntReporte.UseVisualStyleBackColor = true;
-            this.BntReporte.Click += new System.EventHandler(this.BntReporte_Click);
-            // 
             // txtBuscar
             // 
             this.txtBuscar.Location = new System.Drawing.Point(61, 12);
@@ -91,7 +79,6 @@
             this.ClientSize = new System.Drawing.Size(363, 404);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBuscar);
-            this.Controls.Add(this.BntReporte);
             this.Controls.Add(this.BtnAceptar);
             this.Controls.Add(this.DGV_Unidades);
             this.Name = "ContFrmBuscar";
@@ -107,7 +94,6 @@
 
         private System.Windows.Forms.DataGridView DGV_Unidades;
         private System.Windows.Forms.Button BtnAceptar;
-        private System.Windows.Forms.Button BntReporte;
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label1;
     }

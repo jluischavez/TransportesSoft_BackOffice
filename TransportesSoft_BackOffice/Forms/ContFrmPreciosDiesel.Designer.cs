@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.LblPrecio = new System.Windows.Forms.Label();
@@ -37,24 +36,11 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BtnEliminar
-            // 
-            this.BtnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.Red;
-            this.BtnEliminar.FlatAppearance.BorderSize = 2;
-            this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnEliminar.ForeColor = System.Drawing.Color.Red;
-            this.BtnEliminar.Location = new System.Drawing.Point(30, 103);
-            this.BtnEliminar.Name = "BtnEliminar";
-            this.BtnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.BtnEliminar.TabIndex = 24;
-            this.BtnEliminar.Text = "Eliminar";
-            this.BtnEliminar.UseVisualStyleBackColor = true;
-            // 
             // BtnGuardar
             // 
-            this.BtnGuardar.Location = new System.Drawing.Point(231, 103);
+            this.BtnGuardar.Location = new System.Drawing.Point(85, 104);
             this.BtnGuardar.Name = "BtnGuardar";
-            this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.BtnGuardar.Size = new System.Drawing.Size(145, 23);
             this.BtnGuardar.TabIndex = 23;
             this.BtnGuardar.Text = "Guardar";
             this.BtnGuardar.UseVisualStyleBackColor = true;
@@ -90,7 +76,7 @@
             // LblPrecioActual
             // 
             this.LblPrecioActual.AutoSize = true;
-            this.LblPrecioActual.Location = new System.Drawing.Point(113, 73);
+            this.LblPrecioActual.Location = new System.Drawing.Point(96, 73);
             this.LblPrecioActual.Name = "LblPrecioActual";
             this.LblPrecioActual.Size = new System.Drawing.Size(73, 13);
             this.LblPrecioActual.TabIndex = 26;
@@ -102,7 +88,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(328, 139);
             this.Controls.Add(this.LblPrecioActual);
-            this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.groupBox1);
             this.Name = "ContFrmPreciosDiesel";
@@ -116,8 +101,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.Button BtnGuardar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label LblPrecio;
