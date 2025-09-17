@@ -62,7 +62,9 @@ namespace TransportesSoft_BackOffice.Forms
             ContClientes = 2,
             ContRemolques = 3,
             ContOperadores = 4,
-            MunicipiosCat = 5
+            MunicipiosCat = 5,
+            MantenimientoUnidades = 6,
+            MantenimientoRemolques = 8
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -225,10 +227,8 @@ namespace TransportesSoft_BackOffice.Forms
             DGV_Unidades.Columns["id_Unidad"].Width = 50;
             DGV_Unidades.Columns["Serie"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
-            DGV_Unidades.Columns["Kilometraje"].Visible = false;
             DGV_Unidades.Columns["FechaActualizacion"].Visible = false;
             DGV_Unidades.Columns["id_Operador"].Visible = false;
-            DGV_Unidades.Columns["ProximoMantenimiento"].Visible = false;
             DGV_Unidades.Columns["Descripcion"].Visible = false;
             DGV_Unidades.Columns["Estatus"].Visible = false;
             DGV_Unidades.Columns["id_Remolque"].Visible = false;
@@ -304,11 +304,9 @@ namespace TransportesSoft_BackOffice.Forms
                     id_Unidad = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Unidad"].Value),
                     Marca = DGV_Unidades.Rows[rowIndex].Cells["Marca"].Value?.ToString(),
                     Serie = DGV_Unidades.Rows[rowIndex].Cells["Serie"].Value?.ToString(),
-                    Kilometraje = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["Kilometraje"].Value),
                     FechaActualizacion = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaActualizacion"].Value),
                     id_Operador = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Operador"].Value),
-                    id_Remolque = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Remolque"].Value),
-                    ProximoMantenimiento = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["ProximoMantenimiento"].Value)
+                    id_Remolque = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["id_Remolque"].Value)
                 };
 
                 UnidadSeleccionadaEvent?.Invoke(this, unidad);
@@ -372,19 +370,6 @@ namespace TransportesSoft_BackOffice.Forms
         private void DGV_Unidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             RegresarInformacion(e.RowIndex);
-        }
-        private void BntReporte_Click(object sender, EventArgs e)
-        {
-            Document doc = new Document();
-            PdfWriter.GetInstance(doc, new FileStream("Unidades.pdf", FileMode.Create));
-            doc.Open();
-
-            foreach (var unidad in lContUnidades)
-            {
-                doc.Add(new Paragraph($"ID: {unidad.id_Unidad} - Marca: {unidad.Marca} - Serie: {unidad.Serie} - Kilometraje: {unidad.Kilometraje} - Operador: {unidad.id_Operador} - Proximo Mantenimiento: {unidad.ProximoMantenimiento}"));
-            }
-
-            doc.Close();
         }
         private void txtBuscar_TextChanged(object sender, EventArgs e)
         {

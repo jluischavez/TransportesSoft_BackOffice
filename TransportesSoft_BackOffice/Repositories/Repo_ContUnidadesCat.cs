@@ -40,6 +40,24 @@ namespace TransportesSoft_BackOffice.Repositories
             }
         }
 
+        /// <summary>
+        /// Obtener todas las unidades ACTIVAS
+        /// </summary>
+        /// <returns></returns>
+        public List<ContUnidadesCat> ObtenerTodasUnidadesActivas()
+        {
+            lContUnidades = new List<ContUnidadesCat>();
+
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "SELECT * FROM ContUnidadesCat " +
+                    "WHERE ESTATUS = 'A'";
+                lContUnidades = db.Query<ContUnidadesCat>(sql).ToList();
+
+                return lContUnidades;
+            }
+        }
+
         public ContUnidadesCat UnidadPorIDOperador(int idOperador)
         {
             ContUnidadesCat lUnidad = new ContUnidadesCat();
@@ -66,16 +84,14 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlInsert = "Insert into ContUnidadesCat(Marca, Serie, Kilometraje, FechaActualizacion, id_Operador, ProximoMantenimiento, Estatus, id_Remolque) " +
-                    "Values(@Marca, @Serie, @Kilometraje, @FechaActualizacion, @id_Operador, @ProximoMantenimiento, @Estatus, @id_Remolque)";
+                var sqlInsert = "Insert into ContUnidadesCat(Marca, Serie, FechaActualizacion, id_Operador, Estatus, id_Remolque) " +
+                    "Values(@Marca, @Serie, @FechaActualizacion, @id_Operador, @Estatus, @id_Remolque)";
                 var result = db.Execute(sqlInsert, new
                 {
                     Marca = unidad.Marca,
                     Serie = unidad.Serie,
-                    Kilometraje = unidad.Kilometraje,
                     FechaActualizacion = DateTime.Now,
                     id_Operador = unidad.id_Operador,
-                    ProximoMantenimiento = unidad.ProximoMantenimiento,
                     Estatus = unidad.Estatus,
                     id_Remolque = unidad.id_Remolque
                 });
@@ -90,17 +106,15 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sqlEdit = "UPDATE ContUnidadesCat set Marca=@Marca, Serie=@Serie, Kilometraje=@Kilometraje, FechaActualizacion=@FechaActualizacion, " +
-                    "ProximoMantenimiento=@ProximoMantenimiento, id_Operador = @id_Operador, Estatus=@Estatus, id_Remolque=@id_Remolque " +
+                var sqlEdit = "UPDATE ContUnidadesCat set Marca=@Marca, Serie=@Serie, FechaActualizacion=@FechaActualizacion, " +
+                    " id_Operador = @id_Operador, Estatus=@Estatus, id_Remolque=@id_Remolque " +
                     "WHERE id_Unidad=@id_Unidad";
                 var result = db.Execute(sqlEdit, new
                 {
                     Marca = unidad.Marca,
                     Serie = unidad.Serie,
-                    Kilometraje = unidad.Kilometraje,
                     FechaActualizacion = DateTime.Now,
                     id_Operador = unidad.id_Operador,
-                    ProximoMantenimiento = unidad.ProximoMantenimiento,
                     id_Unidad = unidad.id_Unidad,
                     Estatus = unidad.Estatus,
                     id_Remolque = unidad.id_Remolque
@@ -120,36 +134,6 @@ namespace TransportesSoft_BackOffice.Repositories
                 var sqlEdit = "UPDATE ContUnidadesCat set Estatus=@Estatus " +
                    "WHERE id_Unidad=@id_Unidad";
                 var result = db.Execute(sqlEdit, new { id_Unidad = id_Unidad, Estatus='C' });
-            }
-        }
-
-        public List<ContUnidadesCat> ObtenerTodasUnidadesPorMantenimiento()
-        {
-            lContUnidades = new List<ContUnidadesCat>();
-
-            using (var db = new SqlConnection(ConnectionString))
-            {
-                var sql = "SELECT * FROM ContUnidadesCat " +
-                    "WHERE ESTATUS = 'A'" +
-                    " ORDER BY (ProximoMantenimiento - Kilometraje) desc";
-                lContUnidades = db.Query<ContUnidadesCat>(sql).ToList();
-
-                return lContUnidades;
-            }
-        }
-
-        public List<ContUnidadesCat> ObtenerTodasUnidadesPorMantenimientoYKilometraje(int KilometrajeLimite)
-        {
-            lContUnidades = new List<ContUnidadesCat>();
-
-            using (var db = new SqlConnection(ConnectionString))
-            {
-                var sql = "SELECT * FROM ContUnidadesCat" +
-                    " WHERE (ProximoMantenimiento - Kilometraje) <= @KilometrajeLimite AND Estatus = 'A'" +
-                    " ORDER BY (ProximoMantenimiento - Kilometraje) desc";
-                lContUnidades = db.Query<ContUnidadesCat>(sql, new { KilometrajeLimite = KilometrajeLimite }).ToList();
-
-                return lContUnidades;
             }
         }
     }

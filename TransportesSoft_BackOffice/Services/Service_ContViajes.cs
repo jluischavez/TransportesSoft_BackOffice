@@ -11,7 +11,6 @@ namespace TransportesSoft_BackOffice.Services
 
     public class Service_ContViajes
     {
-        List<ContViajes> lListContViajes;
         List<ContViajesYOperador> lListContViajesYOperador;
         Repo_ContViajes RepoContViajes;
 

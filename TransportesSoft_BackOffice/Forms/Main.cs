@@ -131,6 +131,10 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ContFrmPreciosDiesel>(this);
         }
+        private void mantenimientosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ContFrmMantenimientos>(this);
+        }
         #endregion
 
 

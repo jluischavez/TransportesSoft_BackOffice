@@ -148,6 +148,12 @@
     <Compile Include="Forms\ContFrmBuscar.Designer.cs">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ContFrmBuscarMantenimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmBuscarMantenimientos.Designer.cs">
+      <DependentUpon>ContFrmBuscarMantenimientos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContFrmBusquedaViajes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,12 @@
     </Compile>
     <Compile Include="Forms\ContFrmConsumosUnidades.Designer.cs">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ContFrmMantenimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmMantenimientos.Designer.cs">
+      <DependentUpon>ContFrmMantenimientos.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ContFrmPreciosDiesel.cs">
       <SubType>Form</SubType>
@@ -202,6 +214,8 @@
     <Compile Include="Forms\RptsFrmViajesPorFecha.Designer.cs">
       <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContMantenimientosCab.cs" />
+    <Compile Include="Models\ContMantenimientosDet.cs" />
     <Compile Include="Models\ContPreciosDiesel.cs" />
     <Compile Include="Models\EstadosCat.cs" />
     <Compile Include="Models\MunicipiosCatYEstado.cs" />
@@ -210,6 +224,8 @@
     <Compile Include="Repositories\Repo_ConfSucursalLocal.cs" />
     <Compile Include="Repositories\Repo_ContClientesCat.cs" />
     <Compile Include="Repositories\Repo_ContConsumoUnidades.cs" />
+    <Compile Include="Repositories\Repo_ContMantenimientosCab.cs" />
+    <Compile Include="Repositories\Repo_ContMantenimientosDet.cs" />
     <Compile Include="Repositories\Repo_ContOperadoresCat.cs" />
     <Compile Include="Repositories\Repo_ContPreciosDiesel.cs" />
     <Compile Include="Repositories\Repo_ContRemolquesCat.cs" />
@@ -220,6 +236,8 @@
     <Compile Include="Services\Service_ConfSucursalLocal.cs" />
     <Compile Include="Services\Service_ContClientesCat.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
+    <Compile Include="Services\Service_ContMantenimientosCab.cs" />
+    <Compile Include="Services\Service_ContMantenimientosDet.cs" />
     <Compile Include="Services\Service_ContOperadoresCat.cs" />
     <Compile Include="Services\Service_ContPreciosDiesel.cs" />
     <Compile Include="Services\Service_ContRemolquesCat.cs" />
@@ -246,11 +264,17 @@
     <EmbeddedResource Include="Forms\ContFrmBuscar.resx">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmBuscarMantenimientos.resx">
+      <DependentUpon>ContFrmBuscarMantenimientos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmBusquedaViajes.resx">
       <DependentUpon>ContFrmBusquedaViajes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmConsumosUnidades.resx">
       <DependentUpon>ContFrmConsumosUnidades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmMantenimientos.resx">
+      <DependentUpon>ContFrmMantenimientos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmPreciosDiesel.resx">
       <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>

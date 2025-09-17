@@ -30,13 +30,9 @@
         {
             this.LblMarca = new System.Windows.Forms.Label();
             this.LblSerie = new System.Windows.Forms.Label();
-            this.LblKilometraje = new System.Windows.Forms.Label();
             this.LblOperador = new System.Windows.Forms.Label();
-            this.LblProxMantenimiento = new System.Windows.Forms.Label();
             this.txtMarca = new System.Windows.Forms.TextBox();
             this.txtSerie = new System.Windows.Forms.TextBox();
-            this.txtKilometraje = new System.Windows.Forms.TextBox();
-            this.txtProxMantenimiento = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.LblID = new System.Windows.Forms.Label();
             this.BtnGuardar = new System.Windows.Forms.Button();
@@ -66,32 +62,14 @@
             this.LblSerie.TabIndex = 1;
             this.LblSerie.Text = "Serie:";
             // 
-            // LblKilometraje
-            // 
-            this.LblKilometraje.AutoSize = true;
-            this.LblKilometraje.Location = new System.Drawing.Point(15, 89);
-            this.LblKilometraje.Name = "LblKilometraje";
-            this.LblKilometraje.Size = new System.Drawing.Size(61, 13);
-            this.LblKilometraje.TabIndex = 2;
-            this.LblKilometraje.Text = "Kilometraje:";
-            // 
             // LblOperador
             // 
             this.LblOperador.AutoSize = true;
-            this.LblOperador.Location = new System.Drawing.Point(15, 115);
+            this.LblOperador.Location = new System.Drawing.Point(15, 89);
             this.LblOperador.Name = "LblOperador";
             this.LblOperador.Size = new System.Drawing.Size(54, 13);
             this.LblOperador.TabIndex = 4;
             this.LblOperador.Text = "Operador:";
-            // 
-            // LblProxMantenimiento
-            // 
-            this.LblProxMantenimiento.AutoSize = true;
-            this.LblProxMantenimiento.Location = new System.Drawing.Point(15, 141);
-            this.LblProxMantenimiento.Name = "LblProxMantenimiento";
-            this.LblProxMantenimiento.Size = new System.Drawing.Size(119, 13);
-            this.LblProxMantenimiento.TabIndex = 5;
-            this.LblProxMantenimiento.Text = "Próximo Mantenimiento:";
             // 
             // txtMarca
             // 
@@ -108,25 +86,6 @@
             this.txtSerie.Name = "txtSerie";
             this.txtSerie.Size = new System.Drawing.Size(195, 20);
             this.txtSerie.TabIndex = 2;
-            // 
-            // txtKilometraje
-            // 
-            this.txtKilometraje.Location = new System.Drawing.Point(140, 86);
-            this.txtKilometraje.MaxLength = 999999;
-            this.txtKilometraje.Name = "txtKilometraje";
-            this.txtKilometraje.Size = new System.Drawing.Size(195, 20);
-            this.txtKilometraje.TabIndex = 3;
-            this.txtKilometraje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtKilometraje_KeyPress);
-            this.txtKilometraje.Leave += new System.EventHandler(this.txtKilometraje_Leave);
-            // 
-            // txtProxMantenimiento
-            // 
-            this.txtProxMantenimiento.Location = new System.Drawing.Point(140, 138);
-            this.txtProxMantenimiento.MaxLength = 999999;
-            this.txtProxMantenimiento.Name = "txtProxMantenimiento";
-            this.txtProxMantenimiento.Size = new System.Drawing.Size(195, 20);
-            this.txtProxMantenimiento.TabIndex = 5;
-            this.txtProxMantenimiento.Leave += new System.EventHandler(this.txtProxMantenimiento_Leave);
             // 
             // txtID
             // 
@@ -149,7 +108,7 @@
             // 
             // BtnGuardar
             // 
-            this.BtnGuardar.Location = new System.Drawing.Point(272, 251);
+            this.BtnGuardar.Location = new System.Drawing.Point(272, 198);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
             this.BtnGuardar.TabIndex = 6;
@@ -164,23 +123,19 @@
             this.groupBox1.Controls.Add(this.CBOperadores);
             this.groupBox1.Controls.Add(this.LblMarca);
             this.groupBox1.Controls.Add(this.LblSerie);
-            this.groupBox1.Controls.Add(this.LblKilometraje);
             this.groupBox1.Controls.Add(this.LblOperador);
-            this.groupBox1.Controls.Add(this.txtProxMantenimiento);
-            this.groupBox1.Controls.Add(this.LblProxMantenimiento);
             this.groupBox1.Controls.Add(this.txtMarca);
-            this.groupBox1.Controls.Add(this.txtKilometraje);
             this.groupBox1.Controls.Add(this.txtSerie);
             this.groupBox1.Location = new System.Drawing.Point(12, 42);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(356, 203);
+            this.groupBox1.Size = new System.Drawing.Size(356, 150);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
             // CBRemolques
             // 
             this.CBRemolques.FormattingEnabled = true;
-            this.CBRemolques.Location = new System.Drawing.Point(140, 164);
+            this.CBRemolques.Location = new System.Drawing.Point(140, 113);
             this.CBRemolques.Name = "CBRemolques";
             this.CBRemolques.Size = new System.Drawing.Size(195, 21);
             this.CBRemolques.TabIndex = 6;
@@ -188,7 +143,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 167);
+            this.label1.Location = new System.Drawing.Point(15, 116);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 7;
@@ -197,7 +152,7 @@
             // CBOperadores
             // 
             this.CBOperadores.FormattingEnabled = true;
-            this.CBOperadores.Location = new System.Drawing.Point(140, 112);
+            this.CBOperadores.Location = new System.Drawing.Point(140, 86);
             this.CBOperadores.Name = "CBOperadores";
             this.CBOperadores.Size = new System.Drawing.Size(195, 21);
             this.CBOperadores.TabIndex = 4;
@@ -208,7 +163,7 @@
             this.BtnEliminar.FlatAppearance.BorderSize = 2;
             this.BtnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnEliminar.ForeColor = System.Drawing.Color.Red;
-            this.BtnEliminar.Location = new System.Drawing.Point(30, 251);
+            this.BtnEliminar.Location = new System.Drawing.Point(30, 198);
             this.BtnEliminar.Name = "BtnEliminar";
             this.BtnEliminar.Size = new System.Drawing.Size(75, 23);
             this.BtnEliminar.TabIndex = 7;
@@ -220,7 +175,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 285);
+            this.ClientSize = new System.Drawing.Size(380, 231);
             this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.BtnGuardar);
@@ -245,13 +200,9 @@
 
         private System.Windows.Forms.Label LblMarca;
         private System.Windows.Forms.Label LblSerie;
-        private System.Windows.Forms.Label LblKilometraje;
         private System.Windows.Forms.Label LblOperador;
-        private System.Windows.Forms.Label LblProxMantenimiento;
         private System.Windows.Forms.TextBox txtMarca;
         private System.Windows.Forms.TextBox txtSerie;
-        private System.Windows.Forms.TextBox txtKilometraje;
-        private System.Windows.Forms.TextBox txtProxMantenimiento;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label LblID;
         private System.Windows.Forms.Button BtnGuardar;

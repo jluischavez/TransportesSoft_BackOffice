@@ -16,23 +16,6 @@ namespace TransportesSoft_BackOffice.Forms
     {
         Service_ContPreciosDiesel lServiceContPreciosDiesel;
 
-        private Boolean _esConsulta;
-
-        /// <summary>
-        /// Propiedad que establece un estado al botón eliminar, el cual cambiará dependiendo de si es consulta o no.
-        /// </summary>
-        private bool EsConsulta
-        {
-            get => _esConsulta;
-            set
-            {
-                if (_esConsulta != value)
-                {
-                    _esConsulta = value;
-                    BtnEliminar.Enabled = _esConsulta; // Actualiza el botón automáticamente
-                }
-            }
-        }
         public ContFrmPreciosDiesel()
         {
             InitializeComponent();
