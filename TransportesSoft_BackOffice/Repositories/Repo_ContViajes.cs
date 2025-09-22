@@ -28,7 +28,7 @@ namespace TransportesSoft_BackOffice.Repositories
                     var sql = "SELECT id_Viaje,id_Client,NombreCliente,FechaViaje,FechaFactura,Factura,NumeroTransporte," +
                     "Origen,Destino,Monto,IVA,Retenciones,Total,Comentarios,Maniobra,OP.id_Operador,OP.Nombre AS NombreOperador " +
                     "FROM ContViajes VI " +
-                    "LEFT JOIN ContOperadores OP ON OP.id_Operador = VI.id_Operador" +
+                    "LEFT JOIN ContOperadoresCat OP ON OP.id_Operador = VI.id_Operador" +
                     " WHERE FechaViaje Between @FechaInicial AND @FechaFinal";
                     var parametros = new
                     {
@@ -59,7 +59,7 @@ namespace TransportesSoft_BackOffice.Repositories
                 var sql = "SELECT id_Viaje,id_Client,NombreCliente,FechaViaje,FechaFactura,Factura,NumeroTransporte," +
                     "Origen,Destino,Monto,IVA,Retenciones,Total,Comentarios,Maniobra,OP.id_Operador,OP.Nombre AS NombreOperador " +
                     "FROM ContViajes VI " +
-                    "LEFT JOIN ContOperadores OP ON OP.id_Operador = VI.id_Operador" +
+                    "LEFT JOIN ContOperadoresCat OP ON OP.id_Operador = VI.id_Operador" +
                     " WHERE FechaViaje Between @FechaInicial AND @FechaFinal AND id_Client = @id_Client";
                 var parametros = new
                 {

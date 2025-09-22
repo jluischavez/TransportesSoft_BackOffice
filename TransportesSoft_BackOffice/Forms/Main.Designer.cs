@@ -48,9 +48,10 @@ namespace TransportesSoft_BackOffice
             this.viajesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preciosDeDieselToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kilometrajePorUnidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -173,7 +174,7 @@ namespace TransportesSoft_BackOffice
             // viajesToolStripMenuItem
             // 
             this.viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
-            this.viajesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viajesToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.viajesToolStripMenuItem.Text = "Viajes";
             this.viajesToolStripMenuItem.Click += new System.EventHandler(this.viajesToolStripMenuItem_Click);
             // 
@@ -181,7 +182,8 @@ namespace TransportesSoft_BackOffice
             // 
             this.contabilidadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.preciosDeDieselToolStripMenuItem,
-            this.mantenimientosToolStripMenuItem});
+            this.mantenimientosToolStripMenuItem,
+            this.kilometrajePorUnidadToolStripMenuItem});
             this.contabilidadToolStripMenuItem.Name = "contabilidadToolStripMenuItem";
             this.contabilidadToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.contabilidadToolStripMenuItem.Text = "Contabilidad";
@@ -189,9 +191,16 @@ namespace TransportesSoft_BackOffice
             // preciosDeDieselToolStripMenuItem
             // 
             this.preciosDeDieselToolStripMenuItem.Name = "preciosDeDieselToolStripMenuItem";
-            this.preciosDeDieselToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preciosDeDieselToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.preciosDeDieselToolStripMenuItem.Text = "Precios de Diesel";
             this.preciosDeDieselToolStripMenuItem.Click += new System.EventHandler(this.preciosDeDieselToolStripMenuItem_Click);
+            // 
+            // mantenimientosToolStripMenuItem
+            // 
+            this.mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
+            this.mantenimientosToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.mantenimientosToolStripMenuItem.Text = "Mantenimientos";
+            this.mantenimientosToolStripMenuItem.Click += new System.EventHandler(this.mantenimientosToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -209,12 +218,12 @@ namespace TransportesSoft_BackOffice
             this.toolStripStatusConexion.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusConexion.Text = "Conexion";
             // 
-            // mantenimientosToolStripMenuItem
+            // kilometrajePorUnidadToolStripMenuItem
             // 
-            this.mantenimientosToolStripMenuItem.Name = "mantenimientosToolStripMenuItem";
-            this.mantenimientosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.mantenimientosToolStripMenuItem.Text = "Mantenimientos";
-            this.mantenimientosToolStripMenuItem.Click += new System.EventHandler(this.mantenimientosToolStripMenuItem_Click);
+            this.kilometrajePorUnidadToolStripMenuItem.Name = "kilometrajePorUnidadToolStripMenuItem";
+            this.kilometrajePorUnidadToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.kilometrajePorUnidadToolStripMenuItem.Text = "Kilometraje por unidad";
+            this.kilometrajePorUnidadToolStripMenuItem.Click += new System.EventHandler(this.kilometrajePorUnidadToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -257,6 +266,7 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem contabilidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem preciosDeDieselToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mantenimientosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kilometrajePorUnidadToolStripMenuItem;
     }
 }
 

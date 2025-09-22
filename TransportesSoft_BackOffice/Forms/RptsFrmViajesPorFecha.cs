@@ -90,6 +90,10 @@ namespace TransportesSoft_BackOffice.Forms
                 int x = (this.MdiParent.ClientSize.Width - lreport.Width) / 2;
                 int y = (this.MdiParent.ClientSize.Height - lreport.Height) / 2;
                 lreport.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
+                if (lreport.HayInformacion == false)
+                {
+                    return;
+                }
                 lreport.Show();
                 lreport.BringToFront();
             }

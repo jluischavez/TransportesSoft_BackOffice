@@ -172,6 +172,12 @@
     <Compile Include="Forms\ContFrmMantenimientos.Designer.cs">
       <DependentUpon>ContFrmMantenimientos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ContFrmKilometrajeUnidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmKilometrajeUnidades.Designer.cs">
+      <DependentUpon>ContFrmKilometrajeUnidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContFrmPreciosDiesel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -214,16 +220,19 @@
     <Compile Include="Forms\RptsFrmViajesPorFecha.Designer.cs">
       <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContKilometrajeUnidad.cs" />
     <Compile Include="Models\ContMantenimientosCab.cs" />
     <Compile Include="Models\ContMantenimientosDet.cs" />
     <Compile Include="Models\ContPreciosDiesel.cs" />
     <Compile Include="Models\EstadosCat.cs" />
     <Compile Include="Models\MunicipiosCatYEstado.cs" />
+    <Compile Include="Models\ProximoMantenimientoUnidades.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repo_ConfSucursalLocal.cs" />
     <Compile Include="Repositories\Repo_ContClientesCat.cs" />
     <Compile Include="Repositories\Repo_ContConsumoUnidades.cs" />
+    <Compile Include="Repositories\Repo_ContKilometrajeUnidad.cs" />
     <Compile Include="Repositories\Repo_ContMantenimientosCab.cs" />
     <Compile Include="Repositories\Repo_ContMantenimientosDet.cs" />
     <Compile Include="Repositories\Repo_ContOperadoresCat.cs" />
@@ -236,6 +245,7 @@
     <Compile Include="Services\Service_ConfSucursalLocal.cs" />
     <Compile Include="Services\Service_ContClientesCat.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
+    <Compile Include="Services\Service_ContKilometrajeUnidad.cs" />
     <Compile Include="Services\Service_ContMantenimientosCab.cs" />
     <Compile Include="Services\Service_ContMantenimientosDet.cs" />
     <Compile Include="Services\Service_ContOperadoresCat.cs" />
@@ -275,6 +285,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmMantenimientos.resx">
       <DependentUpon>ContFrmMantenimientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmKilometrajeUnidades.resx">
+      <DependentUpon>ContFrmKilometrajeUnidades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmPreciosDiesel.resx">
       <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>
@@ -318,6 +331,14 @@
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContUnidades.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContViajes.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContViajesYOperador.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContMantenimientosCab.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContMantenimientosDet.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContPreciosDiesel.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.EstadosCat.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadDTO+MantenimientoUnidadDTO.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadDTO.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidades.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadesDTO.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

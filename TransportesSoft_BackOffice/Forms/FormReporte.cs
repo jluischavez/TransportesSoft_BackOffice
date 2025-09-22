@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TransportesSoft_BackOffice.Clases;
+using TransportesSoft_BackOffice.Models;
 using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
@@ -18,20 +19,22 @@ namespace TransportesSoft_BackOffice.Forms
     public partial class FormReporte : Form
     {
         /*Cont Unidades*/
-        Service_ContUnidadesCat lServiceContUnidades;
-        List<ContUnidadesCat> lContUnidades;
+        private Service_ContKilometrajeUnidad lServiceContKilometraje;
+        private List<ProximoMantenimientoUnidades> lListProximoMantenimientoUnidadDTO;
 
         /*Cont Consumo Unidades*/
-        Service_ContConsumoUnidades lServiceConsumoUnidades;
-        List<ContConsumoUnidades> lContConsumoUnidades;
+        private Service_ContConsumoUnidades lServiceConsumoUnidades;
+        private List<ContConsumoUnidades> lContConsumoUnidades;
 
         /*Configuracion Sucursal*/
-        Service_ConfSucursalLocal lServcontSucLocal;
-        ConfSucursalLocal lConfSucLocal;
+        private Service_ConfSucursalLocal lServcontSucLocal;
+        private ConfSucursalLocal lConfSucLocal;
 
         /*Cont Viajes*/
-        Service_ContViajes lServContViajes;
-        List<ContViajesYOperador> lListContViajesYOperador;
+        private Service_ContViajes lServContViajes;
+        private List<ContViajesYOperador> lListContViajesYOperador;
+
+        public Boolean HayInformacion = false;
         public enum TipoReporte
         {
             ContabilidadUnidades = 1,
@@ -42,9 +45,6 @@ namespace TransportesSoft_BackOffice.Forms
         #region "Constructor"
         public FormReporte(TipoReporte tipoReporte)
         {
-
-            //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
-
             InitializeComponent();
         }
 
@@ -73,7 +73,7 @@ namespace TransportesSoft_BackOffice.Forms
 
             if(tipoReporte == TipoReporte.UnidadesPorMantenimiento)
             {
-                //RptMantenimientoUnidades(kilometrajeMantenimiento);
+                RptMantenimientoUnidades(kilometrajeMantenimiento);
                 this.Text = "Reporte de mantenimiento de unidades.";
             }
         }
@@ -95,8 +95,10 @@ namespace TransportesSoft_BackOffice.Forms
                 if (lContConsumoUnidades.Count == 0)
                 {
                     MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HayInformacion = false;
                     return;
                 }
+                HayInformacion = true;
 
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
@@ -137,8 +139,10 @@ namespace TransportesSoft_BackOffice.Forms
                 if (lListContViajesYOperador.Count == 0)
                 {
                     MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HayInformacion = false;
                     return;
                 }
+                HayInformacion = true;
 
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
@@ -162,50 +166,52 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        //private void RptMantenimientoUnidades(int kilometrajeMantenimiento)
-        //{
-        //    try
-        //    {
-        //        lServiceContUnidades = new Service_ContUnidadesCat();
-        //        lContUnidades = new List<ContUnidadesCat>();
-        //        if (kilometrajeMantenimiento == 0)
-        //        {
-        //            lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimiento();
-        //        }
-        //        else
-        //        {
-        //            lContUnidades = lServiceContUnidades.ObtenerUnidadesPorMantenimientoYKilometraje(kilometrajeMantenimiento);
-        //        }
-
-        //        if (lContUnidades.Count == 0)
-        //        {
-        //            MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            return;
-        //        }
+        private void RptMantenimientoUnidades(int kilometrajeMantenimiento)
+        {
+            try
+            {
+                lServiceContKilometraje = new Service_ContKilometrajeUnidad();
+                lListProximoMantenimientoUnidadDTO = new List<ProximoMantenimientoUnidades>();
+                if (kilometrajeMantenimiento == 0)
+                {
+                    lListProximoMantenimientoUnidadDTO = lServiceContKilometraje.ObtenerProximosMantenimientos();
+                }
+                else
+                {
+                    lListProximoMantenimientoUnidadDTO = lServiceContKilometraje.ObtenerProximosMantenimientosPorKilometraje(kilometrajeMantenimiento);
+                }
 
 
-        //        lServcontSucLocal = new Service_ConfSucursalLocal();
-        //        lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+                if (lListProximoMantenimientoUnidadDTO.Count == 0)
+                {
+                    MessageBox.Show("No hay información de mantenimientos", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HayInformacion = false;
+                    return;
+                }
+                HayInformacion = true;
 
-        //        string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-        //        string reportPath = Path.Combine(projectRoot, "Reports", "RptMantenimientoUnidades.rdlc");
+                lServcontSucLocal = new Service_ConfSucursalLocal();
+                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
 
-        //        ReportDataSource rds = new ReportDataSource("DSContUnidades", lContUnidades);
-        //        reportViewer1.LocalReport.DataSources.Clear();
-        //        reportViewer1.LocalReport.DataSources.Add(rds);
-        //        reportViewer1.LocalReport.ReportPath = reportPath;
+                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+                string reportPath = Path.Combine(projectRoot, "Reports", "RptMantenimientoUnidades.rdlc");
 
-        //        /*Agrega la sucursal*/
-        //        ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
-        //        reportViewer1.LocalReport.SetParameters(paramSucursal);
+                ReportDataSource rds = new ReportDataSource("DSProximoMantenimientoUnidadesDTO", lListProximoMantenimientoUnidadDTO);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.ReportPath = reportPath;
 
-        //        reportViewer1.RefreshReport();
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
+                /*Agrega la sucursal*/
+                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+                reportViewer1.LocalReport.SetParameters(paramSucursal);
+
+                reportViewer1.RefreshReport();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         #region "Eventos"
         private void FormReporte_Load(object sender, EventArgs e)
         {
