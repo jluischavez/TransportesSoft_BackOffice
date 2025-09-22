@@ -40,6 +40,8 @@ namespace TransportesSoft_BackOffice.Forms
                 FormReporte lreport = new FormReporte(FormReporte.TipoReporte.ContabilidadConsumoUnidades,fechaInicial, fechaFinal, idUnidad);
                 lreport.MdiParent = this.MdiParent;
                 lreport.FormBorderStyle = FormBorderStyle.Sizable;
+                if (lreport.HayInformacion == false)
+                    return;
                 lreport.Show();
                 lreport.BringToFront();
             }

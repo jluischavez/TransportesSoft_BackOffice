@@ -31,6 +31,10 @@ namespace TransportesSoft_BackOffice.Forms
             FormReporte lreport = new FormReporte(FormReporte.TipoReporte.UnidadesPorMantenimiento, Convert.ToInt32(CBKilometrajes.SelectedValue));
             lreport.MdiParent = this.MdiParent;
             lreport.FormBorderStyle = FormBorderStyle.Sizable;
+            if (lreport.HayInformacion == false)
+            {
+                return;
+            }
             lreport.Show();
             lreport.BringToFront();
         }

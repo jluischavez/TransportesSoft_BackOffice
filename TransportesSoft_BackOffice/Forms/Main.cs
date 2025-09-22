@@ -135,6 +135,10 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ContFrmMantenimientos>(this);
         }
+        private void kilometrajePorUnidadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ContFrmKilometrajeUnidades>(this);
+        }
         #endregion
 
 

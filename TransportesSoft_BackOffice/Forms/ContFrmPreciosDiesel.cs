@@ -78,5 +78,14 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
         #endregion
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite solo dígitos (0-9) y teclas de control como Backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea el carácter
+            }
+        }
     }
 }

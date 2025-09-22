@@ -787,7 +787,6 @@
                             <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1204,6 +1203,39 @@
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
               <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Totales:</Value>
+                    <Style>
+                      <FontSize>6pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>3.87794cm</Top>
+            <Left>6.29327cm</Left>
+            <Height>0.56472cm</Height>
+            <Width>1.83854cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
         </ReportItems>
