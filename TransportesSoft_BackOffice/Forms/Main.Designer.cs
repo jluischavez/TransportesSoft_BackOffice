@@ -49,9 +49,11 @@ namespace TransportesSoft_BackOffice
             this.contabilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preciosDeDieselToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kilometrajePorUnidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aBCDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.kilometrajePorUnidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +65,8 @@ namespace TransportesSoft_BackOffice
             this.unidadesToolStripMenuItem,
             this.reportesToolStripMenuItem,
             this.registrosToolStripMenuItem,
-            this.contabilidadToolStripMenuItem});
+            this.contabilidadToolStripMenuItem,
+            this.seguridadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(920, 24);
@@ -202,6 +205,28 @@ namespace TransportesSoft_BackOffice
             this.mantenimientosToolStripMenuItem.Text = "Mantenimientos";
             this.mantenimientosToolStripMenuItem.Click += new System.EventHandler(this.mantenimientosToolStripMenuItem_Click);
             // 
+            // kilometrajePorUnidadToolStripMenuItem
+            // 
+            this.kilometrajePorUnidadToolStripMenuItem.Name = "kilometrajePorUnidadToolStripMenuItem";
+            this.kilometrajePorUnidadToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.kilometrajePorUnidadToolStripMenuItem.Text = "Kilometraje por unidad";
+            this.kilometrajePorUnidadToolStripMenuItem.Click += new System.EventHandler(this.kilometrajePorUnidadToolStripMenuItem_Click);
+            // 
+            // seguridadToolStripMenuItem
+            // 
+            this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aBCDeUsuariosToolStripMenuItem});
+            this.seguridadToolStripMenuItem.Name = "seguridadToolStripMenuItem";
+            this.seguridadToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
+            this.seguridadToolStripMenuItem.Text = "Seguridad";
+            // 
+            // aBCDeUsuariosToolStripMenuItem
+            // 
+            this.aBCDeUsuariosToolStripMenuItem.Name = "aBCDeUsuariosToolStripMenuItem";
+            this.aBCDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.aBCDeUsuariosToolStripMenuItem.Text = "ABC de Usuarios";
+            this.aBCDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.aBCDeUsuariosToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -218,13 +243,6 @@ namespace TransportesSoft_BackOffice
             this.toolStripStatusConexion.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusConexion.Text = "Conexion";
             // 
-            // kilometrajePorUnidadToolStripMenuItem
-            // 
-            this.kilometrajePorUnidadToolStripMenuItem.Name = "kilometrajePorUnidadToolStripMenuItem";
-            this.kilometrajePorUnidadToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
-            this.kilometrajePorUnidadToolStripMenuItem.Text = "Kilometraje por unidad";
-            this.kilometrajePorUnidadToolStripMenuItem.Click += new System.EventHandler(this.kilometrajePorUnidadToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,6 +254,7 @@ namespace TransportesSoft_BackOffice
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
             this.Text = "TransportesSoft BackOffice";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -267,6 +286,8 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem preciosDeDieselToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mantenimientosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kilometrajePorUnidadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem seguridadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aBCDeUsuariosToolStripMenuItem;
     }
 }
 
