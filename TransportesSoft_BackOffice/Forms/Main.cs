@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TransportesSoft_BackOffice.Clases;
 using TransportesSoft_BackOffice.Forms;
+using TransportesSoft_BackOffice.Models;
 using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice
@@ -20,6 +21,7 @@ namespace TransportesSoft_BackOffice
     {
         private ConfSucursalLocal lConfSucursalLocal;
         private Service_ConfSucursalLocal lserviceConfSucLocal;
+        private UsuariosCat lUsuarioActual = new UsuariosCat();
 
         public Main()
         {
@@ -28,10 +30,38 @@ namespace TransportesSoft_BackOffice
             this.IsMdiContainer = true;
             this.WindowState = FormWindowState.Maximized;
 
+            
+            
+
+            var login = new Login();
+            login.StartPosition = FormStartPosition.CenterScreen;
+
+            var resultado = login.ShowDialog();
+
+            if (resultado == DialogResult.OK)
+            {
+                lUsuarioActual.Id = login.lUsuario.Id;
+                lUsuarioActual.NombreUsuario = login.lUsuario.NombreUsuario;
+            }
+            else
+            {
+                // Cerrar la app si el login falla o se cancela
+                this.Close();
+            }
             ConfiguracionMDI();
+
             this.Text = this.Text + " | Sucursal: " + lConfSucursalLocal.NombreSucursal + " | Versión: " + Application.ProductVersion;
         }
 
+        #region "Eventos"
+        private void Main_Load(object sender, EventArgs e)
+        {
+            //FrmNotificaciones postIt = new FrmNotificaciones();
+            //postIt.MdiParent = this; // 'this' es el MDI principal
+            //postIt.Location = new Point(this.ClientSize.Width / 2, 0); // esquina superior derecha
+            //postIt.Show();
+        }
+        #endregion
 
         #region "Private"
         private void ConfiguracionMDI()
@@ -74,7 +104,7 @@ namespace TransportesSoft_BackOffice
             string instancia = builder.DataSource;
             string baseDatos = builder.InitialCatalog;
 
-            toolStripStatusConexion.Text = $"BD: {baseDatos} | Instancia: {instancia}";
+            toolStripStatusConexion.Text = $"BD: {baseDatos} | Instancia: {instancia} | Usuario: {lUsuarioActual.NombreUsuario}";
         }
 
         #endregion
@@ -139,9 +169,14 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ContFrmKilometrajeUnidades>(this);
         }
+        private void aBCDeUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<SegFrmUsuariosCat>(this,"",0);
+        }
+
         #endregion
 
-
+       
     }
 
     /// <summary>
@@ -149,13 +184,12 @@ namespace TransportesSoft_BackOffice
     /// </summary>
     public static class FormFactory
     {
-        public static void AbrirFormulario<T>(Form mdiParent) where T : Form, new()
+        public static void AbrirFormulario<T>(Form mdiParent, params object[] args) where T : Form
         {
-            var formulario = new T();
+            var formulario = (T)Activator.CreateInstance(typeof(T), args);
             formulario.MdiParent = mdiParent;
             formulario.StartPosition = FormStartPosition.Manual;
 
-            /*UBICACION*/
             int x = (mdiParent.ClientSize.Width - formulario.Width) / 2;
             int y = (mdiParent.ClientSize.Height - formulario.Height) / 2;
             formulario.Location = new Point(Math.Max(x, 0), Math.Max(y, 0));
@@ -163,5 +197,6 @@ namespace TransportesSoft_BackOffice
             formulario.Show();
             formulario.BringToFront();
         }
+
     }
 }

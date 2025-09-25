@@ -13,6 +13,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using System.Xml.Linq;
+using TransportesSoft_BackOffice.Models;
 
 namespace TransportesSoft_BackOffice.Forms
 {
@@ -54,6 +55,13 @@ namespace TransportesSoft_BackOffice.Forms
         public MunicipiosCat MunicipioSeleccionado { get; private set; }
         public event EventHandler<MunicipiosCat> MunicipioSeleccionadoEvent;
 
+        /*Usuarios Cat*/
+        private List<UsuariosCat> lUsuariosCat;
+        private Service_UsuariosCat lServiceUsuariosCat;
+        private BindingSource bindingSourceUsuariosCat = new BindingSource();
+        public UsuariosCat UsuarioSeleccionado { get; private set; }
+        public event EventHandler<UsuariosCat> UsuarioSeleccionadoEvent;
+
         private TipoBusqueda TipoFormulario;
         #endregion
         public enum TipoBusqueda
@@ -64,7 +72,8 @@ namespace TransportesSoft_BackOffice.Forms
             ContOperadores = 4,
             MunicipiosCat = 5,
             MantenimientoUnidades = 6,
-            MantenimientoRemolques = 8
+            MantenimientoRemolques = 8,
+            UsuariosCat = 9
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -104,9 +113,29 @@ namespace TransportesSoft_BackOffice.Forms
                 lServiceMunicipiosCat = new Service_MunicipiosCat();
                 BuscarMunicipios();
             }
+            else if (TipoFormulario == TipoBusqueda.UsuariosCat)
+            {
+                lUsuariosCat = new List<UsuariosCat>();
+                lServiceUsuariosCat = new Service_UsuariosCat();
+                BuscarUsuarios();
+            }
         }
         #endregion
         #region "Private"
+        private void BuscarUsuarios()
+        {
+            try
+            {
+                lUsuariosCat = lServiceUsuariosCat.ObtenerUsuarios();
+                bindingSourceUsuariosCat.DataSource = lUsuariosCat;
+                DGV_Unidades.DataSource = bindingSourceUsuariosCat;
+                ConfigurarGridUsuarios();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error", "Error al consultar los usuarios: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BuscarUnidades()
         {
             try
@@ -176,6 +205,23 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 MessageBox.Show("Error", "Error al consultar los municipios: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void ConfigurarGridUsuarios()
+        {
+            DGV_Unidades.ReadOnly = true;
+            DGV_Unidades.AllowUserToAddRows = false;
+            DGV_Unidades.AllowUserToDeleteRows = false;
+            DGV_Unidades.AllowUserToOrderColumns = false;
+            DGV_Unidades.AllowUserToResizeColumns = false;
+            DGV_Unidades.AllowUserToResizeRows = false;
+            DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV_Unidades.MultiSelect = false;
+            DGV_Unidades.Columns["Id"].Width = 50;
+            DGV_Unidades.Columns["NombreUsuario"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DGV_Unidades.Columns["ContrasenaHash"].Visible = false;
+            DGV_Unidades.Columns["FechaRegistro"].Visible = false;
+            DGV_Unidades.Columns["Activo"].Visible = false;
         }
         private void ConfigurarGridMunicipios()
         {
@@ -362,6 +408,18 @@ namespace TransportesSoft_BackOffice.Forms
                 };
                 MunicipioSeleccionadoEvent.Invoke(this, Municipio);
             }
+            else if(TipoFormulario == TipoBusqueda.UsuariosCat)
+            {
+                UsuariosCat usuario = new UsuariosCat()
+                {
+                    Id = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["Id"].Value),
+                    NombreUsuario = DGV_Unidades.Rows[rowIndex].Cells["NombreUsuario"].Value?.ToString(),
+                    ContrasenaHash = DGV_Unidades.Rows[rowIndex].Cells["ContrasenaHash"].Value?.ToString(),
+                    FechaRegistro = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaRegistro"].Value),
+                    Activo = Convert.ToBoolean(DGV_Unidades.Rows[rowIndex].Cells["Activo"].Value)
+                };
+                UsuarioSeleccionadoEvent?.Invoke(this, usuario);
+            }
 
                 this.Close();
         }
@@ -465,6 +523,22 @@ namespace TransportesSoft_BackOffice.Forms
                     bindingSourceMunicipiosCat.DataSource = filtradas;
                 }
             }
+            /*Usuarios Cat*/
+            else if(TipoFormulario == TipoBusqueda.UsuariosCat)
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    bindingSourceUsuariosCat.DataSource = lUsuariosCat;
+                }
+                else
+                {
+                    var filtradas = lUsuariosCat
+                        .Where(u => u.Id.ToString().Contains(filtro) ||
+                                    u.NombreUsuario.ToLower().Contains(filtro))
+                        .ToList();
+                    bindingSourceUsuariosCat.DataSource = filtradas;
+                }
+            }
 
                 DGV_Unidades.Refresh();
         }
@@ -504,10 +578,6 @@ namespace TransportesSoft_BackOffice.Forms
                     }
                 }
             }
-            else if (TipoFormulario == TipoBusqueda.ContRemolques)
-            {
-
-            }
             else if (TipoFormulario == TipoBusqueda.ContOperadores)
             {
 
@@ -515,6 +585,17 @@ namespace TransportesSoft_BackOffice.Forms
                 {
                     var estatusValue = DGV_Unidades.Rows[e.RowIndex].Cells["Estatus"].Value?.ToString();
                     if (estatusValue == "C")
+                    {
+                        DGV_Unidades.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(234, 171, 56);
+                    }
+                }
+            }
+            else if (TipoFormulario == TipoBusqueda.UsuariosCat)
+            {
+                if (DGV_Unidades.Columns["Activo"] != null && e.RowIndex >= 0)
+                {
+                    bool activoValue = Convert.ToBoolean(DGV_Unidades.Rows[e.RowIndex].Cells["Activo"].Value);
+                    if (!activoValue)
                     {
                         DGV_Unidades.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.FromArgb(234, 171, 56);
                     }
