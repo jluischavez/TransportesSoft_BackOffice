@@ -20,6 +20,7 @@ namespace TransportesSoft_BackOffice.Forms
         {
             InitializeComponent();
             lServiceUsuariosCat = new Service_UsuariosCat();
+            TxtContrasena.UseSystemPasswordChar = true;
         }
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)

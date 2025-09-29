@@ -8,10 +8,11 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>TransportesSoft_BackOffice</RootNamespace>
     <AssemblyName>TransportesSoft_BackOffice</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -141,6 +142,12 @@
     </Compile>
     <Compile Include="Forms\Base.Designer.cs">
       <DependentUpon>Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ConfFrmSucursalLocal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ConfFrmSucursalLocal.Designer.cs">
+      <DependentUpon>ConfFrmSucursalLocal.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ContFrmBuscar.cs">
       <SubType>Form</SubType>
@@ -298,6 +305,9 @@
     <EmbeddedResource Include="Forms\ABCFrmMunicipios.resx">
       <DependentUpon>ABCFrmMunicipios.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ConfFrmSucursalLocal.resx">
+      <DependentUpon>ConfFrmSucursalLocal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmBuscar.resx">
       <DependentUpon>ContFrmBuscar.cs</DependentUpon>
     </EmbeddedResource>
@@ -354,6 +364,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
     <EmbeddedResource Include="Reports\RptMantenimientoUnidades.rdlc" />

@@ -52,6 +52,8 @@ namespace TransportesSoft_BackOffice
             this.kilometrajePorUnidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónDeSucursalLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
@@ -66,7 +68,8 @@ namespace TransportesSoft_BackOffice
             this.reportesToolStripMenuItem,
             this.registrosToolStripMenuItem,
             this.contabilidadToolStripMenuItem,
-            this.seguridadToolStripMenuItem});
+            this.seguridadToolStripMenuItem,
+            this.configuraciónToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(920, 24);
@@ -227,6 +230,21 @@ namespace TransportesSoft_BackOffice
             this.aBCDeUsuariosToolStripMenuItem.Text = "ABC de Usuarios";
             this.aBCDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.aBCDeUsuariosToolStripMenuItem_Click);
             // 
+            // configuraciónToolStripMenuItem
+            // 
+            this.configuraciónToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configuraciónDeSucursalLocalToolStripMenuItem});
+            this.configuraciónToolStripMenuItem.Name = "configuraciónToolStripMenuItem";
+            this.configuraciónToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+            this.configuraciónToolStripMenuItem.Text = "Configuración";
+            // 
+            // configuraciónDeSucursalLocalToolStripMenuItem
+            // 
+            this.configuraciónDeSucursalLocalToolStripMenuItem.Name = "configuraciónDeSucursalLocalToolStripMenuItem";
+            this.configuraciónDeSucursalLocalToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.configuraciónDeSucursalLocalToolStripMenuItem.Text = "Configuración de Sucursal Local";
+            this.configuraciónDeSucursalLocalToolStripMenuItem.Click += new System.EventHandler(this.configuraciónDeSucursalLocalToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -255,6 +273,7 @@ namespace TransportesSoft_BackOffice
             this.Name = "Main";
             this.Text = "TransportesSoft BackOffice";
             this.Load += new System.EventHandler(this.Main_Load);
+            this.Resize += new System.EventHandler(this.Main_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -288,6 +307,8 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem kilometrajePorUnidadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem seguridadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBCDeUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónDeSucursalLocalToolStripMenuItem;
     }
 }
 

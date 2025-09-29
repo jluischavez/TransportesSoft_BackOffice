@@ -28,6 +28,18 @@ namespace TransportesSoft_BackOffice.Services
             return lConfSucursalLocal;
         }
 
+        public bool GuardarConfiguracionSucursalLocal(ConfSucursalLocal pConfSucursalLocal)
+        {
+            lRepoConfSucLocal.GuardarConfiguracionSucursalLocal(pConfSucursalLocal);
+            return true;
+        }
+
+        public bool ActualizarConfiguracionSucursalLocal(ConfSucursalLocal pConfSucursalLocal)
+        {
+            lRepoConfSucLocal.ActualizarConfiguracionSucursalLocal(pConfSucursalLocal);
+            return true;
+        }
+
 
     }
 }

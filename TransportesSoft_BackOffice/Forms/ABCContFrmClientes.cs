@@ -12,7 +12,7 @@ using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class ABCContFrmClientes : Form
+    public partial class ABCContFrmClientes : Base
     {
         Service_ContClientesCat lServiceContClientes;
         ContClientesCat lContClientes;
