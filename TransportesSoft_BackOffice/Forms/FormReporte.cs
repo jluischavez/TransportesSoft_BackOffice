@@ -16,7 +16,7 @@ using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class FormReporte : Form
+    public partial class FormReporte : Base
     {
         /*Cont Unidades*/
         private Service_ContKilometrajeUnidad lServiceContKilometraje;

@@ -17,7 +17,7 @@ using TransportesSoft_BackOffice.Models;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class ContFrmBuscar : Form
+    public partial class ContFrmBuscar : Base
     {
         #region "Declaraciones"
         /*CONTABILIDAD UNIDADES*/

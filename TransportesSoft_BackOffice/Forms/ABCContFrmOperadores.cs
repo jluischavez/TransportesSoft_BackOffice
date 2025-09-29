@@ -12,7 +12,7 @@ using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class ABCContFrmOperadores : Form
+    public partial class ABCContFrmOperadores : Base
     {
         private Service_ContOperadoresCat lServContOperadores;
         private Boolean _esConsulta;

@@ -13,7 +13,7 @@ using static TransportesSoft_BackOffice.Forms.ContFrmBuscar;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class ContFrmBusquedaViajes : Form
+    public partial class ContFrmBusquedaViajes : Base
     {
         List<ContViajes> lListViajes;
         Service_ContViajes lServiceContViajes;

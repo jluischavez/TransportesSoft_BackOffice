@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class RptsFrmMantenimientoUnidades : Form
+    public partial class RptsFrmMantenimientoUnidades : Base
     {
         public RptsFrmMantenimientoUnidades()
         {

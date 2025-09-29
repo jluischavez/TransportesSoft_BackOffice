@@ -27,8 +27,32 @@ namespace TransportesSoft_BackOffice.Repositories
             using (var db = new SqlConnection(ConnectionString))
             {
                 var sql = "SELECT * FROM ConfSucursalLocal";
-                lConfSucursalLocal = db.QueryFirst<ConfSucursalLocal>(sql);
+                lConfSucursalLocal = db.QueryFirstOrDefault<ConfSucursalLocal>(sql);
                 return lConfSucursalLocal;
+            }
+        }
+
+        public bool GuardarConfiguracionSucursalLocal(ConfSucursalLocal conf)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = @"INSERT INTO ConfSucursalLocal (NombreSucursal, Direccion, URLImagen, Telefono)
+                            VALUES (@NombreSucursal, @Direccion, @URLImagen, @Telefono)";
+                db.Execute(sql, conf);
+                return true;
+            }
+        }
+
+        public void ActualizarConfiguracionSucursalLocal(ConfSucursalLocal conf)
+        {
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = @"UPDATE ConfSucursalLocal 
+                            SET NombreSucursal = @NombreSucursal, 
+                                Direccion = @Direccion, 
+                                URLImagen = @URLImagen, 
+                                Telefono = @Telefono";
+                db.Execute(sql, conf);
             }
         }
     }

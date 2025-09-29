@@ -13,7 +13,7 @@ using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class ContFrmConsumosUnidades : Form
+    public partial class ContFrmConsumosUnidades : Base
     {
         //private List<ContConsumoUnidades> lContConsumoUnidades;
         private Service_ContConsumoUnidades lservContConsumoUnidades;

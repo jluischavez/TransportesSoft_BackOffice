@@ -12,7 +12,7 @@ using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class RptsFrmConsumoUnidadesPorFecha : Form
+    public partial class RptsFrmConsumoUnidadesPorFecha : Base
     {
         private List<ContUnidadesCat> lContUnidades;
         private Service_ContUnidadesCat lServContUnidades;

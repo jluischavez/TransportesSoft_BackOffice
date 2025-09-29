@@ -11,7 +11,7 @@ namespace TransportesSoft_BackOffice.Clases
         public int id_Sucursal { get; set; }
         public string NombreSucursal { get; set; }
         public string Direccion { get; set; }
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
         public string URLImagen { get; set; }
     }
 }
