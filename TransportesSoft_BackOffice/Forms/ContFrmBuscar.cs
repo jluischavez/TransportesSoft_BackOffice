@@ -61,6 +61,13 @@ namespace TransportesSoft_BackOffice.Forms
         private BindingSource bindingSourceUsuariosCat = new BindingSource();
         public UsuariosCat UsuarioSeleccionado { get; private set; }
         public event EventHandler<UsuariosCat> UsuarioSeleccionadoEvent;
+        
+        /*CONTABILIDAD POLIZAS*/
+        private List<ContPolizasReg> lContPolizas;
+        private Service_ContFrmPolizas lServicePolizasReg;
+        private BindingSource bindingSourceContPolizas = new BindingSource();
+        public ContPolizasReg PolizaSeleccionada { get; private set; }
+        public event EventHandler<ContPolizasReg> PolizaSeleccionadaEvent;
 
         private TipoBusqueda TipoFormulario;
         #endregion
@@ -73,7 +80,8 @@ namespace TransportesSoft_BackOffice.Forms
             MunicipiosCat = 5,
             MantenimientoUnidades = 6,
             MantenimientoRemolques = 8,
-            UsuariosCat = 9
+            UsuariosCat = 9,
+            Polizas = 10
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -119,9 +127,30 @@ namespace TransportesSoft_BackOffice.Forms
                 lServiceUsuariosCat = new Service_UsuariosCat();
                 BuscarUsuarios();
             }
+            else if (TipoFormulario == TipoBusqueda.Polizas)
+            {
+                lContPolizas = new List<ContPolizasReg>();
+                lServicePolizasReg = new Service_ContFrmPolizas();
+                BuscarPolizas();
+            }
         }
         #endregion
         #region "Private"
+        private void BuscarPolizas()
+        {
+            try
+            {
+                lContPolizas = lServicePolizasReg.ObtenerPolizas();
+                bindingSourceContPolizas.DataSource = lContPolizas;
+                DGV_Unidades.DataSource = bindingSourceContPolizas;
+                ConfigurarGridPolizas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error", "Error al consultar las pólizas: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void BuscarUsuarios()
         {
             try
@@ -206,7 +235,24 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error", "Error al consultar los municipios: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void ConfigurarGridPolizas()
+        {
+            DGV_Unidades.ReadOnly = true;
+            DGV_Unidades.AllowUserToAddRows = false;
+            DGV_Unidades.AllowUserToDeleteRows = false;
+            DGV_Unidades.AllowUserToOrderColumns = false;
+            DGV_Unidades.AllowUserToResizeColumns = false;
+            DGV_Unidades.AllowUserToResizeRows = false;
+            DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV_Unidades.MultiSelect = false;
 
+            DGV_Unidades.Columns["Id"].Width = 50;
+            DGV_Unidades.Columns["FechaRegistro"].Width = 80;
+            DGV_Unidades.Columns["FechaExpira"].Width = 80;
+            DGV_Unidades.Columns["FolioPoliza"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            DGV_Unidades.Columns["idTipoPoliza"].Visible = false;
+            DGV_Unidades.Columns["idUsuario"].Visible = false;
+        }
         private void ConfigurarGridUsuarios()
         {
             DGV_Unidades.ReadOnly = true;
@@ -420,6 +466,19 @@ namespace TransportesSoft_BackOffice.Forms
                 };
                 UsuarioSeleccionadoEvent?.Invoke(this, usuario);
             }
+            else if(TipoFormulario == TipoBusqueda.Polizas)
+            {
+                ContPolizasReg poliza = new ContPolizasReg()
+                {
+                    Id = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["Id"].Value),
+                    FolioPoliza = DGV_Unidades.Rows[rowIndex].Cells["FolioPoliza"].Value?.ToString(),
+                    FechaRegistro = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaRegistro"].Value),
+                    FechaExpira = Convert.ToDateTime(DGV_Unidades.Rows[rowIndex].Cells["FechaExpira"].Value),
+                    idTipoPoliza = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["idTipoPoliza"].Value),
+                    idUsuario = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["idUsuario"].Value)
+                };
+                PolizaSeleccionadaEvent?.Invoke(this, poliza);
+            }
 
                 this.Close();
         }
@@ -539,8 +598,24 @@ namespace TransportesSoft_BackOffice.Forms
                     bindingSourceUsuariosCat.DataSource = filtradas;
                 }
             }
+            /*CONT POLIZAS*/
+            else if(TipoFormulario == TipoBusqueda.Polizas)
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    bindingSourceContPolizas.DataSource = lContPolizas;
+                }
+                else
+                {
+                    var filtradas = lContPolizas
+                        .Where(u => u.Id.ToString().Contains(filtro) ||
+                                    u.FolioPoliza.ToLower().Contains(filtro))
+                        .ToList();
+                    bindingSourceContPolizas.DataSource = filtradas;
+                }
+            }
 
-                DGV_Unidades.Refresh();
+            DGV_Unidades.Refresh();
         }
         private void BtnAceptar_Click(object sender, EventArgs e)
         {

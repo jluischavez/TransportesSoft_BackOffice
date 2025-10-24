@@ -43,16 +43,24 @@ namespace TransportesSoft_BackOffice.Forms
         }
         public void ConfiguracionInicial()
         {
-            Service_EstadosCat lServiceEstados = new Service_EstadosCat();
-            lEstados = lServiceEstados.ObtenerEstados();
-            CBEstados.DataSource = lEstados;
-            CBEstados.DisplayMember = "Nombre";
-            CBEstados.ValueMember = "idEstado";
-            CBEstados.SelectedIndex = -1;
+            try
+            {
+                Service_EstadosCat lServiceEstados = new Service_EstadosCat();
+                lEstados = lServiceEstados.ObtenerEstados();
+                CBEstados.DataSource = lEstados;
+                CBEstados.DisplayMember = "Nombre";
+                CBEstados.ValueMember = "idEstado";
+                CBEstados.SelectedIndex = -1;
 
-            EsConsulta = false;
-            BtnEliminar.Enabled = false;
-            this.KeyPreview = true;
+                EsConsulta = false;
+                BtnEliminar.Enabled = false;
+                this.KeyPreview = true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+           
         }
         private void FrmBuscar_MunicipioSeleccionado(object sender, MunicipiosCat municipio)
         {
