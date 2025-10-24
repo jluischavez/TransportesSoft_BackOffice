@@ -24,10 +24,26 @@ namespace TransportesSoft_BackOffice.Forms
         #region "Private"
         private void ConfiguracionInicial()
         {
-            ContPreciosDiesel preciosDiesel = new ContPreciosDiesel();
+            try
+            {
+                 ContPreciosDiesel preciosDiesel = new ContPreciosDiesel();
             lServiceContPreciosDiesel = new Service_ContPreciosDiesel();
             preciosDiesel = lServiceContPreciosDiesel.PrecioActualDiesel();
-            LblPrecioActual.Text = "Precio Actual: " + preciosDiesel.Precio.ToString("F2");
+
+                if (preciosDiesel != null && preciosDiesel.Precio != 0)
+                {
+                    LblPrecioActual.Text = "Precio Actual: " + preciosDiesel.Precio.ToString("F2");
+                }
+                else
+                {
+                    LblPrecioActual.Text = "Precio Actual: 0.00";
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+           
         }
 
         private void Limpiar()

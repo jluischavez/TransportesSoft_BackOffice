@@ -13,5 +13,6 @@ namespace TransportesSoft_BackOffice.Clases
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string URLImagen { get; set; }
+        public int KilometrajeNotificaciones { get; set; }
     }
 }

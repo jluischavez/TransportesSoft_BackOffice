@@ -20,7 +20,9 @@ namespace TransportesSoft_BackOffice.Forms
         {
             InitializeComponent();
             TraerConfiguracionInicial();
+            this.KeyPreview = true;
         }
+        #region "Private"
         private void TraerConfiguracionInicial()
         {
             lServiceConfSucursalLocal = new Service_ConfSucursalLocal();
@@ -31,23 +33,15 @@ namespace TransportesSoft_BackOffice.Forms
                 txtDireccion.Text = conf.Direccion;
                 txtImagen.Text = conf.URLImagen;
                 txtTelefono.Text = conf.Telefono;
+                txtKilometrajeNotificaciones.Text = conf.KilometrajeNotificaciones.ToString();
             }
             else
             {
+                txtKilometrajeNotificaciones.Text = "0";
                 MessageBox.Show("No se encontró configuración de la sucursal. Favor de guardar una nueva configuración.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Permitir solo dígitos y teclas de control (como Backspace)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true; // Bloquea la tecla
-            }
-        }
-
-        private void BtnGuardar_Click_1(object sender, EventArgs e)
+        private void Guardar()
         {
             try
             {
@@ -67,7 +61,8 @@ namespace TransportesSoft_BackOffice.Forms
                         NombreSucursal = txtNombre.Text.Trim(),
                         Direccion = txtDireccion.Text.Trim(),
                         URLImagen = txtImagen.Text.Trim(),
-                        Telefono = txtTelefono.Text.Trim()
+                        Telefono = txtTelefono.Text.Trim(),
+                        KilometrajeNotificaciones = txtKilometrajeNotificaciones.Text.Trim() == "" ? 0 : int.Parse(txtKilometrajeNotificaciones.Text.Trim()),
                     };
                     bool exito = false;
                     /*SI NO TIENE ID DE SUCURSAL SIGNIFICA QUE NO EXISTE ENTONCES SE GUARDA UNA NUEVA*/
@@ -97,6 +92,21 @@ namespace TransportesSoft_BackOffice.Forms
                 MessageBox.Show("Error al guardar " + ex.Message);
             }
         }
+        #endregion
+        #region "Eventos"
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo dígitos y teclas de control (como Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void BtnGuardar_Click_1(object sender, EventArgs e)
+        {
+            Guardar();
+        }
 
         private void BtnExaminar_Click(object sender, EventArgs e)
         {
@@ -113,5 +123,38 @@ namespace TransportesSoft_BackOffice.Forms
                 }
             }
         }
+
+
+        private void txtKilometrajeNotificaciones_Leave(object sender, EventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+            if (decimal.TryParse(txt.Text, out decimal valor))
+            {
+                txt.Text = valor.ToString();
+            }
+            else
+            {
+                txt.Text = "0";
+            }
+        }
+
+        private void txtKilometrajeNotificaciones_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permitir solo dígitos y teclas de control (como Backspace)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquea la tecla
+            }
+        }
+
+        private void ConfFrmSucursalLocal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.G)
+            {
+                BtnGuardar.Focus();
+                Guardar();
+            }
+        }
+        #endregion
     }
 }

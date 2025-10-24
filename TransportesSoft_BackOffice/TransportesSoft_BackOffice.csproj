@@ -76,6 +76,9 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -98,6 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clases\ConexionHelper.cs" />
+    <Compile Include="Clases\ConfigConexion.cs" />
     <Compile Include="Clases\ConfSucursalLocal.cs" />
     <Compile Include="Clases\ContClientesCat.cs" />
     <Compile Include="Clases\ContConsumoUnidades.cs" />
@@ -185,6 +190,12 @@
     <Compile Include="Forms\ContFrmKilometrajeUnidades.Designer.cs">
       <DependentUpon>ContFrmKilometrajeUnidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ContFrmPolizasRegcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmPolizasRegcs.Designer.cs">
+      <DependentUpon>ContFrmPolizasRegcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContFrmPreciosDiesel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +213,12 @@
     </Compile>
     <Compile Include="Forms\FormReporte.Designer.cs">
       <DependentUpon>FormReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmConexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmConexion.Designer.cs">
+      <DependentUpon>FrmConexion.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmNotificaciones.cs">
       <SubType>Form</SubType>
@@ -248,7 +265,9 @@
     <Compile Include="Models\ContKilometrajeUnidad.cs" />
     <Compile Include="Models\ContMantenimientosCab.cs" />
     <Compile Include="Models\ContMantenimientosDet.cs" />
+    <Compile Include="Models\ContPolizasReg.cs" />
     <Compile Include="Models\ContPreciosDiesel.cs" />
+    <Compile Include="Models\ContTiposPolizas.cs" />
     <Compile Include="Models\EstadosCat.cs" />
     <Compile Include="Models\MunicipiosCatYEstado.cs" />
     <Compile Include="Models\ProximoMantenimientoUnidades.cs" />
@@ -264,8 +283,10 @@
     <Compile Include="Repositories\Repo_ContMantenimientosCab.cs" />
     <Compile Include="Repositories\Repo_ContMantenimientosDet.cs" />
     <Compile Include="Repositories\Repo_ContOperadoresCat.cs" />
+    <Compile Include="Repositories\Repo_ContPolizasReg.cs" />
     <Compile Include="Repositories\Repo_ContPreciosDiesel.cs" />
     <Compile Include="Repositories\Repo_ContRemolquesCat.cs" />
+    <Compile Include="Repositories\Repo_ContTiposPolizas.cs" />
     <Compile Include="Repositories\Repo_ContUnidadesCat.cs" />
     <Compile Include="Repositories\Repo_ContViajes.cs" />
     <Compile Include="Repositories\Repo_EstadosCat.cs" />
@@ -276,6 +297,7 @@
     <Compile Include="Services\Service_ConfSucursalLocal.cs" />
     <Compile Include="Services\Service_ContClientesCat.cs" />
     <Compile Include="Services\Service_ContConsumoUnidades.cs" />
+    <Compile Include="Services\Service_ContFrmPolizas.cs" />
     <Compile Include="Services\Service_ContKilometrajeUnidad.cs" />
     <Compile Include="Services\Service_ContMantenimientosCab.cs" />
     <Compile Include="Services\Service_ContMantenimientosDet.cs" />
@@ -326,6 +348,9 @@
     <EmbeddedResource Include="Forms\ContFrmKilometrajeUnidades.resx">
       <DependentUpon>ContFrmKilometrajeUnidades.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmPolizasRegcs.resx">
+      <DependentUpon>ContFrmPolizasRegcs.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmPreciosDiesel.resx">
       <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>
     </EmbeddedResource>
@@ -334,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormReporte.resx">
       <DependentUpon>FormReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmConexion.resx">
+      <DependentUpon>FrmConexion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmNotificaciones.resx">
       <DependentUpon>FrmNotificaciones.cs</DependentUpon>
