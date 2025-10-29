@@ -97,9 +97,22 @@ namespace TransportesSoft_BackOffice.Forms
                         idTipoPoliza = Convert.ToInt32(CBTipoPoliza.SelectedValue),
                         idUsuario = idUsuario
                     };
-                    // Aquí se llamaría al servicio para guardar la nueva póliza
-                    int idPoliza = service_ContFrmPolizas.GuardarPoliza(nuevaPoliza);
-                    MessageBox.Show($"La Póliza se guardó exitosamente ID: {idPoliza}.");
+                    int idPoliza = 0;
+                    if (EsConsulta)
+                    {
+                        nuevaPoliza.Id = Convert.ToInt32(txtID.Text);
+                        // Aquí se llamaría al servicio para actualizar la póliza existente
+                        service_ContFrmPolizas.ActualizarPoliza(nuevaPoliza);
+                        MessageBox.Show($"La Póliza se actualizó exitosamente el ID: {nuevaPoliza.Id}.");
+                    }
+                    else
+                    {
+                        // Aquí se llamaría al servicio para guardar la nueva póliza
+                        idPoliza = service_ContFrmPolizas.GuardarPoliza(nuevaPoliza);
+                        MessageBox.Show($"La Póliza se guardó exitosamente el ID: {idPoliza}.");
+                    }
+                      
+                    
                     Limpiar();
                 }
             }
@@ -116,6 +129,7 @@ namespace TransportesSoft_BackOffice.Forms
             DTFechaExp.Value = DateTime.Now;
             CBTipoPoliza.SelectedIndex = -1;
             txtID.Text = String.Empty;
+            EsConsulta = false;
         }
 
         private void txtID_TextChanged(object sender, EventArgs e)
@@ -169,6 +183,28 @@ namespace TransportesSoft_BackOffice.Forms
             CBTipoPoliza.SelectedValue = poliza.idTipoPoliza;
 
             EsConsulta = true;
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_esConsulta)
+                {
+                    DialogResult result = MessageBox.Show($"¿Estás seguro que deseas eliminar la póliza {txtID.Text} - {txtFolioPoliza.Text}?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        service_ContFrmPolizas.EliminarPoliza(Convert.ToInt32(txtID.Text));
+
+                        MessageBox.Show("Se eliminó correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    Limpiar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
