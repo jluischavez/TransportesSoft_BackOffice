@@ -32,5 +32,32 @@ namespace TransportesSoft_BackOffice.Repositories
             var polizas = SqlConnection.Query<ContPolizasReg>(sql).ToList();
             return polizas;
         }
+
+        public bool ActualizarPoliza(ContPolizasReg polizaExistente, SqlTransaction transaction)
+        {
+            var sql = @"UPDATE ContPolizasReg 
+                        SET FolioPoliza = @FolioPoliza, 
+                            FechaRegistro = @FechaRegistro, 
+                            FechaExpira = @FechaExpira, 
+                            idTipoPoliza = @idTipoPoliza, 
+                            idUsuario = @idUsuario
+                        WHERE Id = @Id";
+            SqlConnection.Execute(sql, polizaExistente, transaction: transaction);
+
+            return true;
+        }
+
+        /// <summary>
+        /// Esta eliminación de póliza si elimina, no cambia el status.
+        /// </summary>
+        /// <param name="idPoliza"></param>
+        /// <param name="transaction"></param>
+        /// <returns></returns>
+        public bool EliminarPoliza(int idPoliza, SqlTransaction transaction)
+        {
+            var sql = "DELETE FROM ContPolizasReg WHERE Id = @Id";
+            SqlConnection.Execute(sql, new { Id = idPoliza }, transaction: transaction);
+            return true;
+        }
     }
 }

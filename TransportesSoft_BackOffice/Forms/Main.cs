@@ -89,7 +89,9 @@ namespace TransportesSoft_BackOffice
                 int y = this.ClientSize.Height - frmMantenimientos.Height - alturaStatusStrip - margenInferior;
 
                 frmMantenimientos.Location = new Point(x, y);
+                frmMantenimientos.ReubicarPanelNotificaciones();
             }
+            
         }
         #endregion
 
@@ -304,16 +306,48 @@ namespace TransportesSoft_BackOffice
 
     public class FrmPanelMantenimientos : Form
     {
+        private Button btnMinimizar;
+        private Button btnContador;
+        private FlowLayoutPanel flpContenido;
+        private List<ProximoMantenimientoUnidades> mantenimientos;
+        private bool estaMinimizado = false;
         public FrmPanelMantenimientos(List<ProximoMantenimientoUnidades> mantenimientos)
         {
+            this.mantenimientos = mantenimientos;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Width = 300;
             this.Height = 120;
             this.StartPosition = FormStartPosition.Manual;
-            //this.BackColor = Color.Transparent;
             this.ShowInTaskbar = false;
 
-            var flp = new FlowLayoutPanel
+            btnMinimizar = new Button
+            {
+                Text = "—",
+                Width = 25,
+                Height = 25,
+                Location = new Point(this.Width - 38, 5),
+                BackColor = Color.LightGray,
+                FlatStyle = FlatStyle.Flat
+            };
+            btnMinimizar.Click += BtnMinimizar_Click;
+            this.Controls.Add(btnMinimizar);
+
+            btnMinimizar.BringToFront();
+
+            btnContador = new Button
+            {
+                Text = mantenimientos.Count.ToString(),
+                ForeColor = Color.White,
+                BackColor = Color.Red,
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                Width = 40,
+                Height = 40,
+                Visible = false
+            };
+            btnContador.Click += BtnContador_Click;
+            this.Controls.Add(btnContador);
+
+            flpContenido = new FlowLayoutPanel
             {
                 Dock = DockStyle.Fill,
                 AutoScroll = true,
@@ -336,10 +370,58 @@ namespace TransportesSoft_BackOffice
                 tarjeta.Controls.Add(new Label { Text = $"🛠️ Tipo: Mantenimiento", Location = new Point(10, 35), AutoSize = true });
                 tarjeta.Controls.Add(new Label { Text = $"📍 Faltan: {m.ProximoMantenimiento} km", Location = new Point(10, 60), AutoSize = true });
 
-                flp.Controls.Add(tarjeta);
+                flpContenido.Controls.Add(tarjeta);
             }
 
-            this.Controls.Add(flp);
+            this.Controls.Add(flpContenido);
+        }
+
+        private void BtnMinimizar_Click(object sender, EventArgs e)
+        {
+            estaMinimizado = true;
+            flpContenido.Visible = false;
+            btnMinimizar.Visible = false;
+
+            this.Width = 50;
+            this.Height = 50;
+            ReubicarPanelNotificaciones();
+            btnContador.Location = new Point(5, 5);
+            btnContador.Visible = true;
+        }
+
+        private void BtnContador_Click(object sender, EventArgs e)
+        {
+            estaMinimizado = false;
+            flpContenido.Visible = true;
+            btnMinimizar.Visible = true;
+            btnContador.Visible = false;
+
+            this.Width = 300;
+            this.Height = 120;
+
+            ReubicarPanelNotificaciones();
+        }
+        public void ReubicarPanelNotificaciones()
+        {
+            if (this.MdiParent == null) return;
+
+            int margenDerecho = 10;
+            int margenInferior = 30;
+            int alturaStatusStrip = 0;
+
+            foreach (Control ctl in this.MdiParent.Controls)
+            {
+                if (ctl is StatusStrip strip)
+                {
+                    alturaStatusStrip = strip.Height;
+                    break;
+                }
+            }
+
+            int x = this.MdiParent.ClientSize.Width - this.Width - margenDerecho;
+            int y = this.MdiParent.ClientSize.Height - this.Height - alturaStatusStrip - margenInferior;
+
+            this.Location = new Point(x, y);
         }
     }
 }

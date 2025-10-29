@@ -26,7 +26,7 @@ namespace TransportesSoft_BackOffice.Services
         {
             return repo_ContTiposPolizas.ObtenerContTiposPolizas();
         }
-
+        
         public int GuardarPoliza(ContPolizasReg nuevaPoliza)
         {
             //CREAME UNA CONEXION AQUI PARA EL BEGIN TRANSSACTION Y EL COMMIT
@@ -54,6 +54,52 @@ namespace TransportesSoft_BackOffice.Services
         public List<ContPolizasReg> ObtenerPolizas()
         {
             return repo_ContPolizasReg.ObtenerPolizas();
+        }
+
+        public bool ActualizarPoliza(ContPolizasReg polizaExistente)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        repo_ContPolizasReg = new Repo_ContPolizasReg(connection);
+                        bool resultado = repo_ContPolizasReg.ActualizarPoliza(polizaExistente, transaction);
+                        transaction.Commit();
+                        return resultado;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw; // Re-lanza la excepción para que pueda ser manejada más arriba
+                    }
+                }
+            }
+        }
+
+        public bool EliminarPoliza(int idPoliza)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        repo_ContPolizasReg = new Repo_ContPolizasReg(connection);
+                        bool resultado = repo_ContPolizasReg.EliminarPoliza(idPoliza, transaction);
+                        transaction.Commit();
+                        return resultado;
+                    }
+                    catch (Exception)
+                    {
+                        transaction.Rollback();
+                        throw; // Re-lanza la excepción para que pueda ser manejada más arriba
+                    }
+                }
+            }
         }
 
     }
