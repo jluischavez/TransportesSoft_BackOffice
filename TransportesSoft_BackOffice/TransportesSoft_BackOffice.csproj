@@ -190,17 +190,23 @@
     <Compile Include="Forms\ContFrmKilometrajeUnidades.Designer.cs">
       <DependentUpon>ContFrmKilometrajeUnidades.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ContFrmPolizasRegcs.cs">
+    <Compile Include="Forms\ContFrmPolizasReg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ContFrmPolizasRegcs.Designer.cs">
-      <DependentUpon>ContFrmPolizasRegcs.cs</DependentUpon>
+    <Compile Include="Forms\ContFrmPolizasReg.Designer.cs">
+      <DependentUpon>ContFrmPolizasReg.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ContFrmPreciosDiesel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ContFrmPreciosDiesel.Designer.cs">
       <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ContFrmTiposPolizas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ContFrmTiposPolizas.Designer.cs">
+      <DependentUpon>ContFrmTiposPolizas.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ContFrmViajes.cs">
       <SubType>Form</SubType>
@@ -304,6 +310,7 @@
     <Compile Include="Services\Service_ContOperadoresCat.cs" />
     <Compile Include="Services\Service_ContPreciosDiesel.cs" />
     <Compile Include="Services\Service_ContRemolquesCat.cs" />
+    <Compile Include="Services\Service_ContTiposPolizas.cs" />
     <Compile Include="Services\Service_ContUnidadesCat.cs" />
     <Compile Include="Services\Service_ContViajes.cs" />
     <Compile Include="Services\Service_EstadosCat.cs" />
@@ -348,11 +355,14 @@
     <EmbeddedResource Include="Forms\ContFrmKilometrajeUnidades.resx">
       <DependentUpon>ContFrmKilometrajeUnidades.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ContFrmPolizasRegcs.resx">
-      <DependentUpon>ContFrmPolizasRegcs.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ContFrmPolizasReg.resx">
+      <DependentUpon>ContFrmPolizasReg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmPreciosDiesel.resx">
       <DependentUpon>ContFrmPreciosDiesel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ContFrmTiposPolizas.resx">
+      <DependentUpon>ContFrmTiposPolizas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContFrmViajes.resx">
       <DependentUpon>ContFrmViajes.cs</DependentUpon>

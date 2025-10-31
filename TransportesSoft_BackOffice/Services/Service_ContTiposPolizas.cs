@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TransportesSoft_BackOffice.Repositories;
 using TransportesSoft_BackOffice.Models;
-using System.Data.SqlClient;
+using TransportesSoft_BackOffice.Repositories;
 
 namespace TransportesSoft_BackOffice.Services
 {
-    public class Service_ContFrmPolizas
+    public class Service_ContTiposPolizas
     {
         private string ConnectionString;
         private Repo_ContTiposPolizas repo_ContTiposPolizas;
-        private Repo_ContPolizasReg repo_ContPolizasReg;
-        public Service_ContFrmPolizas()
+
+        public Service_ContTiposPolizas()
         {
             ConnectionString = ConfigurationManager.ConnectionStrings["Conexion"].ConnectionString;
             repo_ContTiposPolizas = new Repo_ContTiposPolizas(new System.Data.SqlClient.SqlConnection(ConnectionString));
-            repo_ContPolizasReg = new Repo_ContPolizasReg(new System.Data.SqlClient.SqlConnection(ConnectionString));
         }
-
-        public List<ContTiposPolizas> ObtenerContTiposPolizas()
+        public List<ContTiposPolizas> ObtenerTiposPolizas()
         {
-            return repo_ContTiposPolizas.ObtenerContTiposPolizas();
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                repo_ContTiposPolizas = new Repo_ContTiposPolizas(connection);
+                return repo_ContTiposPolizas.ObtenerContTiposPolizas();
+            }
         }
-        
-        public int GuardarPoliza(ContPolizasReg nuevaPoliza)
+        public int GuardarTipoPoliza(ContTiposPolizas tipoPoliza)
         {
-            //CREAME UNA CONEXION AQUI PARA EL BEGIN TRANSSACTION Y EL COMMIT
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -37,8 +38,8 @@ namespace TransportesSoft_BackOffice.Services
                 {
                     try
                     {
-                        repo_ContPolizasReg = new Repo_ContPolizasReg(connection);
-                        int idPoliza = repo_ContPolizasReg.GuardarPoliza(nuevaPoliza, transaction);
+                        repo_ContTiposPolizas = new Repo_ContTiposPolizas(connection);
+                        int idPoliza = repo_ContTiposPolizas.GuardarTipoPoliza(tipoPoliza, transaction);
                         transaction.Commit();
                         return idPoliza;
                     }
@@ -51,19 +52,7 @@ namespace TransportesSoft_BackOffice.Services
             }
         }
 
-        public List<ContPolizasReg> ObtenerPolizas()
-        {
-            try
-            {
-                return repo_ContPolizasReg.ObtenerPolizas();
-            }
-            catch(Exception)
-            {
-                throw;
-            }
-        }
-
-        public bool ActualizarPoliza(ContPolizasReg polizaExistente)
+        public bool ActualizarTipoPoliza(ContTiposPolizas tipoPoliza)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -72,8 +61,8 @@ namespace TransportesSoft_BackOffice.Services
                 {
                     try
                     {
-                        repo_ContPolizasReg = new Repo_ContPolizasReg(connection);
-                        bool resultado = repo_ContPolizasReg.ActualizarPoliza(polizaExistente, transaction);
+                        repo_ContTiposPolizas = new Repo_ContTiposPolizas(connection);
+                        bool resultado = repo_ContTiposPolizas.ActualizarTipoPoliza(tipoPoliza, transaction);
                         transaction.Commit();
                         return resultado;
                     }
@@ -86,7 +75,7 @@ namespace TransportesSoft_BackOffice.Services
             }
         }
 
-        public bool EliminarPoliza(int idPoliza)
+        public bool EliminarTipoPoliza(int idTipoPoliza)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
@@ -95,8 +84,8 @@ namespace TransportesSoft_BackOffice.Services
                 {
                     try
                     {
-                        repo_ContPolizasReg = new Repo_ContPolizasReg(connection);
-                        bool resultado = repo_ContPolizasReg.EliminarPoliza(idPoliza, transaction);
+                        repo_ContTiposPolizas = new Repo_ContTiposPolizas(connection);
+                        bool resultado = repo_ContTiposPolizas.EliminarTipoPoliza(idTipoPoliza, transaction);
                         transaction.Commit();
                         return resultado;
                     }
@@ -108,6 +97,5 @@ namespace TransportesSoft_BackOffice.Services
                 }
             }
         }
-
     }
 }

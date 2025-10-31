@@ -13,7 +13,7 @@ using TransportesSoft_BackOffice.Services;
 
 namespace TransportesSoft_BackOffice.Forms
 {
-    public partial class ContFrmPolizasRegcs : Base
+    public partial class ContFrmPolizasReg : Base
     {
         Service_ContFrmPolizas service_ContFrmPolizas = new Service_ContFrmPolizas();
         List<ContTiposPolizas> lListTiposPolizas = new List<ContTiposPolizas>();
@@ -36,7 +36,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
 
-        public ContFrmPolizasRegcs(int Usuario)
+        public ContFrmPolizasReg(int Usuario)
         {
             idUsuario = Usuario;
             InitializeComponent();

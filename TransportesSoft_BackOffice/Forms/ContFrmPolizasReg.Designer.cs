@@ -1,6 +1,6 @@
 ﻿namespace TransportesSoft_BackOffice.Forms
 {
-    partial class ContFrmPolizasRegcs
+    partial class ContFrmPolizasReg
     {
         /// <summary>
         /// Required designer variable.
