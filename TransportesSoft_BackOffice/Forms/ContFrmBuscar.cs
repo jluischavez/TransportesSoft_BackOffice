@@ -69,6 +69,13 @@ namespace TransportesSoft_BackOffice.Forms
         public ContPolizasReg PolizaSeleccionada { get; private set; }
         public event EventHandler<ContPolizasReg> PolizaSeleccionadaEvent;
 
+        /*Tipos de pólizas*/
+        private List<ContTiposPolizas> lContTiposPolizas;
+        private Service_ContTiposPolizas lServiceTiposPolizas;
+        private BindingSource bindingSourceContTiposPolizas = new BindingSource();
+        public ContTiposPolizas TipoPolizaSeleccionada { get; private set; }
+        public event EventHandler<ContTiposPolizas> TipoPolizaSeleccionadaEvent;
+
         private TipoBusqueda TipoFormulario;
         #endregion
         public enum TipoBusqueda
@@ -81,7 +88,8 @@ namespace TransportesSoft_BackOffice.Forms
             MantenimientoUnidades = 6,
             MantenimientoRemolques = 8,
             UsuariosCat = 9,
-            Polizas = 10
+            Polizas = 10,
+            TiposPolizas = 11
         }
         #region "Constructor"
         public ContFrmBuscar(string titulo, TipoBusqueda tipobusqueda)
@@ -133,9 +141,29 @@ namespace TransportesSoft_BackOffice.Forms
                 lServicePolizasReg = new Service_ContFrmPolizas();
                 BuscarPolizas();
             }
+            else if(TipoFormulario == TipoBusqueda.TiposPolizas)
+            {
+                lContTiposPolizas = new List<ContTiposPolizas>();
+                lServiceTiposPolizas = new Service_ContTiposPolizas();
+                BuscarTiposPolizas();
+            }
         }
         #endregion
         #region "Private"
+        private void BuscarTiposPolizas()
+        {
+            try
+            {
+                lContTiposPolizas = lServiceTiposPolizas.ObtenerTiposPolizas();
+                bindingSourceContTiposPolizas.DataSource = lContTiposPolizas;
+                DGV_Unidades.DataSource = bindingSourceContTiposPolizas;
+                ConfigurarGridTiposPolizas();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error", "Error al consultar los tipos de pólizas: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void BuscarPolizas()
         {
             try
@@ -234,6 +262,20 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 MessageBox.Show("Error", "Error al consultar los municipios: " + ex.InnerException, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void ConfigurarGridTiposPolizas()
+        {
+            DGV_Unidades.ReadOnly = true;
+            DGV_Unidades.AllowUserToAddRows = false;
+            DGV_Unidades.AllowUserToDeleteRows = false;
+            DGV_Unidades.AllowUserToOrderColumns = false;
+            DGV_Unidades.AllowUserToResizeColumns = false;
+            DGV_Unidades.AllowUserToResizeRows = false;
+            DGV_Unidades.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DGV_Unidades.MultiSelect = false;
+
+            DGV_Unidades.Columns["Id"].Width = 50;
+            DGV_Unidades.Columns["TipoPoliza"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
         private void ConfigurarGridPolizas()
         {
@@ -479,6 +521,15 @@ namespace TransportesSoft_BackOffice.Forms
                 };
                 PolizaSeleccionadaEvent?.Invoke(this, poliza);
             }
+            else if(TipoFormulario == TipoBusqueda.TiposPolizas)
+            {
+                ContTiposPolizas tipopoliza = new ContTiposPolizas()
+                {
+                    Id = Convert.ToInt32(DGV_Unidades.Rows[rowIndex].Cells["Id"].Value),
+                    TipoPoliza = DGV_Unidades.Rows[rowIndex].Cells["TipoPoliza"].Value?.ToString()
+                };
+                TipoPolizaSeleccionadaEvent?.Invoke(this, tipopoliza);
+            }
 
                 this.Close();
         }
@@ -615,7 +666,23 @@ namespace TransportesSoft_BackOffice.Forms
                 }
             }
 
-            DGV_Unidades.Refresh();
+            else if (TipoFormulario == TipoBusqueda.TiposPolizas) 
+            {
+                if (string.IsNullOrEmpty(filtro))
+                {
+                    bindingSourceContTiposPolizas.DataSource = lContTiposPolizas;
+                }
+                else
+                {
+                    var filtradas = lContTiposPolizas
+                        .Where(u => u.Id.ToString().Contains(filtro) ||
+                                    u.TipoPoliza.ToLower().Contains(filtro))
+                        .ToList();
+                    bindingSourceContTiposPolizas.DataSource = filtradas;
+                }
+            }
+
+                DGV_Unidades.Refresh();
         }
         private void BtnAceptar_Click(object sender, EventArgs e)
         {

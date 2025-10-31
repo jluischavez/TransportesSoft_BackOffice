@@ -274,7 +274,11 @@ namespace TransportesSoft_BackOffice
         }
         private void registroDePólizasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormFactory.AbrirFormulario<ContFrmPolizasRegcs>(this, lUsuarioActual.Id);
+            FormFactory.AbrirFormulario<ContFrmPolizasReg>(this, lUsuarioActual.Id);
+        }
+        private void registroTiposDePólizasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ContFrmTiposPolizas>(this);
         }
 
         #endregion
