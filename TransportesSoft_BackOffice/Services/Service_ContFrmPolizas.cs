@@ -109,5 +109,29 @@ namespace TransportesSoft_BackOffice.Services
             }
         }
 
+        public List<ContPolizasReg> ObtenerPolizasPorFechaAExpirar(DateTime fechaInicio, DateTime fechaFin)
+        {
+            try
+            {
+                return repo_ContPolizasReg.ObtenerPolizasPorFechaAExpirar(fechaInicio, fechaFin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ContPolizasReg> ObtenerPolizasPorTipoYFecha(DateTime fechaInicio, DateTime fechaFin, int idTipoPoliza)
+        {
+            try
+            {
+                return repo_ContPolizasReg.ObtenerPolizaPorTipoPolizaYFechaAExpirar(fechaInicio, fechaFin, idTipoPoliza);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

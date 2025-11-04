@@ -250,11 +250,29 @@
     <Compile Include="Forms\RptsFrmConsumoUnidadesPorFecha.Designer.cs">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RptsFrmGastosPorUnidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RptsFrmGastosPorUnidad.Designer.cs">
+      <DependentUpon>RptsFrmGastosPorUnidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RptsFrmIngresosPorUnidad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RptsFrmIngresosPorUnidad.Designer.cs">
+      <DependentUpon>RptsFrmIngresosPorUnidad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\RptsFrmMantenimientoUnidades.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\RptsFrmMantenimientoUnidades.Designer.cs">
       <DependentUpon>RptsFrmMantenimientoUnidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RptsFrmPolizasPorFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RptsFrmPolizasPorFecha.Designer.cs">
+      <DependentUpon>RptsFrmPolizasPorFecha.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\RptsFrmViajesPorFecha.cs">
       <SubType>Form</SubType>
@@ -388,6 +406,9 @@
     <EmbeddedResource Include="Forms\RptsFrmMantenimientoUnidades.resx">
       <DependentUpon>RptsFrmMantenimientoUnidades.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RptsFrmPolizasPorFecha.resx">
+      <DependentUpon>RptsFrmPolizasPorFecha.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RptsFrmViajesPorFecha.resx">
       <DependentUpon>RptsFrmViajesPorFecha.cs</DependentUpon>
     </EmbeddedResource>
@@ -406,6 +427,7 @@
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
     <EmbeddedResource Include="Reports\RptMantenimientoUnidades.rdlc" />
+    <EmbeddedResource Include="Reports\RptPolizasPorFecha.rdlc" />
     <EmbeddedResource Include="Reports\RptViajesPorFecha.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ConfSucursalLocal.datasource" />
@@ -416,14 +438,20 @@
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContUnidades.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContViajes.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Clases.ContViajesYOperador.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContKilometrajeUnidad.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContMantenimientosCab.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContMantenimientosDet.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContPolizasReg.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContPreciosDiesel.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContTiposPolizas.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.EstadosCat.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadDTO+MantenimientoUnidadDTO.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadDTO.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidades.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadesDTO.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.RolesCat.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.UsuarioRoles.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.UsuariosCat.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

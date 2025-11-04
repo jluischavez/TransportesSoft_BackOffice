@@ -34,13 +34,18 @@ namespace TransportesSoft_BackOffice.Forms
         private Service_ContViajes lServContViajes;
         private List<ContViajesYOperador> lListContViajesYOperador;
 
+        /*Cont Polizas Reg*/
+        private Service_ContFrmPolizas lServcontFrmPolizas;
+        private List<ContPolizasReg> lListContFrmPolizas;
+
         public Boolean HayInformacion = false;
         public enum TipoReporte
         {
             ContabilidadUnidades = 1,
             ContabilidadConsumoUnidades = 2,
             ContabilidadViajesPorFecha = 3,
-            UnidadesPorMantenimiento = 4
+            UnidadesPorMantenimiento = 4,
+            ContabilidadPolizasPorFecha = 5
         }
         #region "Constructor"
         public FormReporte(TipoReporte tipoReporte)
@@ -48,7 +53,7 @@ namespace TransportesSoft_BackOffice.Forms
             InitializeComponent();
         }
 
-        /**CONSTRUCTOR DE CONSUMO DE UNIDADES Y DE VIAJES**/
+        /**CONSTRUCTOR DE CONSUMO DE UNIDADES, DE VIAJES Y DE PÓLIZAS**/
         public FormReporte(TipoReporte tipoReporte, DateTime FechaInicial, DateTime FechaFinal, int ID)
         {
 
@@ -65,6 +70,10 @@ namespace TransportesSoft_BackOffice.Forms
                 RptContViajesPorFecha(FechaInicial, FechaFinal, ID);
                 this.Text = "Reporte de viajes por fecha.";
             }
+            else if (tipoReporte == TipoReporte.ContabilidadPolizasPorFecha)
+            {
+                RptContPolizasPorFecha(FechaInicial, FechaFinal, ID);
+            }
         }
         /*CONSTRUCTOR DE REPORTE DE MANTENIMIENTO DE UNIDADES*/
         public FormReporte(TipoReporte tipoReporte, int kilometrajeMantenimiento)
@@ -78,6 +87,47 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
         #endregion
+        private void RptContPolizasPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idTipoPoliza)
+        {
+            try
+            {
+                //Implementar reporte de pólizas por fecha
+                lServcontFrmPolizas = new Service_ContFrmPolizas();
+                if (idTipoPoliza == 0)
+                {
+                    lListContFrmPolizas = lServcontFrmPolizas.ObtenerPolizasPorFechaAExpirar(FechaInicial, FechaFinal);
+                }
+                else
+                {
+                    lListContFrmPolizas = lServcontFrmPolizas.ObtenerPolizasPorTipoYFecha(FechaInicial, FechaFinal, idTipoPoliza);
+                }
+                if (lListContFrmPolizas.Count == 0)
+                {
+                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HayInformacion = false;
+                    return;
+                }
+                HayInformacion = true;
+                lServcontSucLocal = new Service_ConfSucursalLocal();
+                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+                string reportPath = Path.Combine(projectRoot, "Reports", "RptPolizasPorFecha.rdlc");
+               
+                ReportDataSource rds = new ReportDataSource("DSContPolizasReg", lListContFrmPolizas);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.ReportPath = reportPath;
+                
+                /*Agrega la sucursal*/
+                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+                reportViewer1.LocalReport.SetParameters(paramSucursal);
+                reportViewer1.RefreshReport();  
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void RptContConsumoUnidadesPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
         {
             try

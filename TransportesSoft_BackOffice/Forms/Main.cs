@@ -280,6 +280,10 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<ContFrmTiposPolizas>(this);
         }
+        private void pólizasPorFechaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<RptsFrmPolizasPorFecha>(this);
+        }
 
         #endregion
 
