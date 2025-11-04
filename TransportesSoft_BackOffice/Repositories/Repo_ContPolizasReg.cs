@@ -59,5 +59,26 @@ namespace TransportesSoft_BackOffice.Repositories
             SqlConnection.Execute(sql, new { Id = idPoliza }, transaction: transaction);
             return true;
         }
+
+        public List<ContPolizasReg> ObtenerPolizasPorFechaAExpirar(DateTime FechaIni, DateTime FechaFin)
+        {
+           List<ContPolizasReg> polizas;
+            var sql = @"SELECT * FROM ContPolizasReg 
+                        WHERE FechaExpira BETWEEN @FechaIni AND @FechaFin
+                        ORDER BY FechaExpira";
+            polizas = SqlConnection.Query<ContPolizasReg>(sql, new { FechaIni, FechaFin }).ToList();
+            return polizas;
+        }
+
+        public List<ContPolizasReg> ObtenerPolizaPorTipoPolizaYFechaAExpirar(DateTime FechaIni, DateTime FechaFin, int idTipoPoliza)
+        {
+            List<ContPolizasReg> polizas;
+            var sql = @"SELECT * FROM ContPolizasReg 
+                        WHERE FechaExpira BETWEEN @FechaIni AND @FechaFin
+                        AND idTipoPoliza = @idTipoPoliza 
+                        ORDER BY FechaExpira";
+            polizas = SqlConnection.Query<ContPolizasReg>(sql, new { FechaIni, FechaFin, idTipoPoliza }).ToList();
+            return polizas;
+        }
     }
 }

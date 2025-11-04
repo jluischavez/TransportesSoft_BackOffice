@@ -51,13 +51,14 @@ namespace TransportesSoft_BackOffice
             this.mantenimientosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kilometrajePorUnidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroDePólizasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registroTiposDePólizasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónDeSucursalLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.registroTiposDePólizasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pólizasPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -145,7 +146,8 @@ namespace TransportesSoft_BackOffice
             this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consumoDeUnidadesToolStripMenuItem1,
             this.viajesPorFechaToolStripMenuItem,
-            this.próximosMantenimientosDeUnidadesToolStripMenuItem});
+            this.próximosMantenimientosDeUnidadesToolStripMenuItem,
+            this.pólizasPorFechaToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -182,7 +184,7 @@ namespace TransportesSoft_BackOffice
             // viajesToolStripMenuItem
             // 
             this.viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
-            this.viajesToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.viajesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viajesToolStripMenuItem.Text = "Viajes";
             this.viajesToolStripMenuItem.Click += new System.EventHandler(this.viajesToolStripMenuItem_Click);
             // 
@@ -225,6 +227,13 @@ namespace TransportesSoft_BackOffice
             this.registroDePólizasToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.registroDePólizasToolStripMenuItem.Text = "Registro de Pólizas";
             this.registroDePólizasToolStripMenuItem.Click += new System.EventHandler(this.registroDePólizasToolStripMenuItem_Click);
+            // 
+            // registroTiposDePólizasToolStripMenuItem
+            // 
+            this.registroTiposDePólizasToolStripMenuItem.Name = "registroTiposDePólizasToolStripMenuItem";
+            this.registroTiposDePólizasToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.registroTiposDePólizasToolStripMenuItem.Text = "Registro Tipos de Pólizas";
+            this.registroTiposDePólizasToolStripMenuItem.Click += new System.EventHandler(this.registroTiposDePólizasToolStripMenuItem_Click);
             // 
             // seguridadToolStripMenuItem
             // 
@@ -272,12 +281,12 @@ namespace TransportesSoft_BackOffice
             this.toolStripStatusConexion.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusConexion.Text = "Conexion";
             // 
-            // registroTiposDePólizasToolStripMenuItem
+            // pólizasPorFechaToolStripMenuItem
             // 
-            this.registroTiposDePólizasToolStripMenuItem.Name = "registroTiposDePólizasToolStripMenuItem";
-            this.registroTiposDePólizasToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.registroTiposDePólizasToolStripMenuItem.Text = "Registro Tipos de Pólizas";
-            this.registroTiposDePólizasToolStripMenuItem.Click += new System.EventHandler(this.registroTiposDePólizasToolStripMenuItem_Click);
+            this.pólizasPorFechaToolStripMenuItem.Name = "pólizasPorFechaToolStripMenuItem";
+            this.pólizasPorFechaToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.pólizasPorFechaToolStripMenuItem.Text = "Pólizas Por Fecha";
+            this.pólizasPorFechaToolStripMenuItem.Click += new System.EventHandler(this.pólizasPorFechaToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -329,6 +338,7 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem configuraciónDeSucursalLocalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registroDePólizasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registroTiposDePólizasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pólizasPorFechaToolStripMenuItem;
     }
 }
 
