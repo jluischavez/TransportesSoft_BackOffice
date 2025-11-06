@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TransportesSoft_BackOffice.Clases;
+using TransportesSoft_BackOffice.Models;
 
 namespace TransportesSoft_BackOffice.Repositories
 {
@@ -183,6 +185,29 @@ namespace TransportesSoft_BackOffice.Repositories
                 {
                     id_Viaje = id_Viaje
                 });
+            }
+        }
+
+        public List<ContViajes> ObtenerIngresosUnidades(DateTime FechaIni, DateTime FechaFin, int idUnidad = 0)
+        {
+            lListContViajes = new List<ContViajes>();
+            using (var db = new SqlConnection(ConnectionString))
+            {
+                var sql = "dbo.sp_C_ObtenerIngresosUnidades";
+                //var parametros = new
+                //{
+                //    FechaIni = FechaIni.Year + "-" + FechaIni.Month + "-" + FechaIni.Day ,
+                //    FechaFin = FechaFin.Year + "-" + FechaFin.Month + "-" + FechaFin.Day,
+                //    IdUnidad = idUnidad
+                //};
+                var parametros = new
+                {
+                    FechaIni = FechaIni,
+                    FechaFin = FechaFin,
+                    IdUnidad = idUnidad
+                };
+                lListContViajes = db.Query<ContViajes>(sql, parametros, commandType: CommandType.StoredProcedure).ToList();
+                return lListContViajes;
             }
         }
     }

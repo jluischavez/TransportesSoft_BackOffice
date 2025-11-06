@@ -33,6 +33,7 @@ namespace TransportesSoft_BackOffice.Forms
         /*Cont Viajes*/
         private Service_ContViajes lServContViajes;
         private List<ContViajesYOperador> lListContViajesYOperador;
+        private List<ContViajes> lListContViajes;
 
         /*Cont Polizas Reg*/
         private Service_ContFrmPolizas lServcontFrmPolizas;
@@ -45,7 +46,8 @@ namespace TransportesSoft_BackOffice.Forms
             ContabilidadConsumoUnidades = 2,
             ContabilidadViajesPorFecha = 3,
             UnidadesPorMantenimiento = 4,
-            ContabilidadPolizasPorFecha = 5
+            ContabilidadPolizasPorFecha = 5,
+            IngresosPorUnidad = 6,
         }
         #region "Constructor"
         public FormReporte(TipoReporte tipoReporte)
@@ -53,7 +55,7 @@ namespace TransportesSoft_BackOffice.Forms
             InitializeComponent();
         }
 
-        /**CONSTRUCTOR DE CONSUMO DE UNIDADES, DE VIAJES Y DE PÓLIZAS**/
+        /**CONSTRUCTOR DE CONSUMO DE UNIDADES, DE VIAJES Y DE PÓLIZAS, INGRESOS Y EGRESOS POR UNIDAD**/
         public FormReporte(TipoReporte tipoReporte, DateTime FechaInicial, DateTime FechaFinal, int ID)
         {
 
@@ -74,6 +76,10 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 RptContPolizasPorFecha(FechaInicial, FechaFinal, ID);
             }
+            else if (tipoReporte == TipoReporte.IngresosPorUnidad)
+            {
+                RptIngresosPorUnidad(FechaInicial, FechaFinal, ID);
+            }
         }
         /*CONSTRUCTOR DE REPORTE DE MANTENIMIENTO DE UNIDADES*/
         public FormReporte(TipoReporte tipoReporte, int kilometrajeMantenimiento)
@@ -87,6 +93,50 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
         #endregion
+        private void RptIngresosPorUnidad(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
+        {
+            try
+            {
+                //Implementar reporte de ingresos por unidad
+                lServContViajes = new Service_ContViajes();
+                if (idUnidad == 0)
+                {
+                    lListContViajes = lServContViajes.ObtenerIngresosUnidades(FechaInicial, FechaFinal);
+                }
+                else
+                {
+                    lListContViajes = lServContViajes.ObtenerIngresosUnidades(FechaInicial, FechaFinal, idUnidad);
+                }
+                if (lListContViajes.Count == 0)
+                {
+                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HayInformacion = false;
+                    return;
+                }
+
+                HayInformacion = true;
+
+                lServcontSucLocal = new Service_ConfSucursalLocal();
+                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+                string reportPath = Path.Combine(projectRoot, "Reports", "RptIngresosPorUnidades.rdlc");
+
+                ReportDataSource rds = new ReportDataSource("DSIngresosPorUnidades", lListContViajes);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.ReportPath = reportPath;
+
+                /*Agrega la sucursal*/
+                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+                reportViewer1.LocalReport.SetParameters(paramSucursal);
+                reportViewer1.RefreshReport();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error." + ex.Message,"Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void RptContPolizasPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idTipoPoliza)
         {
             try
