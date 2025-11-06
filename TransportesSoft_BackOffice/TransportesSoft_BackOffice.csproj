@@ -403,6 +403,9 @@
     <EmbeddedResource Include="Forms\RptsFrmConsumoUnidadesPorFecha.resx">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RptsFrmIngresosPorUnidad.resx">
+      <DependentUpon>RptsFrmIngresosPorUnidad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RptsFrmMantenimientoUnidades.resx">
       <DependentUpon>RptsFrmMantenimientoUnidades.cs</DependentUpon>
     </EmbeddedResource>
@@ -426,6 +429,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
+    <EmbeddedResource Include="Reports\RptIngresosPorUnidades.rdlc" />
     <EmbeddedResource Include="Reports\RptMantenimientoUnidades.rdlc" />
     <EmbeddedResource Include="Reports\RptPolizasPorFecha.rdlc" />
     <EmbeddedResource Include="Reports\RptViajesPorFecha.rdlc" />

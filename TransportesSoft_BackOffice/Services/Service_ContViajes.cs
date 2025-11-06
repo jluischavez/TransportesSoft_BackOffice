@@ -54,5 +54,10 @@ namespace TransportesSoft_BackOffice.Services
         {
             RepoContViajes.GuardarViaje(objViaje);
         }
+
+        public List<ContViajes> ObtenerIngresosUnidades(DateTime FechaIni, DateTime FechaFin, int id_Unidad = 0)
+        {
+            return RepoContViajes.ObtenerIngresosUnidades(FechaIni, FechaFin, id_Unidad);
+        }
     }
 }

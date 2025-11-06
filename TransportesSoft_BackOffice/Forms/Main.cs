@@ -30,46 +30,54 @@ namespace TransportesSoft_BackOffice
 
         public Main()
         {
-            InitializeComponent();
-
-            this.IsMdiContainer = true;
-            this.WindowState = FormWindowState.Maximized;
-
-            // 🔍 Verificar si hay conexión configurada
-            //if (!ConexionConfigurada())
-            //{
-            //    var frmConfig = new FrmConexion(); // Tu formulario de configuración
-            //    frmConfig.StartPosition = FormStartPosition.CenterScreen;
-
-            //    var resultadoConfigg = frmConfig.ShowDialog();
-
-            //    if (resultadoConfigg != DialogResult.OK)
-            //    {
-            //        MessageBox.Show("No se configuró la conexión. La aplicación se cerrará.", "Error de configuración", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        this.Close();
-            //        return;
-            //    }
-            //}
-
-
-            var login = new Login();
-            login.StartPosition = FormStartPosition.CenterScreen;
-
-            var resultadoLogin = login.ShowDialog();
-
-            if (resultadoLogin == DialogResult.OK)
+            try
             {
-                lUsuarioActual.Id = login.lUsuario.Id;
-                lUsuarioActual.NombreUsuario = login.lUsuario.NombreUsuario;
+                InitializeComponent();
+
+                this.IsMdiContainer = true;
+                this.WindowState = FormWindowState.Maximized;
+
+                // 🔍 Verificar si hay conexión configurada
+                //if (!ConexionConfigurada())
+                //{
+                //    var frmConfig = new FrmConexion(); // Tu formulario de configuración
+                //    frmConfig.StartPosition = FormStartPosition.CenterScreen;
+
+                //    var resultadoConfigg = frmConfig.ShowDialog();
+
+                //    if (resultadoConfigg != DialogResult.OK)
+                //    {
+                //        MessageBox.Show("No se configuró la conexión. La aplicación se cerrará.", "Error de configuración", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //        this.Close();
+                //        return;
+                //    }
+                //}
+
+
+                var login = new Login();
+                login.StartPosition = FormStartPosition.CenterScreen;
+
+                var resultadoLogin = login.ShowDialog();
+
+                if (resultadoLogin == DialogResult.OK)
+                {
+                    lUsuarioActual.Id = login.lUsuario.Id;
+                    lUsuarioActual.NombreUsuario = login.lUsuario.NombreUsuario;
+                }
+                else
+                {
+                    // Cerrar la app si el login falla o se cancela
+                    this.Close();
+                }
+                ConfiguracionMDI();
+
+                this.Text = this.Text + " | Sucursal: " + (lConfSucursalLocal?.NombreSucursal ?? "") + " | Versión: " + Application.ProductVersion;
             }
-            else
+            catch(Exception ex)
             {
-                // Cerrar la app si el login falla o se cancela
+                MessageBox.Show("Error al iniciar la aplicación: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
             }
-            ConfiguracionMDI();
-
-            this.Text = this.Text + " | Sucursal: " + (lConfSucursalLocal?.NombreSucursal ?? "") + " | Versión: " + Application.ProductVersion;
         }
 
         #region "Eventos"
@@ -285,6 +293,10 @@ namespace TransportesSoft_BackOffice
             FormFactory.AbrirFormulario<RptsFrmPolizasPorFecha>(this);
         }
 
+        private void ingresosPorUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<RptsFrmIngresosPorUnidad>(this);
+        }
         #endregion
 
 
@@ -312,6 +324,9 @@ namespace TransportesSoft_BackOffice
 
     }
 
+    /// <summary>
+    /// Clase de Panel de notificaciones de Mantenimientos
+    /// </summary>
     public class FrmPanelMantenimientos : Form
     {
         private Button btnMinimizar;

@@ -44,6 +44,7 @@ namespace TransportesSoft_BackOffice
             this.consumoDeUnidadesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.viajesPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.próximosMantenimientosDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pólizasPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viajesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,7 @@ namespace TransportesSoft_BackOffice
             this.configuraciónDeSucursalLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.pólizasPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresosPorUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -94,35 +95,35 @@ namespace TransportesSoft_BackOffice
             // aBCDeClientesToolStripMenuItem
             // 
             this.aBCDeClientesToolStripMenuItem.Name = "aBCDeClientesToolStripMenuItem";
-            this.aBCDeClientesToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.aBCDeClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aBCDeClientesToolStripMenuItem.Text = "ABC de Clientes";
             this.aBCDeClientesToolStripMenuItem.Click += new System.EventHandler(this.aBCDeClientesToolStripMenuItem_Click);
             // 
             // aBCDeOperadoresToolStripMenuItem1
             // 
             this.aBCDeOperadoresToolStripMenuItem1.Name = "aBCDeOperadoresToolStripMenuItem1";
-            this.aBCDeOperadoresToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
+            this.aBCDeOperadoresToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.aBCDeOperadoresToolStripMenuItem1.Text = "ABC de Operadores";
             this.aBCDeOperadoresToolStripMenuItem1.Click += new System.EventHandler(this.aBCDeOperadoresToolStripMenuItem1_Click);
             // 
             // aBCDeUnidadesToolStripMenuItem1
             // 
             this.aBCDeUnidadesToolStripMenuItem1.Name = "aBCDeUnidadesToolStripMenuItem1";
-            this.aBCDeUnidadesToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
+            this.aBCDeUnidadesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.aBCDeUnidadesToolStripMenuItem1.Text = "ABC de Unidades";
             this.aBCDeUnidadesToolStripMenuItem1.Click += new System.EventHandler(this.aBCDeUnidadesToolStripMenuItem1_Click);
             // 
             // aBCDeRemolquesToolStripMenuItem1
             // 
             this.aBCDeRemolquesToolStripMenuItem1.Name = "aBCDeRemolquesToolStripMenuItem1";
-            this.aBCDeRemolquesToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
+            this.aBCDeRemolquesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.aBCDeRemolquesToolStripMenuItem1.Text = "ABC de Remolques";
             this.aBCDeRemolquesToolStripMenuItem1.Click += new System.EventHandler(this.aBCDeRemolquesToolStripMenuItem1_Click);
             // 
             // aBCDeMunicipiosToolStripMenuItem
             // 
             this.aBCDeMunicipiosToolStripMenuItem.Name = "aBCDeMunicipiosToolStripMenuItem";
-            this.aBCDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.aBCDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aBCDeMunicipiosToolStripMenuItem.Text = "ABC de Municipios";
             this.aBCDeMunicipiosToolStripMenuItem.Click += new System.EventHandler(this.aBCDeMunicipiosToolStripMenuItem_Click);
             // 
@@ -147,7 +148,8 @@ namespace TransportesSoft_BackOffice
             this.consumoDeUnidadesToolStripMenuItem1,
             this.viajesPorFechaToolStripMenuItem,
             this.próximosMantenimientosDeUnidadesToolStripMenuItem,
-            this.pólizasPorFechaToolStripMenuItem});
+            this.pólizasPorFechaToolStripMenuItem,
+            this.ingresosPorUnidadesToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -172,6 +174,13 @@ namespace TransportesSoft_BackOffice
             this.próximosMantenimientosDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
             this.próximosMantenimientosDeUnidadesToolStripMenuItem.Text = "Próximos Mantenimientos de Unidades";
             this.próximosMantenimientosDeUnidadesToolStripMenuItem.Click += new System.EventHandler(this.próximosMantenimientosDeUnidadesToolStripMenuItem_Click);
+            // 
+            // pólizasPorFechaToolStripMenuItem
+            // 
+            this.pólizasPorFechaToolStripMenuItem.Name = "pólizasPorFechaToolStripMenuItem";
+            this.pólizasPorFechaToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.pólizasPorFechaToolStripMenuItem.Text = "Pólizas Por Fecha";
+            this.pólizasPorFechaToolStripMenuItem.Click += new System.EventHandler(this.pólizasPorFechaToolStripMenuItem_Click);
             // 
             // registrosToolStripMenuItem
             // 
@@ -281,12 +290,12 @@ namespace TransportesSoft_BackOffice
             this.toolStripStatusConexion.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusConexion.Text = "Conexion";
             // 
-            // pólizasPorFechaToolStripMenuItem
+            // ingresosPorUnidadesToolStripMenuItem
             // 
-            this.pólizasPorFechaToolStripMenuItem.Name = "pólizasPorFechaToolStripMenuItem";
-            this.pólizasPorFechaToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.pólizasPorFechaToolStripMenuItem.Text = "Pólizas Por Fecha";
-            this.pólizasPorFechaToolStripMenuItem.Click += new System.EventHandler(this.pólizasPorFechaToolStripMenuItem_Click);
+            this.ingresosPorUnidadesToolStripMenuItem.Name = "ingresosPorUnidadesToolStripMenuItem";
+            this.ingresosPorUnidadesToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.ingresosPorUnidadesToolStripMenuItem.Text = "Ingresos Por Unidades";
+            this.ingresosPorUnidadesToolStripMenuItem.Click += new System.EventHandler(this.ingresosPorUnidadesToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -339,6 +348,7 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem registroDePólizasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registroTiposDePólizasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pólizasPorFechaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ingresosPorUnidadesToolStripMenuItem;
     }
 }
 
