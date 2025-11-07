@@ -38,13 +38,13 @@ namespace TransportesSoft_BackOffice
             this.aBCDeUnidadesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCDeRemolquesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCDeMunicipiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consumoDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consumoDeUnidadesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.viajesPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.próximosMantenimientosDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pólizasPorFechaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ingresosPorUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gastosPorUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viajesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,13 +53,13 @@ namespace TransportesSoft_BackOffice
             this.kilometrajePorUnidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroDePólizasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroTiposDePólizasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consumoDeUnidadesToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.seguridadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBCDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.configuraciónDeSucursalLocalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusConexion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ingresosPorUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -68,12 +68,11 @@ namespace TransportesSoft_BackOffice
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CatalogosToolStripMenuItem,
-            this.unidadesToolStripMenuItem,
             this.reportesToolStripMenuItem,
             this.registrosToolStripMenuItem,
             this.contabilidadToolStripMenuItem,
-            this.seguridadToolStripMenuItem,
-            this.configuraciónToolStripMenuItem});
+            this.configuraciónToolStripMenuItem,
+            this.seguridadToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1264, 24);
@@ -95,52 +94,37 @@ namespace TransportesSoft_BackOffice
             // aBCDeClientesToolStripMenuItem
             // 
             this.aBCDeClientesToolStripMenuItem.Name = "aBCDeClientesToolStripMenuItem";
-            this.aBCDeClientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aBCDeClientesToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBCDeClientesToolStripMenuItem.Text = "ABC de Clientes";
             this.aBCDeClientesToolStripMenuItem.Click += new System.EventHandler(this.aBCDeClientesToolStripMenuItem_Click);
             // 
             // aBCDeOperadoresToolStripMenuItem1
             // 
             this.aBCDeOperadoresToolStripMenuItem1.Name = "aBCDeOperadoresToolStripMenuItem1";
-            this.aBCDeOperadoresToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aBCDeOperadoresToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.aBCDeOperadoresToolStripMenuItem1.Text = "ABC de Operadores";
             this.aBCDeOperadoresToolStripMenuItem1.Click += new System.EventHandler(this.aBCDeOperadoresToolStripMenuItem1_Click);
             // 
             // aBCDeUnidadesToolStripMenuItem1
             // 
             this.aBCDeUnidadesToolStripMenuItem1.Name = "aBCDeUnidadesToolStripMenuItem1";
-            this.aBCDeUnidadesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aBCDeUnidadesToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.aBCDeUnidadesToolStripMenuItem1.Text = "ABC de Unidades";
             this.aBCDeUnidadesToolStripMenuItem1.Click += new System.EventHandler(this.aBCDeUnidadesToolStripMenuItem1_Click);
             // 
             // aBCDeRemolquesToolStripMenuItem1
             // 
             this.aBCDeRemolquesToolStripMenuItem1.Name = "aBCDeRemolquesToolStripMenuItem1";
-            this.aBCDeRemolquesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aBCDeRemolquesToolStripMenuItem1.Size = new System.Drawing.Size(177, 22);
             this.aBCDeRemolquesToolStripMenuItem1.Text = "ABC de Remolques";
             this.aBCDeRemolquesToolStripMenuItem1.Click += new System.EventHandler(this.aBCDeRemolquesToolStripMenuItem1_Click);
             // 
             // aBCDeMunicipiosToolStripMenuItem
             // 
             this.aBCDeMunicipiosToolStripMenuItem.Name = "aBCDeMunicipiosToolStripMenuItem";
-            this.aBCDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aBCDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.aBCDeMunicipiosToolStripMenuItem.Text = "ABC de Municipios";
             this.aBCDeMunicipiosToolStripMenuItem.Click += new System.EventHandler(this.aBCDeMunicipiosToolStripMenuItem_Click);
-            // 
-            // unidadesToolStripMenuItem
-            // 
-            this.unidadesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.consumoDeUnidadesToolStripMenuItem});
-            this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
-            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.unidadesToolStripMenuItem.Text = "Unidades";
-            // 
-            // consumoDeUnidadesToolStripMenuItem
-            // 
-            this.consumoDeUnidadesToolStripMenuItem.Name = "consumoDeUnidadesToolStripMenuItem";
-            this.consumoDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.consumoDeUnidadesToolStripMenuItem.Text = "Consumo de Unidades";
-            this.consumoDeUnidadesToolStripMenuItem.Click += new System.EventHandler(this.consumoDeUnidadesToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
@@ -149,7 +133,8 @@ namespace TransportesSoft_BackOffice
             this.viajesPorFechaToolStripMenuItem,
             this.próximosMantenimientosDeUnidadesToolStripMenuItem,
             this.pólizasPorFechaToolStripMenuItem,
-            this.ingresosPorUnidadesToolStripMenuItem});
+            this.ingresosPorUnidadesToolStripMenuItem,
+            this.gastosPorUnidadesToolStripMenuItem});
             this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
             this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.reportesToolStripMenuItem.Text = "Reportes";
@@ -182,6 +167,20 @@ namespace TransportesSoft_BackOffice
             this.pólizasPorFechaToolStripMenuItem.Text = "Pólizas Por Fecha";
             this.pólizasPorFechaToolStripMenuItem.Click += new System.EventHandler(this.pólizasPorFechaToolStripMenuItem_Click);
             // 
+            // ingresosPorUnidadesToolStripMenuItem
+            // 
+            this.ingresosPorUnidadesToolStripMenuItem.Name = "ingresosPorUnidadesToolStripMenuItem";
+            this.ingresosPorUnidadesToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.ingresosPorUnidadesToolStripMenuItem.Text = "Ingresos Por Unidades";
+            this.ingresosPorUnidadesToolStripMenuItem.Click += new System.EventHandler(this.ingresosPorUnidadesToolStripMenuItem_Click);
+            // 
+            // gastosPorUnidadesToolStripMenuItem
+            // 
+            this.gastosPorUnidadesToolStripMenuItem.Name = "gastosPorUnidadesToolStripMenuItem";
+            this.gastosPorUnidadesToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
+            this.gastosPorUnidadesToolStripMenuItem.Text = "Gastos Por Unidades";
+            this.gastosPorUnidadesToolStripMenuItem.Click += new System.EventHandler(this.gastosPorUnidadesToolStripMenuItem_Click);
+            // 
             // registrosToolStripMenuItem
             // 
             this.registrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -193,7 +192,7 @@ namespace TransportesSoft_BackOffice
             // viajesToolStripMenuItem
             // 
             this.viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
-            this.viajesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viajesToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.viajesToolStripMenuItem.Text = "Viajes";
             this.viajesToolStripMenuItem.Click += new System.EventHandler(this.viajesToolStripMenuItem_Click);
             // 
@@ -204,7 +203,8 @@ namespace TransportesSoft_BackOffice
             this.mantenimientosToolStripMenuItem,
             this.kilometrajePorUnidadToolStripMenuItem,
             this.registroDePólizasToolStripMenuItem,
-            this.registroTiposDePólizasToolStripMenuItem});
+            this.registroTiposDePólizasToolStripMenuItem,
+            this.consumoDeUnidadesToolStripMenuItem2});
             this.contabilidadToolStripMenuItem.Name = "contabilidadToolStripMenuItem";
             this.contabilidadToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.contabilidadToolStripMenuItem.Text = "Contabilidad";
@@ -244,6 +244,13 @@ namespace TransportesSoft_BackOffice
             this.registroTiposDePólizasToolStripMenuItem.Text = "Registro Tipos de Pólizas";
             this.registroTiposDePólizasToolStripMenuItem.Click += new System.EventHandler(this.registroTiposDePólizasToolStripMenuItem_Click);
             // 
+            // consumoDeUnidadesToolStripMenuItem2
+            // 
+            this.consumoDeUnidadesToolStripMenuItem2.Name = "consumoDeUnidadesToolStripMenuItem2";
+            this.consumoDeUnidadesToolStripMenuItem2.Size = new System.Drawing.Size(203, 22);
+            this.consumoDeUnidadesToolStripMenuItem2.Text = "Consumo de Unidades";
+            this.consumoDeUnidadesToolStripMenuItem2.Click += new System.EventHandler(this.consumoDeUnidadesToolStripMenuItem2_Click);
+            // 
             // seguridadToolStripMenuItem
             // 
             this.seguridadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -255,7 +262,7 @@ namespace TransportesSoft_BackOffice
             // aBCDeUsuariosToolStripMenuItem
             // 
             this.aBCDeUsuariosToolStripMenuItem.Name = "aBCDeUsuariosToolStripMenuItem";
-            this.aBCDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.aBCDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aBCDeUsuariosToolStripMenuItem.Text = "ABC de Usuarios";
             this.aBCDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.aBCDeUsuariosToolStripMenuItem_Click);
             // 
@@ -290,13 +297,6 @@ namespace TransportesSoft_BackOffice
             this.toolStripStatusConexion.Size = new System.Drawing.Size(58, 17);
             this.toolStripStatusConexion.Text = "Conexion";
             // 
-            // ingresosPorUnidadesToolStripMenuItem
-            // 
-            this.ingresosPorUnidadesToolStripMenuItem.Name = "ingresosPorUnidadesToolStripMenuItem";
-            this.ingresosPorUnidadesToolStripMenuItem.Size = new System.Drawing.Size(282, 22);
-            this.ingresosPorUnidadesToolStripMenuItem.Text = "Ingresos Por Unidades";
-            this.ingresosPorUnidadesToolStripMenuItem.Click += new System.EventHandler(this.ingresosPorUnidadesToolStripMenuItem_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,8 +322,6 @@ namespace TransportesSoft_BackOffice
         #endregion
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem CatalogosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unidadesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem consumoDeUnidadesToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusConexion;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
@@ -349,6 +347,8 @@ namespace TransportesSoft_BackOffice
         private System.Windows.Forms.ToolStripMenuItem registroTiposDePólizasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pólizasPorFechaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ingresosPorUnidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gastosPorUnidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem consumoDeUnidadesToolStripMenuItem2;
     }
 }
 

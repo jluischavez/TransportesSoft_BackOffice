@@ -39,6 +39,10 @@ namespace TransportesSoft_BackOffice.Forms
         private Service_ContFrmPolizas lServcontFrmPolizas;
         private List<ContPolizasReg> lListContFrmPolizas;
 
+        /*Rep GastosPorUnidad*/
+        private Service_GastosPorUnidad lServGastosPorUnidad;
+        private List<C_ObtenerGastosUnidades> lListGastosUnidades;
+
         public Boolean HayInformacion = false;
         public enum TipoReporte
         {
@@ -48,6 +52,7 @@ namespace TransportesSoft_BackOffice.Forms
             UnidadesPorMantenimiento = 4,
             ContabilidadPolizasPorFecha = 5,
             IngresosPorUnidad = 6,
+            GastosPorUnidad = 7
         }
         #region "Constructor"
         public FormReporte(TipoReporte tipoReporte)
@@ -80,6 +85,10 @@ namespace TransportesSoft_BackOffice.Forms
             {
                 RptIngresosPorUnidad(FechaInicial, FechaFinal, ID);
             }
+            else if (tipoReporte == TipoReporte.GastosPorUnidad)
+            {
+                RptGastosPorUnidad(FechaInicial, FechaFinal, ID);
+            }
         }
         /*CONSTRUCTOR DE REPORTE DE MANTENIMIENTO DE UNIDADES*/
         public FormReporte(TipoReporte tipoReporte, int kilometrajeMantenimiento)
@@ -93,6 +102,52 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
         #endregion
+
+        private void RptGastosPorUnidad(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
+        {
+            try
+            {
+                //Implementar reporte de ingresos por unidad
+                lServGastosPorUnidad = new Service_GastosPorUnidad();
+                if (idUnidad == 0)
+                {
+                    lListGastosUnidades = lServGastosPorUnidad.ObtenerGastosPorUnidad(FechaInicial, FechaFinal);
+                }
+                else
+                {
+                    lListGastosUnidades = lServGastosPorUnidad.ObtenerGastosPorUnidad(FechaInicial, FechaFinal, idUnidad);
+                }
+                if (lListGastosUnidades.Count == 0)
+                {
+                    MessageBox.Show("No hay información para las fechas seleccionadas", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    HayInformacion = false;
+                    return;
+                }
+
+                HayInformacion = true;
+
+                lServcontSucLocal = new Service_ConfSucursalLocal();
+                lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
+                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
+                string reportPath = Path.Combine(projectRoot, "Reports", "RptGastosPorUnidad.rdlc");
+
+                ReportDataSource rds = new ReportDataSource("DSGastosPorUnidad", lListGastosUnidades);
+                reportViewer1.LocalReport.DataSources.Clear();
+                reportViewer1.LocalReport.DataSources.Add(rds);
+                reportViewer1.LocalReport.ReportPath = reportPath;
+
+                /*Agrega la sucursal*/
+                ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
+                reportViewer1.LocalReport.SetParameters(paramSucursal);
+                reportViewer1.RefreshReport();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error." + ex.Message, "Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void RptIngresosPorUnidad(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
         {
             try

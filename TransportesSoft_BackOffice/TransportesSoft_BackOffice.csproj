@@ -292,6 +292,7 @@
     <Compile Include="Models\ContPolizasReg.cs" />
     <Compile Include="Models\ContPreciosDiesel.cs" />
     <Compile Include="Models\ContTiposPolizas.cs" />
+    <Compile Include="Models\C_ObtenerGastosUnidades.cs" />
     <Compile Include="Models\EstadosCat.cs" />
     <Compile Include="Models\MunicipiosCatYEstado.cs" />
     <Compile Include="Models\ProximoMantenimientoUnidades.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="Repositories\Repo_ContUnidadesCat.cs" />
     <Compile Include="Repositories\Repo_ContViajes.cs" />
     <Compile Include="Repositories\Repo_EstadosCat.cs" />
+    <Compile Include="Repositories\Repo_GastosPorUnidad.cs" />
     <Compile Include="Repositories\Repo_MunicipiosCat.cs" />
     <Compile Include="Repositories\Repo_RolesCat.cs" />
     <Compile Include="Repositories\Repo_UsuarioRoles.cs" />
@@ -332,6 +334,7 @@
     <Compile Include="Services\Service_ContUnidadesCat.cs" />
     <Compile Include="Services\Service_ContViajes.cs" />
     <Compile Include="Services\Service_EstadosCat.cs" />
+    <Compile Include="Services\Service_GastosPorUnidad.cs" />
     <Compile Include="Services\Service_MunicipiosCat.cs" />
     <Compile Include="Services\Service_RolesCat.cs" />
     <Compile Include="Services\Service_UsuarioRoles.cs" />
@@ -403,6 +406,9 @@
     <EmbeddedResource Include="Forms\RptsFrmConsumoUnidadesPorFecha.resx">
       <DependentUpon>RptsFrmConsumoUnidadesPorFecha.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RptsFrmGastosPorUnidad.resx">
+      <DependentUpon>RptsFrmGastosPorUnidad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\RptsFrmIngresosPorUnidad.resx">
       <DependentUpon>RptsFrmIngresosPorUnidad.cs</DependentUpon>
     </EmbeddedResource>
@@ -429,6 +435,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\RptConsumoUnidadesPorFecha.rdlc" />
+    <EmbeddedResource Include="Reports\RptGastosPorUnidad.rdlc" />
     <EmbeddedResource Include="Reports\RptIngresosPorUnidades.rdlc" />
     <EmbeddedResource Include="Reports\RptMantenimientoUnidades.rdlc" />
     <EmbeddedResource Include="Reports\RptPolizasPorFecha.rdlc" />
@@ -448,6 +455,7 @@
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContPolizasReg.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContPreciosDiesel.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ContTiposPolizas.datasource" />
+    <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.C_ObtenerGastosUnidades.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.EstadosCat.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadDTO+MantenimientoUnidadDTO.datasource" />
     <None Include="Properties\DataSources\TransportesSoft_BackOffice.Models.ProximoMantenimientoUnidadDTO.datasource" />

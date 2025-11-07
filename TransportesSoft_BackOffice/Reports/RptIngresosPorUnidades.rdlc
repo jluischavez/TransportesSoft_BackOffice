@@ -604,7 +604,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Monto.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>'$'#,0.00;('$'#,0.00)</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -620,6 +622,7 @@
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -634,7 +637,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!IVA.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>'$'#,0.00;('$'#,0.00)</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -650,6 +655,7 @@
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -664,7 +670,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Retenciones.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>'$'#,0.00;('$'#,0.00)</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -680,6 +688,7 @@
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -694,7 +703,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Maniobra.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>'$'#,0.00;('$'#,0.00)</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -710,6 +721,7 @@
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -724,7 +736,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Total.Value</Value>
-                                  <Style />
+                                  <Style>
+                                    <Format>'$'#,0.00;('$'#,0.00)</Format>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -740,6 +754,7 @@
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -803,7 +818,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!Monto.Value, "DSIngresosPorUnidades")</Value>
-                    <Style />
+                    <Style>
+                      <Format>'$'#,0.00;('$'#,0.00)</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -823,6 +840,7 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
           <Textbox Name="IVA1">
@@ -833,7 +851,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!IVA.Value, "DSIngresosPorUnidades")</Value>
-                    <Style />
+                    <Style>
+                      <Format>'$'#,0.00;('$'#,0.00)</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -853,6 +873,7 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
           <Textbox Name="Retenciones1">
@@ -863,7 +884,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!Retenciones.Value, "DSIngresosPorUnidades")</Value>
-                    <Style />
+                    <Style>
+                      <Format>'$'#,0.00;('$'#,0.00)</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -883,6 +906,7 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
           <Textbox Name="Maniobra1">
@@ -893,7 +917,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!Maniobra.Value, "DSIngresosPorUnidades")</Value>
-                    <Style />
+                    <Style>
+                      <Format>'$'#,0.00;('$'#,0.00)</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -913,6 +939,7 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
           <Textbox Name="Total1">
@@ -923,7 +950,9 @@
                 <TextRuns>
                   <TextRun>
                     <Value>=Sum(Fields!Total.Value, "DSIngresosPorUnidades")</Value>
-                    <Style />
+                    <Style>
+                      <Format>'$'#,0.00;('$'#,0.00)</Format>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
@@ -943,6 +972,7 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>es-MX</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
         </ReportItems>
@@ -994,7 +1024,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Reporte de Mantenimiento de unidades</Value>
+                      <Value>Reporte de ingresos de unidades</Value>
                       <Style>
                         <FontSize>18pt</FontSize>
                       </Style>
