@@ -211,12 +211,6 @@ namespace TransportesSoft_BackOffice
 
         #endregion
         #region "Formularios"
-
-        private void consumoDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormFactory.AbrirFormulario<ContFrmConsumosUnidades>(this);
-        }
-
         private void consumoDeUnidadesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FormFactory.AbrirFormulario<RptsFrmConsumoUnidadesPorFecha>(this);
@@ -292,10 +286,17 @@ namespace TransportesSoft_BackOffice
         {
             FormFactory.AbrirFormulario<RptsFrmPolizasPorFecha>(this);
         }
-
         private void ingresosPorUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormFactory.AbrirFormulario<RptsFrmIngresosPorUnidad>(this);
+        }
+        private void gastosPorUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<RptsFrmGastosPorUnidad>(this);
+        }
+        private void consumoDeUnidadesToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            FormFactory.AbrirFormulario<ContFrmConsumosUnidades>(this);
         }
         #endregion
 
