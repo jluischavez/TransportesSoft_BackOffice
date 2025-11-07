@@ -80,14 +80,17 @@ namespace TransportesSoft_BackOffice.Forms
             else if (tipoReporte == TipoReporte.ContabilidadPolizasPorFecha)
             {
                 RptContPolizasPorFecha(FechaInicial, FechaFinal, ID);
+                this.Text = "Reporte de pólizas por fecha.";
             }
             else if (tipoReporte == TipoReporte.IngresosPorUnidad)
             {
                 RptIngresosPorUnidad(FechaInicial, FechaFinal, ID);
+                this.Text = "Reporte de ingresos por unidad.";
             }
             else if (tipoReporte == TipoReporte.GastosPorUnidad)
             {
                 RptGastosPorUnidad(FechaInicial, FechaFinal, ID);
+                this.Text = "Reporte de gastos por unidad.";
             }
         }
         /*CONSTRUCTOR DE REPORTE DE MANTENIMIENTO DE UNIDADES*/
