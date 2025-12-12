@@ -89,7 +89,7 @@ namespace TransportesSoft_BackOffice.Repositories
             else
                 return false;
         }
-        public bool ValidarNumeroTransporte(int NumeroTransporte)
+        public bool ValidarNumeroTransporte(string NumeroTransporte)
         {
             List<ContViajes> viajes = new List<ContViajes>();
             using (SqlConnection db = new SqlConnection(ConnectionString))

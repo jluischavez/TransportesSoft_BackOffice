@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnExaminar = new System.Windows.Forms.Button();
+            this.BtnExaminarURLBackground = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtImagen = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,23 +40,26 @@
             this.BtnGuardar = new System.Windows.Forms.Button();
             this.TBC1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtRutaReportes = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.txtKilometrajeNotificaciones = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnExaminarRutaReportes = new System.Windows.Forms.Button();
             this.TBC1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // BtnExaminar
+            // BtnExaminarURLBackground
             // 
-            this.BtnExaminar.Location = new System.Drawing.Point(335, 4);
-            this.BtnExaminar.Name = "BtnExaminar";
-            this.BtnExaminar.Size = new System.Drawing.Size(63, 23);
-            this.BtnExaminar.TabIndex = 4;
-            this.BtnExaminar.Text = "Examinar";
-            this.BtnExaminar.UseVisualStyleBackColor = true;
-            this.BtnExaminar.Click += new System.EventHandler(this.BtnExaminar_Click);
+            this.BtnExaminarURLBackground.Location = new System.Drawing.Point(335, 4);
+            this.BtnExaminarURLBackground.Name = "BtnExaminarURLBackground";
+            this.BtnExaminarURLBackground.Size = new System.Drawing.Size(63, 23);
+            this.BtnExaminarURLBackground.TabIndex = 4;
+            this.BtnExaminarURLBackground.Text = "Examinar";
+            this.BtnExaminarURLBackground.UseVisualStyleBackColor = true;
+            this.BtnExaminarURLBackground.Click += new System.EventHandler(this.BtnExaminar_Click);
             // 
             // label4
             // 
@@ -126,7 +129,7 @@
             // 
             // BtnGuardar
             // 
-            this.BtnGuardar.Location = new System.Drawing.Point(172, 156);
+            this.BtnGuardar.Location = new System.Drawing.Point(172, 169);
             this.BtnGuardar.Name = "BtnGuardar";
             this.BtnGuardar.Size = new System.Drawing.Size(75, 23);
             this.BtnGuardar.TabIndex = 1;
@@ -141,11 +144,14 @@
             this.TBC1.Location = new System.Drawing.Point(12, 12);
             this.TBC1.Name = "TBC1";
             this.TBC1.SelectedIndex = 0;
-            this.TBC1.Size = new System.Drawing.Size(412, 138);
+            this.TBC1.Size = new System.Drawing.Size(442, 151);
             this.TBC1.TabIndex = 1;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnExaminarRutaReportes);
+            this.tabPage1.Controls.Add(this.txtRutaReportes);
+            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.txtTelefono);
             this.tabPage1.Controls.Add(this.txtNombre);
             this.tabPage1.Controls.Add(this.label1);
@@ -155,22 +161,38 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(404, 112);
+            this.tabPage1.Size = new System.Drawing.Size(434, 125);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtRutaReportes
+            // 
+            this.txtRutaReportes.Location = new System.Drawing.Point(112, 85);
+            this.txtRutaReportes.Name = "txtRutaReportes";
+            this.txtRutaReportes.Size = new System.Drawing.Size(229, 20);
+            this.txtRutaReportes.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 88);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(79, 13);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Ruta Reportes:";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.txtKilometrajeNotificaciones);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.BtnExaminar);
+            this.tabPage2.Controls.Add(this.BtnExaminarURLBackground);
             this.tabPage2.Controls.Add(this.txtImagen);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(404, 112);
+            this.tabPage2.Size = new System.Drawing.Size(434, 125);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Configuración";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -193,11 +215,21 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Kilometraje / Notificaciones:";
             // 
+            // btnExaminarRutaReportes
+            // 
+            this.btnExaminarRutaReportes.Location = new System.Drawing.Point(347, 82);
+            this.btnExaminarRutaReportes.Name = "btnExaminarRutaReportes";
+            this.btnExaminarRutaReportes.Size = new System.Drawing.Size(63, 23);
+            this.btnExaminarRutaReportes.TabIndex = 8;
+            this.btnExaminarRutaReportes.Text = "Examinar";
+            this.btnExaminarRutaReportes.UseVisualStyleBackColor = true;
+            this.btnExaminarRutaReportes.Click += new System.EventHandler(this.btnExaminarRutaReportes_Click);
+            // 
             // ConfFrmSucursalLocal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 187);
+            this.ClientSize = new System.Drawing.Size(466, 204);
             this.Controls.Add(this.TBC1);
             this.Controls.Add(this.BtnGuardar);
             this.Name = "ConfFrmSucursalLocal";
@@ -222,11 +254,14 @@
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Button BtnExaminar;
+        private System.Windows.Forms.Button BtnExaminarURLBackground;
         private System.Windows.Forms.TabControl TBC1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox txtKilometrajeNotificaciones;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtRutaReportes;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnExaminarRutaReportes;
     }
 }

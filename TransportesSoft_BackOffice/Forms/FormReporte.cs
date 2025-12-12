@@ -18,6 +18,10 @@ namespace TransportesSoft_BackOffice.Forms
 {
     public partial class FormReporte : Base
     {
+        /*CONFIGURACION DE SUCURSAL*/
+        private Service_ConfSucursalLocal lServiceConfSucursalLocal;
+        private ConfSucursalLocal lConfSucursalLocal;
+
         /*Cont Unidades*/
         private Service_ContKilometrajeUnidad lServiceContKilometraje;
         private List<ProximoMantenimientoUnidades> lListProximoMantenimientoUnidadDTO;
@@ -43,6 +47,8 @@ namespace TransportesSoft_BackOffice.Forms
         private Service_GastosPorUnidad lServGastosPorUnidad;
         private List<C_ObtenerGastosUnidades> lListGastosUnidades;
 
+        private string RutaReporte;
+
         public Boolean HayInformacion = false;
         public enum TipoReporte
         {
@@ -66,7 +72,15 @@ namespace TransportesSoft_BackOffice.Forms
 
             //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
 
+
             InitializeComponent();
+
+            lConfSucursalLocal = new ConfSucursalLocal();
+            lServiceConfSucursalLocal = new Service_ConfSucursalLocal();
+            lConfSucursalLocal = lServiceConfSucursalLocal.ObtenerConfiguracionSucursalLocal();
+
+            RutaReporte = lConfSucursalLocal.RutaReportes;
+
             if (tipoReporte == TipoReporte.ContabilidadConsumoUnidades)
             {
                 RptContConsumoUnidadesPorFecha(FechaInicial, FechaFinal, ID);
@@ -98,7 +112,11 @@ namespace TransportesSoft_BackOffice.Forms
         {
             InitializeComponent();
 
-            if(tipoReporte == TipoReporte.UnidadesPorMantenimiento)
+            lConfSucursalLocal = new ConfSucursalLocal();
+            lServiceConfSucursalLocal = new Service_ConfSucursalLocal();
+            lConfSucursalLocal = lServiceConfSucursalLocal.ObtenerConfiguracionSucursalLocal();
+
+            if (tipoReporte == TipoReporte.UnidadesPorMantenimiento)
             {
                 RptMantenimientoUnidades(kilometrajeMantenimiento);
                 this.Text = "Reporte de mantenimiento de unidades.";
@@ -131,13 +149,13 @@ namespace TransportesSoft_BackOffice.Forms
 
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptGastosPorUnidad.rdlc");
+
+                RutaReporte = Path.Combine(RutaReporte, "RptGastosPorUnidad.rdlc");
 
                 ReportDataSource rds = new ReportDataSource("DSGastosPorUnidad", lListGastosUnidades);
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+                reportViewer1.LocalReport.ReportPath = RutaReporte;
 
                 /*Agrega la sucursal*/
                 ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
@@ -147,7 +165,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error." + ex.Message, "Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error." + ex.Message, " Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -176,13 +194,13 @@ namespace TransportesSoft_BackOffice.Forms
 
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptIngresosPorUnidades.rdlc");
+
+                RutaReporte = Path.Combine(RutaReporte, "RptIngresosPorUnidades.rdlc");
 
                 ReportDataSource rds = new ReportDataSource("DSIngresosPorUnidades", lListContViajes);
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+                reportViewer1.LocalReport.ReportPath = RutaReporte;
 
                 /*Agrega la sucursal*/
                 ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
@@ -192,7 +210,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error." + ex.Message,"Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error." + ex.Message, " Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void RptContPolizasPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idTipoPoliza)
@@ -218,13 +236,13 @@ namespace TransportesSoft_BackOffice.Forms
                 HayInformacion = true;
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptPolizasPorFecha.rdlc");
+
+                RutaReporte = Path.Combine(RutaReporte, "RptPolizasPorFecha.rdlc");
                
                 ReportDataSource rds = new ReportDataSource("DSContPolizasReg", lListContFrmPolizas);
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+                reportViewer1.LocalReport.ReportPath = RutaReporte;
                 
                 /*Agrega la sucursal*/
                 ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
@@ -233,7 +251,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error." + ex.Message, " Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void RptContConsumoUnidadesPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idUnidad)
@@ -260,14 +278,13 @@ namespace TransportesSoft_BackOffice.Forms
 
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
-
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptConsumoUnidadesPorFecha.rdlc");
+                
+                RutaReporte = Path.Combine(RutaReporte, "RptConsumoUnidadesPorFecha.rdlc");
 
                 ReportDataSource rds = new ReportDataSource("ContConsumoUnidades", lContConsumoUnidades);
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+                reportViewer1.LocalReport.ReportPath = RutaReporte;
 
                 /*Agrega la sucursal*/
                 ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
@@ -277,7 +294,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Error." + ex.Message, " Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void RptContViajesPorFecha(DateTime FechaInicial, DateTime FechaFinal, int idCliente)
@@ -305,13 +322,12 @@ namespace TransportesSoft_BackOffice.Forms
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
 
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptViajesPorFecha.rdlc");
+                RutaReporte = Path.Combine(RutaReporte, "RptViajesPorFecha.rdlc");
 
                 ReportDataSource rds = new ReportDataSource("DSContViajesYOperador", lListContViajesYOperador);
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+                reportViewer1.LocalReport.ReportPath = RutaReporte;
 
                 /*Agrega la sucursal*/
                 ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
@@ -321,7 +337,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error." + ex.Message, " Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void RptMantenimientoUnidades(int kilometrajeMantenimiento)
@@ -351,13 +367,12 @@ namespace TransportesSoft_BackOffice.Forms
                 lServcontSucLocal = new Service_ConfSucursalLocal();
                 lConfSucLocal = lServcontSucLocal.ObtenerConfiguracionSucursalLocal();
 
-                string projectRoot = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\"));
-                string reportPath = Path.Combine(projectRoot, "Reports", "RptMantenimientoUnidades.rdlc");
+                RutaReporte = Path.Combine(lConfSucursalLocal.RutaReportes, "RptMantenimientoUnidades.rdlc");
 
                 ReportDataSource rds = new ReportDataSource("DSProximoMantenimientoUnidadesDTO", lListProximoMantenimientoUnidadDTO);
                 reportViewer1.LocalReport.DataSources.Clear();
                 reportViewer1.LocalReport.DataSources.Add(rds);
-                reportViewer1.LocalReport.ReportPath = reportPath;
+                reportViewer1.LocalReport.ReportPath = RutaReporte;
 
                 /*Agrega la sucursal*/
                 ReportParameter paramSucursal = new ReportParameter("txtSucursal", lConfSucLocal.NombreSucursal);
@@ -367,7 +382,7 @@ namespace TransportesSoft_BackOffice.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar reporte.", "Error." + ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error." + ex.Message, "Error al generar reporte.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #region "Eventos"

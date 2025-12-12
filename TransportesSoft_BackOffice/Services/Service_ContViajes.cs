@@ -46,7 +46,7 @@ namespace TransportesSoft_BackOffice.Services
         {
             return RepoContViajes.ValidarFolioFactura(FolioFactura);
         }
-        public bool ValidarNumeroTransporte(int NumeroTransporte)
+        public bool ValidarNumeroTransporte(string NumeroTransporte)
         {
             return RepoContViajes.ValidarNumeroTransporte(NumeroTransporte);
         }
