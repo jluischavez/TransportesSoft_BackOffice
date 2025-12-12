@@ -97,10 +97,18 @@ namespace TransportesSoft_BackOffice.Forms
 
         private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permite solo dígitos (0-9) y teclas de control como Backspace
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            string separadorDecimal = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+
+            // Permite dígitos, control (Backspace) y el separador decimal
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar.ToString() != separadorDecimal)
             {
-                e.Handled = true; // Bloquea el carácter
+                e.Handled = true;
+            }
+
+            // Evita más de un separador decimal
+            if (e.KeyChar.ToString() == separadorDecimal && (sender as TextBox).Text.Contains(separadorDecimal))
+            {
+                e.Handled = true;
             }
         }
     }

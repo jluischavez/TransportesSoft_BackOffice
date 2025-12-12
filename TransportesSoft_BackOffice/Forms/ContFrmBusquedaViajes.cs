@@ -87,7 +87,7 @@ namespace TransportesSoft_BackOffice.Forms
                     FechaViaje = Convert.ToDateTime(DGV.Rows[rowIndex].Cells["FechaViaje"].Value),
                     FechaFactura = Convert.ToDateTime(DGV.Rows[rowIndex].Cells["FechaFactura"].Value),
                     Factura = DGV.Rows[rowIndex].Cells["Factura"].Value?.ToString(),
-                    NumeroTransporte = Convert.ToInt32(DGV.Rows[rowIndex].Cells["NumeroTransporte"].Value),
+                    NumeroTransporte = DGV.Rows[rowIndex].Cells["NumeroTransporte"].Value?.ToString(),
                     Origen = DGV.Rows[rowIndex].Cells["Origen"].Value?.ToString(),
                     Destino = DGV.Rows[rowIndex].Cells["Destino"].Value?.ToString(),
                     Monto = Convert.ToDecimal(DGV.Rows[rowIndex].Cells["Monto"].Value),
