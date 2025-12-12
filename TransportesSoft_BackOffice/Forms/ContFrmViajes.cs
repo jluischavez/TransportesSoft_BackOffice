@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -23,6 +24,15 @@ namespace TransportesSoft_BackOffice.Forms
         private List<ContClientesCat> lListContClientes;
         private List<MunicipiosCat> lListMunicipios;
         private List<ContOperadores> lListOperadores;
+
+        private const int cIVA = 16;
+        private const int cRETENCION = 4;
+
+        private bool ivaEditado = false;
+        private bool retencionEditado = false;
+
+        // Evita reaccionar a cambios programáticos
+        private bool actualizando = false;
 
         Boolean _esConsulta = false;
 
@@ -56,19 +66,22 @@ namespace TransportesSoft_BackOffice.Forms
             ConfiguracionFormulario();
             DTFechaFactura.Value = DateTime.Now;
             DTFechaViaje.Value = DateTime.Now;
-            txtFolioFactura.Text = String.Empty;
-            txtID.Text = string.Empty;
+            SetTextSafe(txtFolioFactura, string.Empty);
+            SetTextSafe(txtID, string.Empty);
+            SetTextSafe(txtNumeroTransporte, string.Empty);
 
-            txtNumeroTransporte.Text = String.Empty;
-            txtMonto.Text = "0.00";
-            txtIVA.Text = "0.00";
-            txtManiobra.Text = "0.00";
-            txtRetenciones.Text = "0.00";
-            txtTotal.Text = "0.00";
+            SetTextSafe(txtMonto, "0.00");
+            SetTextSafe(txtIVA, "0.00");
+            SetTextSafe(txtManiobra, "0.00");
+            SetTextSafe(txtRetenciones, "0.00");
+            SetTextSafe(txtTotal, "0.00");
 
-            txtComentarios.Text = String.Empty;
+            SetTextSafe(txtComentarios, string.Empty);
+
             lServiceViajes = new Service_ContViajes();
 
+            ivaEditado = false;
+            retencionEditado = false;
             EsConsulta = false;
         }
         private void ConfiguracionFormulario()
@@ -118,13 +131,13 @@ namespace TransportesSoft_BackOffice.Forms
         }
         private void CalcularTotales()
         {
-            decimal Monto = Convert.ToDecimal(txtMonto.Text);
-            decimal IVA = Convert.ToDecimal(txtIVA.Text);
-            decimal Retenciones = Convert.ToDecimal(txtRetenciones.Text);
-            decimal Maniobra = Convert.ToDecimal(txtManiobra.Text);
-            decimal total = Monto + IVA - Retenciones - Maniobra;
+            decimal monto = decimal.TryParse(txtMonto.Text, out var m) ? m : 0m;
+            decimal iva = decimal.TryParse(txtIVA.Text, out var i) ? i : 0m;
+            decimal ret = decimal.TryParse(txtRetenciones.Text, out var r) ? r : 0m;
+            decimal maniobra = decimal.TryParse(txtManiobra.Text, out var mn) ? mn : 0m;
 
-            txtTotal.Text = total.ToString();
+            var total = monto + iva - ret - maniobra;
+            SetTextSafe(txtTotal, total.ToString("N2"));
         }
         private bool GuardarViaje()
         {
@@ -151,12 +164,14 @@ namespace TransportesSoft_BackOffice.Forms
                     }
                     objViaje.Factura = txtFolioFactura.Text;
 
-                    if (!lServiceViajes.ValidarNumeroTransporte(Convert.ToInt32(txtNumeroTransporte.Text)) && !_esConsulta)
+
+
+                    if (!lServiceViajes.ValidarNumeroTransporte(txtNumeroTransporte.Text) && !_esConsulta)
                     {
                         MessageBox.Show($"El NumeroTransporte {txtNumeroTransporte.Text} ya fue registrado anteriormente.", "Error al guardar.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return false;
                     }
-                        objViaje.NumeroTransporte = Convert.ToInt32(txtNumeroTransporte.Text);
+                    objViaje.NumeroTransporte = txtNumeroTransporte.Text;
 
                     /*DESTINO Y ORIGEN*/
                     MunicipiosCat OrigenSeleccionado = lListMunicipios
@@ -179,7 +194,16 @@ namespace TransportesSoft_BackOffice.Forms
 
                     /*Consulta datos de unidad y remolque*/
                     lServiceUnidades = new Service_ContUnidadesCat();
+                    
+                    
                     ContUnidadesCat objUnidad = lServiceUnidades.UnidadPorID(objViaje.id_Operador);
+
+                    if( objUnidad == null )
+                    {
+                        MessageBox.Show("Hubo un error al consultar la unidad del operador, favor de verificar que tenga unidad y remolque asignados.", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return false;
+                    }
+                    
                     objViaje.id_Unidad = objUnidad.id_Unidad;
                     objViaje.id_Remolque = objUnidad.id_Remolque;
 
@@ -196,6 +220,11 @@ namespace TransportesSoft_BackOffice.Forms
                         }
                         MessageBox.Show("Se guardó el viaje correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Limpiar();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Hubo un error, favor de validar la información.", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     }
                     
                 }
@@ -219,7 +248,7 @@ namespace TransportesSoft_BackOffice.Forms
                 return false;
             if (string.IsNullOrEmpty(objViaje.Factura))
                 return false;
-            if (objViaje.NumeroTransporte == 0)
+            if (objViaje.NumeroTransporte == "0")
                 return false;
             if (string.IsNullOrEmpty(objViaje.Origen) || string.IsNullOrEmpty(objViaje.Destino))
                 return false;
@@ -275,23 +304,48 @@ namespace TransportesSoft_BackOffice.Forms
         private void txtNumeroTransporte_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             // Permitir solo dígitos y teclas de control (como Backspace)
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true; // Bloquea la tecla
-            }
+            //if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            //{
+            //    e.Handled = true; // Bloquea la tecla
+            //}
         }
 
         private void txtMonto_Leave(object sender, EventArgs e)
         {
-            TextBox txt = sender as TextBox;
-            if (decimal.TryParse(txt.Text, out decimal valor))
-            {
-                txt.Text = valor.ToString("N2");
-            }
+            if (actualizando) return;
+
+            if (decimal.TryParse(txtMonto.Text, out var monto))
+                SetTextSafe(txtMonto, monto.ToString("N2"));
             else
-            {
-                txt.Text = "0.00";
-            }
+                SetTextSafe(txtMonto, "0.00");
+
+            // Calcula IVA/Ret solo si el usuario no los tocó
+            if (!ivaEditado && decimal.TryParse(txtMonto.Text, out var m1))
+                SetTextSafe(txtIVA, (m1 * cIVA / 100m).ToString("N2"));
+
+            if (!retencionEditado && decimal.TryParse(txtMonto.Text, out var m2))
+                SetTextSafe(txtRetenciones, (m2 * cRETENCION / 100m).ToString("N2"));
+
+            CalcularTotales();
+        }
+
+        private void txtManiobra_Leave(object sender, EventArgs e)
+        {
+            if (actualizando) return;
+
+            if (decimal.TryParse(txtManiobra.Text, out var maniobra))
+                SetTextSafe(txtManiobra, maniobra.ToString("N2"));
+            else
+                SetTextSafe(txtManiobra, "0.00");
+
+            // IVA/Retenciones siguen basados en Monto (tu lógica), no en maniobra
+            if (!ivaEditado && decimal.TryParse(txtMonto.Text, out var m1))
+                SetTextSafe(txtIVA, (m1 * cIVA / 100m).ToString("N2"));
+
+            if (!retencionEditado && decimal.TryParse(txtMonto.Text, out var m2))
+                SetTextSafe(txtRetenciones, (m2 * cRETENCION / 100m).ToString("N2"));
+
+            CalcularTotales();
         }
 
         private void ContFrmViajes_KeyDown(object sender, KeyEventArgs e)
@@ -387,5 +441,52 @@ namespace TransportesSoft_BackOffice.Forms
         }
         #endregion
 
+        private void txtIVA_TextChanged(object sender, EventArgs e)
+        {
+            ivaEditado = true;
+        }
+
+        private void txtRetenciones_TextChanged(object sender, EventArgs e)
+        {
+            retencionEditado = true;
+        }
+
+        private void SetTextSafe(TextBox txt, string value)
+        {
+            actualizando = true;
+            txt.Text = value;
+            txt.Modified = false; // asegura que no se considere edición del usuario
+            actualizando = false;
+        }
+
+        private void txtIVA_Leave(object sender, EventArgs e)
+        {
+            if (actualizando) return;
+
+            // Si el usuario realmente modificó, queda marcado
+            ivaEditado = ((TextBox)sender).Modified;
+
+            // Normaliza formato
+            if (decimal.TryParse(txtIVA.Text, out var iva))
+                SetTextSafe(txtIVA, iva.ToString("N2"));
+            else
+                SetTextSafe(txtIVA, "0.00");
+
+            CalcularTotales();
+        }
+
+        private void txtRetenciones_Leave(object sender, EventArgs e)
+        {
+            if (actualizando) return;
+
+            retencionEditado = ((TextBox)sender).Modified;
+
+            if (decimal.TryParse(txtRetenciones.Text, out var ret))
+                SetTextSafe(txtRetenciones, ret.ToString("N2"));
+            else
+                SetTextSafe(txtRetenciones, "0.00");
+
+            CalcularTotales();
+        }
     }
 }

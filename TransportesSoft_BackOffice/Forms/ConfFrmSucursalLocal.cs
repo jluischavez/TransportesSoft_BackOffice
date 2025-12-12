@@ -34,6 +34,7 @@ namespace TransportesSoft_BackOffice.Forms
                 txtImagen.Text = conf.URLImagen;
                 txtTelefono.Text = conf.Telefono;
                 txtKilometrajeNotificaciones.Text = conf.KilometrajeNotificaciones.ToString();
+                txtRutaReportes.Text = conf.RutaReportes;
             }
             else
             {
@@ -51,7 +52,8 @@ namespace TransportesSoft_BackOffice.Forms
                     if (string.IsNullOrWhiteSpace(txtNombre.Text) ||
                     string.IsNullOrWhiteSpace(txtDireccion.Text) ||
                     string.IsNullOrWhiteSpace(txtImagen.Text) ||
-                    string.IsNullOrWhiteSpace(txtTelefono.Text))
+                    string.IsNullOrWhiteSpace(txtTelefono.Text) ||
+                    string.IsNullOrWhiteSpace(txtRutaReportes.Text))
                     {
                         MessageBox.Show("Todos los campos son obligatorios.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -62,6 +64,7 @@ namespace TransportesSoft_BackOffice.Forms
                         Direccion = txtDireccion.Text.Trim(),
                         URLImagen = txtImagen.Text.Trim(),
                         Telefono = txtTelefono.Text.Trim(),
+                        RutaReportes = txtRutaReportes.Text.Trim(),
                         KilometrajeNotificaciones = txtKilometrajeNotificaciones.Text.Trim() == "" ? 0 : int.Parse(txtKilometrajeNotificaciones.Text.Trim()),
                     };
                     bool exito = false;
@@ -156,5 +159,19 @@ namespace TransportesSoft_BackOffice.Forms
             }
         }
         #endregion
+
+        private void btnExaminarRutaReportes_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.Description = "Selecciona la carpeta donde se guardan los reportes";
+                folderDialog.ShowNewFolderButton = true; // Por si quieres permitir crear una nueva carpeta
+
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    txtRutaReportes.Text = folderDialog.SelectedPath;
+                }
+            }
+        }
     }
 }

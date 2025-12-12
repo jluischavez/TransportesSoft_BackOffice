@@ -36,8 +36,8 @@ namespace TransportesSoft_BackOffice.Repositories
         {
             using (var db = new SqlConnection(ConnectionString))
             {
-                var sql = @"INSERT INTO ConfSucursalLocal (NombreSucursal, Direccion, URLImagen, Telefono, KilometrajeNotificaciones)
-                            VALUES (@NombreSucursal, @Direccion, @URLImagen, @Telefono, @KilometrajeNotificaciones)";
+                var sql = @"INSERT INTO ConfSucursalLocal (NombreSucursal, Direccion, URLImagen, Telefono, KilometrajeNotificaciones, RutaReportes)
+                            VALUES (@NombreSucursal, @Direccion, @URLImagen, @Telefono, @KilometrajeNotificaciones, @RutaReportes)";
                 db.Execute(sql, conf);
                 return true;
             }
@@ -52,7 +52,8 @@ namespace TransportesSoft_BackOffice.Repositories
                                 Direccion = @Direccion, 
                                 URLImagen = @URLImagen, 
                                 Telefono = @Telefono,
-                                KilometrajeNotificaciones = @KilometrajeNotificaciones";
+                                KilometrajeNotificaciones = @KilometrajeNotificaciones,
+                                RutaReportes = @RutaReportes";
                 db.Execute(sql, conf);
             }
         }

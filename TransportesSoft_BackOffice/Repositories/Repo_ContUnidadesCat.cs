@@ -66,7 +66,7 @@ namespace TransportesSoft_BackOffice.Repositories
             {
                 string sql = "SELECT * FROM ContUnidadesCat " +
                     "WHERE id_Operador = @id_Operador";
-                lUnidad = db.QueryFirst<ContUnidadesCat>(sql, new
+                lUnidad = db.QueryFirstOrDefault<ContUnidadesCat>(sql, new
                 {
                     id_Operador = idOperador
                 });

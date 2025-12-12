@@ -146,7 +146,6 @@ namespace TransportesSoft_BackOffice.Forms
         {
             try
             {
-
                 DialogResult result = MessageBox.Show($"¿Deseas guardar los cambios?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {

@@ -249,7 +249,7 @@
             // txtNumeroTransporte
             // 
             this.txtNumeroTransporte.Location = new System.Drawing.Point(113, 134);
-            this.txtNumeroTransporte.MaxLength = 6;
+            this.txtNumeroTransporte.MaxLength = 15;
             this.txtNumeroTransporte.Name = "txtNumeroTransporte";
             this.txtNumeroTransporte.Size = new System.Drawing.Size(151, 20);
             this.txtNumeroTransporte.TabIndex = 5;
@@ -261,8 +261,9 @@
             this.txtIVA.Name = "txtIVA";
             this.txtIVA.Size = new System.Drawing.Size(151, 20);
             this.txtIVA.TabIndex = 9;
+            this.txtIVA.TextChanged += new System.EventHandler(this.txtIVA_TextChanged);
             this.txtIVA.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
-            this.txtIVA.Leave += new System.EventHandler(this.txtMonto_Leave);
+            this.txtIVA.Leave += new System.EventHandler(this.txtIVA_Leave);
             this.txtIVA.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
             // 
             // txtMonto
@@ -282,7 +283,7 @@
             this.txtManiobra.Size = new System.Drawing.Size(151, 20);
             this.txtManiobra.TabIndex = 11;
             this.txtManiobra.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
-            this.txtManiobra.Leave += new System.EventHandler(this.txtMonto_Leave);
+            this.txtManiobra.Leave += new System.EventHandler(this.txtManiobra_Leave);
             this.txtManiobra.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
             // 
             // txtRetenciones
@@ -291,8 +292,9 @@
             this.txtRetenciones.Name = "txtRetenciones";
             this.txtRetenciones.Size = new System.Drawing.Size(151, 20);
             this.txtRetenciones.TabIndex = 10;
+            this.txtRetenciones.TextChanged += new System.EventHandler(this.txtRetenciones_TextChanged);
             this.txtRetenciones.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNumeroTransporte_KeyPress);
-            this.txtRetenciones.Leave += new System.EventHandler(this.txtMonto_Leave);
+            this.txtRetenciones.Leave += new System.EventHandler(this.txtRetenciones_Leave);
             this.txtRetenciones.Validating += new System.ComponentModel.CancelEventHandler(this.txtMonto_Validating);
             // 
             // txtTotal
@@ -405,7 +407,6 @@
             this.Controls.Add(this.BtnGuardar);
             this.Controls.Add(this.groupBox1);
             this.Name = "ContFrmViajes";
-            this.ShowIcon = false;
             this.Text = "Registro de viajes";
             this.Load += new System.EventHandler(this.ContFrmViajes_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ContFrmViajes_KeyDown);
